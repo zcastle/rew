@@ -1,0 +1,13 @@
+<?php
+require_once 'dba.class.php';
+require_once 'autenticacion.php';
+
+$server = 'localhost'; //192.168.15.3
+$username = 'root';
+$password = '123456'; //wr..09z //super..user
+$database_name = 'globalstore';
+
+$_dba = new dba($server, $username, $password);
+$_dba->selectDb($database_name);
+
+?>

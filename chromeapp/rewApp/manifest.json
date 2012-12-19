@@ -1,0 +1,19 @@
+{
+	"name": "REWPos",
+	"description": "SGCA",
+	"version": "1.0",
+	"manifest_version": 2,
+	"icons": {
+		"24": "24.png",
+		"128": "128.png"
+	},
+	"app": {
+		"launch": {
+			"web_url": "http://localhost/rew"
+		}
+	},
+	"permissions": [
+		"unlimitedStorage",
+		"notifications"
+	]
+}
