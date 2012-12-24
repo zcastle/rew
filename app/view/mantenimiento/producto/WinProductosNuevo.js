@@ -449,12 +449,12 @@ Ext.define('MG.view.mantenimiento.producto.WinProductosNuevo', {
             buttons: [{
                 name: 'btnCrear',
                 text : 'Grabar',
-                iconCls: 'ico-aceptar',
+                iconCls: 'ico-aceptar-medium',
                 scale: 'medium'
             },{
                 name: 'btnEditar',
                 text : 'Editar',
-                iconCls: 'ico-aceptar',
+                iconCls: 'ico-aceptar-medium',
                 scale: 'medium'
             },{
                 text : 'Cancelar',

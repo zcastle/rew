@@ -41,12 +41,12 @@ Ext.define('MG.view.mantenimiento.categoria.WinCategoriasNuevo', {
         this.buttons = [{
                 name: 'btnCrear',
                 text : 'Grabar',
-                iconCls: 'ico-aceptar',
+                iconCls: 'ico-aceptar-medium',
                 scale: 'medium'
             },{
                 name: 'btnEditar',
                 text : 'Editar',
-                iconCls: 'ico-aceptar',
+                iconCls: 'ico-aceptar-medium',
                 scale: 'medium'
             },{
                 text : 'Cancelar',

@@ -13,7 +13,8 @@ Ext.define('MG.store.Lotes', {
         extraParams: {
             co_empresa: '',
             co_producto: '',
-            co_almacen: ''
+            co_almacen: '',
+            fl_stock: ''
         }
     }/*,
     data: [

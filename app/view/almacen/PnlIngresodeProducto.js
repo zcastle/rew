@@ -243,13 +243,13 @@ Ext.define('MG.view.almacen.PnlIngresodeProducto', {
                             items: [{
                                 text: 'Limpiar todo',
                                 name: 'btnLimpiarTodo',
-                                iconCls: 'ico-medium',
-                                scale: 'medium'
+                                iconCls: 'ico-limpiar-large',
+                                scale: 'large'
                             },{
                                 text: 'Procesar',
                                 name: 'btnProcesar',
-                                iconCls: 'ico-medium',
-                                scale: 'medium'
+                                iconCls: 'ico-aceptar-large',
+                                scale: 'large'
                             }]
                         },{
                             xtype: 'label',

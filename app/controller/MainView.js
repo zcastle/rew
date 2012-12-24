@@ -31,7 +31,7 @@ Ext.define('MG.controller.MainView', {
             console.log('Debug activado');
             this.getLoginUser().hide();
             this.getCard().getLayout().setActiveItem(1);
-            this.getController('TabMain').addTab('Facturacion', 'pnlventasfacturacion', 'ico-facturacion-small');
+            //this.getController('TabMain').addTab('Facturacion', 'pnlventasfacturacion', 'ico-facturacion-small');
             //this.getController('TabMain').addTab('Ordenes de Despacho', 'pnlordenesdespacho');
             //this.getController('TabMain').addTab('Registro de Compras', 'pnlingresodeproducto');
             //this.getController('TabMain').addTab('Cuentas por Cobrar', 'pnlcuentascobrar');
@@ -46,6 +46,7 @@ Ext.define('MG.controller.MainView', {
             //this.getController('TabMain').addTab('Unidades de Medida', 'pnlunidadmedida');
             //this.getController('TabMain').addTab('Crear', 'pnlordenabastecimientocrear');
             //this.getController('TabMain').addTab('Transferencia de Productos', 'pnltransferencia');
+            this.getController('TabMain').addTab('Usuarios', 'pnlusuarios');
         }
     },
     loadMenu: function(){
@@ -56,10 +57,20 @@ Ext.define('MG.controller.MainView', {
         if(AppGlobals.MODELO_NEGOCIO == AppGlobals.MODELO_NEGOCIO_MELY_GIN){
             tb.add({
                 text: 'Ventas',
+                name: 'mnuVentas',
+                id: 'mnuVentas',
                 menu: [{
                     text: 'Facturacion',
                     iconCls: 'ico-facturacion-small',
-                    action: 'mnuVentasFacturacionFacturar'
+                    action: 'mnuVentasFacturacion'
+                },{
+                    text: 'Guia de Remision',
+                    iconCls: 'ico-facturacion-small',
+                    action: 'mnuVentasGuiaRemision'
+                },{
+                    text: 'Cotizaciones',
+                    iconCls: 'ico-facturacion-small',
+                    action: 'mnuVentasCotizacion'
                 },{
                     text: 'Consultar',
                     menu: [{
@@ -85,6 +96,8 @@ Ext.define('MG.controller.MainView', {
 
         tb.add({
             text: 'Compras',
+            name: 'mnuCompras',
+            id: 'mnuCompras',
             menu: [{
                 text: 'Registro de Compras',
                 iconCls: 'ico-compras-small',
@@ -98,6 +111,8 @@ Ext.define('MG.controller.MainView', {
         if(AppGlobals.MODELO_NEGOCIO == AppGlobals.MODELO_NEGOCIO_MELY_GIN){
             tb.add({
                 text: 'Almacen',
+                name: 'mnuAlmacen',
+                id: 'mnuAlmacen',
                 menu: [{
                     text: 'Transferencia de Productos',
                     action: 'mnuInventarioTrasladodeProductos'
@@ -118,6 +133,8 @@ Ext.define('MG.controller.MainView', {
         } else {
             tb.add({
                 text: 'Almacen',
+                name: 'mnuAlmacen',
+                id: 'mnuAlmacen',
                 menu: [{
                     text: 'Registro de Compras',
                     iconCls: 'ico-compras-small',
@@ -151,6 +168,8 @@ Ext.define('MG.controller.MainView', {
         if(AppGlobals.MODELO_NEGOCIO == AppGlobals.MODELO_NEGOCIO_MELY_GIN){
             tb.add({
                 text: 'Contabilidad',
+                name: 'mnuContabilidad',
+                id: 'mnuContabilidad',
                 menu: [{
                     text: 'Libro Compras',
                     action: 'mnuContabilidadLibroCompras'
@@ -164,6 +183,8 @@ Ext.define('MG.controller.MainView', {
         if(AppGlobals.MODELO_NEGOCIO == AppGlobals.MODELO_NEGOCIO_DSILVANA){
             tb.add({
                 text: 'Reportes',
+                name: 'mnuReportes',
+                id: 'mnuReportes',
                 menu: [{
                     text: 'Registro de Ventas',
                     action: 'mnuReportesRegistroVentas'
@@ -178,6 +199,8 @@ Ext.define('MG.controller.MainView', {
         if(AppGlobals.MODELO_NEGOCIO == AppGlobals.MODELO_NEGOCIO_MELY_GIN){
             tb.add({
                 text: 'Mantenimiento',
+                name: 'mnuMantenimiento',
+                id: 'mnuMantenimiento',
                 menu: [{
                     text: 'Categorias',
                     action: 'mnuMantenimientoCategorias'
@@ -204,6 +227,8 @@ Ext.define('MG.controller.MainView', {
         } else {
             tb.add({
                 text: 'Mantenimiento',
+                name: 'mnuMantenimiento',
+                id: 'mnuMantenimiento',
                 menu: [{
                     text: 'Categorias',
                     action: 'mnuMantenimientoCategorias'
@@ -214,9 +239,6 @@ Ext.define('MG.controller.MainView', {
                     text: 'Unidades de Medida',
                     action: 'mnuMantenimientoUnidadesdeMedida'
                 },{
-                    text: 'Marcas',
-                    action: 'mnuMantenimientoMarcas'
-                },{
                     text: 'Clientes',
                     action: 'mnuMantenimientoClientes'
                 },{
@@ -225,9 +247,11 @@ Ext.define('MG.controller.MainView', {
                 }]
             });
         }
-        
+
         tb.add({
             text: 'Configuracion',
+            name: 'mnuConfiguracion',
+            id: 'mnuConfiguracion',
             menu: [{
                 text: 'Tipo de Cambio',
                 action: 'mnuConfiguracionTipoCambio'
@@ -236,9 +260,19 @@ Ext.define('MG.controller.MainView', {
                 action: 'mnuConfiguracionUsuarios'
             }]
         });
+
+        tb.add({
+            text: 'Configuracion',
+            name: 'mnuConfiguracionUsuario',
+            id: 'mnuConfiguracionusuario',
+            menu: [{
+                text: 'Actualizar Datos',
+                action: 'mnuConfiguracionUsuariosUpdate'
+            }]
+        });
         
         tb.add({
-            xtype: 'tbfill' 
+            xtype: 'tbfill'
         });
         
         tb.add({
@@ -253,7 +287,7 @@ Ext.define('MG.controller.MainView', {
     },
     onMenuItemClick: function(menuItem) {
         switch(menuItem.action){
-            case 'mnuVentasFacturacionFacturar':
+            case 'mnuVentasFacturacion':
                 this.getController('TabMain').addTab(menuItem.text, 'pnlventasfacturacion', 'ico-facturacion-small');
                 break;
             case 'mnuVentasFacturacionConsultar':
@@ -309,6 +343,23 @@ Ext.define('MG.controller.MainView', {
                 break;
             case 'mnuInventarioTrasladodeProductos':
                 this.getController('TabMain').addTab(menuItem.text, 'pnltransferencia', 'tabs');
+                break;
+            case 'mnuVentasGuiaRemision':
+                this.getController('TabMain').addTab(menuItem.text, 'pnlventasfacturacion', 'ico-facturacion-small');
+                this.getController('ventas.Facturaciones').getMainView().down('combo[name=cboTipoDocumento]').setValue('GR');
+                break;
+            case 'mnuVentasCotizacion':
+                this.getController('TabMain').addTab(menuItem.text, 'pnlventasfacturacion', 'ico-facturacion-small');
+                this.getController('ventas.Facturaciones').getMainView().down('combo[name=cboTipoDocumento]').setValue('CC');
+                break;
+            case 'mnuConfiguracionTipoCambio':
+                Ext.widget('wintipocambio').show();
+                break;
+            case 'mnuConfiguracionUsuarios':
+                this.getController('TabMain').addTab(menuItem.text, 'pnlusuarios', 'tabs');
+                break;
+            case 'mnuConfiguracionUsuariosUpdate':
+                Ext.widget('winusuariosupdate').show();
                 break;
         }
     }

@@ -20,5 +20,9 @@ Ext.define('MG.model.Pedido', {
         name: 'unidad'
     },{
         name: 'total'
+    },{
+        name: 'co_almacen'
+    },{
+        name: 'no_almacen'
     }]
 });

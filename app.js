@@ -55,7 +55,11 @@ Ext.application({
     'almacen.abastecimiento.PnlOrdenAbastecimientoCrear',
     'almacen.transferencia.PnlTransferencia',
     'contabilidad.WinLibroVentas',
-    'reportes.WinRegistroVentas'
+    'reportes.WinRegistroVentas',
+    'configuracion.WinTipoCambio',
+    'configuracion.PnlUsuarios',
+    'configuracion.WinUsuariosNuevo',
+    'configuracion.WinUsuariosUpdate'
     ]
 });
 
@@ -90,10 +94,6 @@ Ext.apply(Ext.form.field.VTypes, {
             end.validate();
             this.dateRangeMin = date;
         }
-        /*
-        * Always return true since we're only using this vtype to set the
-        * min/max allowed values (these are tested for after the vtype test)
-        */
         return true;
     },
 

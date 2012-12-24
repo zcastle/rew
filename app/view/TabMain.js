@@ -12,8 +12,8 @@ Ext.define('MG.view.TabMain', {
             layout: 'ux.center',
             items:[{
                 border: false,
-                bodyStyle: 'background-image: url(resources/images/melygin-logo.png); background-repeat: no-repeat;', //456 x 419
-                //bodyStyle: 'background-image: url(resources/images/loggo-500x93.png); background-repeat: no-repeat;',
+                //bodyStyle: 'background-image: url(resources/images/melygin-logo.png); background-repeat: no-repeat;', //456 x 419
+                bodyStyle: 'background-image: url(resources/images/loggo-500x93.png); background-repeat: no-repeat;',
                 margins: '20',
                 width: 500,
                 height: 93

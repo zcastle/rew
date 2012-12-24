@@ -13,13 +13,13 @@ if ($_POST) {
                             FROM (m_usuarios AS mu LEFT JOIN r_usuario_serie AS rus ON mu.co_usuario = rus.co_usuario)
                             WHERE mu.co_usuario = ? AND mu.pw_usuario = ?");
     $stmt->bindParam(1, $usuario);
-    $stmt->bindParam(2, $clave);
+    $stmt->bindParam(2, md5($clave));
     $stmt->execute();
     $result = $stmt->fetch(PDO::FETCH_OBJ);
 
     $rpta = false;
     
-    if ($result->co_usuario == $usuario && $result->pw_usuario == $clave) {
+    if ($result->co_usuario == $usuario && $result->pw_usuario == md5($clave)) {
         $rpta = true;
     }
 

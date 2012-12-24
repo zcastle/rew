@@ -39,6 +39,7 @@ Ext.define('MG.controller.LoginUser', {
     onRenderLoginUser: function(){
         //this.getLoginUser().down('combobox[name=cboCia]').hide();
         this.getUsuariosStore().proxy.extraParams.co_empresa = AppGlobals.CIA;
+        this.getUsuariosStore().proxy.extraParams.co_usuario = '';
         this.getUsuariosStore().load();
     },
     /*onSelectUsuario: function(combo){
@@ -63,12 +64,12 @@ Ext.define('MG.controller.LoginUser', {
     },
     onSubmit: function(form){
         if (form.isValid()) {
+            Ext.getBody().mask('Identificando');
             form.submit({
                 scope: this,
                 //waitTitle: 'Authenticando..',
-                waitMsg: 'Iniciando sesion...',
+                //waitMsg: 'Iniciando sesion...',
                 success: function(frm, action) {
-                    //AppGlobals.CIA = this.getLoginUser().down('combobox[name=cboCia]').getValue();
                     AppGlobals.CO_USUARIO = this.getMainView().down('combobox[name=txtUsuario]').getValue();
                     AppGlobals.RAZON_SOCIAL = this.getMainView().down('combobox[name=cboCia]').getStore().findRecord('co_empresa', AppGlobals.CIA).data.no_razon_social
                     Ext.getCmp('lblNoRazonSocial').setText(AppGlobals.RAZON_SOCIAL + ' - TC: ' + AppGlobals.TIPO_CAMBIO_VENTA);
@@ -99,6 +100,8 @@ Ext.define('MG.controller.LoginUser', {
                             AppGlobals.ROL_ACTIVO = AppGlobals.ROL_ALMACEN_JEFE;
                             break;
                     }
+                    this.setMenus(AppGlobals.ROL_ACTIVO);
+                    Ext.getBody().unmask();
                 },
                 failure: function(frm, action) {
                     if(action.failureType == 'server'){
@@ -109,6 +112,7 @@ Ext.define('MG.controller.LoginUser', {
                     }
                     form.reset();
                     this.getMainView().down('combobox[name=cboCia]').setValue(AppGlobals.CIA);
+                    Ext.getBody().unmask();
                 }
             });
         } else {
@@ -120,5 +124,52 @@ Ext.define('MG.controller.LoginUser', {
     },
     onSelectCboCia: function(){
         //this.getMainView().down('textfield[name=txtUsuario]').focus();
+    },
+    setMenus: function(rol){
+        var menu = Ext.getCmp('tbMain');
+        Ext.Array.forEach(menu.items.items, function(item, index, allItems){
+            if(item.name != undefined){
+                item.hide();
+            }
+        }, this)
+        Ext.getCmp('mnuConfiguracionusuario').show();
+        switch(rol){
+            case AppGlobals.ROL_ADMINISTRADOR:
+                //ADMINISTRADOR
+                if(AppGlobals.MODELO_NEGOCIO == AppGlobals.MODELO_NEGOCIO_MELY_GIN){
+                    Ext.getCmp('mnuVentas').show();
+                }
+                Ext.getCmp('mnuCompras').show();
+                Ext.getCmp('mnuAlmacen').show();
+                if(AppGlobals.MODELO_NEGOCIO == AppGlobals.MODELO_NEGOCIO_MELY_GIN){
+                    Ext.getCmp('mnuContabilidad').show();
+                }
+                Ext.getCmp('mnuMantenimiento').show();
+                Ext.getCmp('mnuConfiguracion').show();
+                Ext.getCmp('mnuConfiguracionusuario').hide();
+                break;
+            case AppGlobals.ROL_VENTAS:
+                //VENTAS
+                if(AppGlobals.MODELO_NEGOCIO == AppGlobals.MODELO_NEGOCIO_MELY_GIN){
+                    Ext.getCmp('mnuVentas').show();
+                }
+                break;
+            case AppGlobals.ROL_ALMACEN:
+                //ALMACEN
+                Ext.getCmp('mnuAlmacen').show();
+                break;
+            case AppGlobals.ROL_VENTAS_JEFE:
+                //JEFE VENTAS
+                if(AppGlobals.MODELO_NEGOCIO == AppGlobals.MODELO_NEGOCIO_MELY_GIN){
+                    Ext.getCmp('mnuVentas').show();
+                }
+                Ext.getCmp('mnuMantenimiento').show();
+                break;
+            case AppGlobals.ROL_ALMACEN_JEFE:
+                //JEFE ALMACEN
+                Ext.getCmp('mnuAlmacen').show();
+                Ext.getCmp('mnuMantenimiento').show();
+                break;
+        }
     }
 });

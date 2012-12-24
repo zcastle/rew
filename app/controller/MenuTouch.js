@@ -4,7 +4,7 @@ Ext.define('MG.controller.MenuTouch', {
     'MenuTouch'
     ],
     stores: [
-    'Imagen'
+    'Launcher'
     ],
     init: function() {
         this.control({

@@ -17,7 +17,9 @@ Ext.define('MG.controller.TabMain', {
     onTabMainRendered: function() {
     },
     addTab: function(titulo, modulo, ico){
-        Ext.getCmp('launcher').collapse();
+        if(Ext.getCmp('launcher')){
+            Ext.getCmp('launcher').collapse();
+        }
         var mainTabs = this.getMainView();
         for (i = 0; i <= mainTabs.items.getCount()-1; i++) {
             if(mainTabs.items.get(i).title==titulo){

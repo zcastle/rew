@@ -179,6 +179,11 @@ Ext.define('MG.view.ventas.WinCantidad', {
                 name: 'txtStockLote',
                 readOnly: true,
                 hidden: true
+            },{
+                xtype: 'textfield',
+                name: 'co_almacen',
+                readOnly: true,
+                hidden: true
             }]
         },{
             xtype: 'grid',
@@ -191,7 +196,7 @@ Ext.define('MG.view.ventas.WinCantidad', {
                 dataIndex: 'no_lote',
                 menuDisabled: true,
                 sortable: false,
-                width: 150
+                width: 90
             },{
                 header: 'Vencimiento',
                 dataIndex: 'fe_vencimiento',
@@ -204,6 +209,12 @@ Ext.define('MG.view.ventas.WinCantidad', {
                 menuDisabled: true,
                 sortable: false,
                 width: 50
+            },{
+                header: 'Almacen',
+                dataIndex: 'no_almacen',
+                menuDisabled: true,
+                sortable: false,
+                flex: 1
             }]
         },{
             xtype: "textfield",

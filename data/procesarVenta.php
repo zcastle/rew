@@ -24,8 +24,8 @@ if ($_POST) {
     $sqlCabecera = "INSERT INTO c_ventas (co_empresa, fe_venta, tipo_comprobante, nu_comprobante, co_cliente, va_neto, va_igv, va_venta, co_forma_pago, co_vendedor, fe_vencimiento)
                     VALUES (:co_empresa, NOW(), :tipo_comprobante, :nu_comprobante, :co_cliente, :va_neto, :va_igv, :va_venta, :co_forma_pago, :co_vendedor, :fe_vencimiento)";
 
-    $sqlDetalle = "INSERT INTO d_ventas (tipo_comprobante, nu_comprobante, co_producto, ca_producto, va_producto, nu_linea, no_lote, fe_vencimiento) 
-                   VALUES(?,?,?,?,?,?,?,?)";
+    $sqlDetalle = "INSERT INTO d_ventas (tipo_comprobante, nu_comprobante, co_producto, ca_producto, va_producto, nu_linea, no_lote, fe_vencimiento, co_almacen) 
+                   VALUES(?,?,?,?,?,?,?,?,?)";
     
     try {
         $conn->beginTransaction();
@@ -44,7 +44,7 @@ if ($_POST) {
             ':fe_vencimiento' => $fe_vencimiento
         ));
 
-        $coProducto = null; $caProducto = null; $vaProducto = null; $noLote = null; $feVencimiento = null;
+        $coProducto = null; $caProducto = null; $vaProducto = null; $noLote = null; $feVencimiento = null; $coAlmacen = null;
         $ln = 1;
         
         $stmtD = $conn->prepare($sqlDetalle);
@@ -56,12 +56,14 @@ if ($_POST) {
         $stmtD->bindParam(6, $ln);
         $stmtD->bindParam(7, $noLote);
         $stmtD->bindParam(8, $feVencimiento);
+        $stmtD->bindParam(9, $coAlmacen);
         
         foreach ($detalle as $linea) {
             $coProducto = $linea[0]->co_producto;
             $caProducto = $linea[0]->cantidad;
             $vaProducto = $linea[0]->precio0;
             $noLote = $linea[0]->lote;
+            $coAlmacen = $linea[0]->co_almacen;
             $feVencimiento = $linea[0]->vencimiento;
             $feVencimiento = substr($feVencimiento, 6, 4) . '-' . substr($feVencimiento, 3, 2) . '-' . substr($feVencimiento, 0, 2);
 

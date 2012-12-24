@@ -106,6 +106,7 @@ Ext.define('MG.controller.almacen.kardex.PnlConsultarKardex', {
     onKeypressCoLote: function(text, key){
         if(key.getKey() == key.ENTER){
             this.getLotesStore().proxy.extraParams.co_producto = this.getMainView().down('form').down('textfield[name=co_producto]').getValue();
+            this.getLotesStore().proxy.extraParams.fl_stock = '';
             if(AppGlobals.MODELO_NEGOCIO == AppGlobals.MODELO_NEGOCIO_MELY_GIN){
                 this.getLotesStore().proxy.extraParams.co_almacen = this.getMainView().down('form').down('textfield[name=co_almacen]').getValue();
             }else{

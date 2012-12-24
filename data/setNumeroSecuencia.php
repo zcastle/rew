@@ -40,10 +40,7 @@ if ($_POST) {
               WHERE co_empresa = '$cia' AND co_documento = '$tipoDocumento' and nu_serie = '$nu_serie';";
             $stmt02 = $conn->prepare($query);
             $stmt02->execute();
-            echo json_encode(
-                    array(
-                        "success" => true
-            ));
+
         }
     }
 } else {

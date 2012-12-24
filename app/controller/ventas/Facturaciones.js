@@ -237,6 +237,8 @@ Ext.define('MG.controller.ventas.Facturaciones', {
         viewWinVentasCantidad.down('hidden').setValue(record.get('co_producto'));
         this.getLotesStore().proxy.extraParams.co_empresa = AppGlobals.CIA;
         this.getLotesStore().proxy.extraParams.co_producto = record.get('co_producto');
+        this.getLotesStore().proxy.extraParams.co_almacen = '';
+        this.getLotesStore().proxy.extraParams.fl_stock = 'S';
         this.getLotesStore().load();
         viewWinVentasCantidad.down('label[name=lblProducto]').setText(record.get('co_producto')+'-'+record.get('no_producto'));
         var pos = this.getPosicion(gridPedido, record.get('co_producto'))
@@ -246,6 +248,7 @@ Ext.define('MG.controller.ventas.Facturaciones', {
             viewWinVentasCantidad.down('textfield[name=txtCosto]').setValue(this.formatNumber4(gridPedido.getStore().data.items[pos].get('va_compra')));
             viewWinVentasCantidad.down('textfield[name=txtLote]').setValue(gridPedido.getStore().data.items[pos].get('lote'));
             viewWinVentasCantidad.down('textfield[name=txtVencimiento]').setValue(gridPedido.getStore().data.items[pos].get('vencimiento'));
+            viewWinVentasCantidad.down('textfield[name=co_almacen]').setValue(gridPedido.getStore().data.items[pos].get('co_almacen'));
         }else{
             viewWinVentasCantidad.down('textfield[name=txtPrecio]').setValue(this.formatNumber4(record.get('precio0')));
             viewWinVentasCantidad.down('textfield[name=txtCosto]').setValue(this.formatNumber4(record.get('va_compra')));
@@ -267,12 +270,13 @@ Ext.define('MG.controller.ventas.Facturaciones', {
         viewWinVentasCantidad.show();
     },
     onCellClickGridPedido: function(grid, nada, columnIndex, record){
-        if(columnIndex == 8) {
-            var producto = record.get('no_producto');
+        var columna = grid.up('grid').columns[columnIndex].name;
+        var producto = record.get('no_producto');
+        if(columna == 'actionRemover') {
             Ext.Msg.confirm('Confirmacion', 'Estas seguro de querer remover el producto: ' + producto + '?', function(btn){
                 if(btn=='yes'){
                     grid.getStore().remove(record);
-                    this.setMontoTotal(grid);
+                    grid.getStore().sync();
                 }
             }, this);
         }
@@ -303,10 +307,10 @@ Ext.define('MG.controller.ventas.Facturaciones', {
                 Ext.Msg.alert('Validacion', 'Precio ingresado es invalido');
                 return;
             }
-            
             var cantidad = viewWinVentasCantidad.down('numberfield');
             var codigo = viewWinVentasCantidad.down('hidden');
             var lote = viewWinVentasCantidad.down('textfield[name=txtLote]');
+            var co_almacen = viewWinVentasCantidad.down('textfield[name=co_almacen]').getValue();
             var vencimiento = viewWinVentasCantidad.down('textfield[name=txtVencimiento]');
             var unidad = viewWinVentasCantidad.down('combobox[name=cboUnidadVenta]').getRawValue();
             var gridPedido = this.getMainView().down('grid[name=gridPedido]');
@@ -320,11 +324,12 @@ Ext.define('MG.controller.ventas.Facturaciones', {
                 this.editProducto(gridPedido, pos, 'lote', lote.value)
                 this.editProducto(gridPedido, pos, 'vencimiento', vencimiento.value)
                 this.editProducto(gridPedido, pos, 'unidad', unidad)
+                this.editProducto(gridPedido, pos, 'co_almacen', co_almacen)
                 this.setMontoTotal(gridPedido);
             }else{
                 var gridProducto = this.getMainView().down('grid[name=gridProductos]');
                 var storeProductos = gridProducto.getSelectionModel().selected.items[0].data;
-                this.addProducto(storeProductos.co_producto, storeProductos.no_producto, unitario.value, storeProductos.costo_s, cantidad.value, lote.value, vencimiento.value, unidad)
+                this.addProducto(storeProductos.co_producto, storeProductos.no_producto, unitario.value, storeProductos.costo_s, cantidad.value, lote.value, vencimiento.value, unidad, co_almacen)
             }
             button.up('window').close();
         }
@@ -349,7 +354,7 @@ Ext.define('MG.controller.ventas.Facturaciones', {
         }
         return rpta;
     },
-    addProducto: function(co_producto, no_producto, precio0, costo_s, cantidad, lote, vencimiento, unidad){
+    addProducto: function(co_producto, no_producto, precio0, costo_s, cantidad, lote, vencimiento, unidad, co_almacen){
         var gridPedido = this.getMainView().down('grid[name=gridPedido]');
         var storePedido = gridPedido.getStore();
         var total = cantidad * precio0;
@@ -363,7 +368,8 @@ Ext.define('MG.controller.ventas.Facturaciones', {
             costo_s: costo_s,
             cantidad: cantidad,
             unidad: unidad,
-            total: total
+            total: total,
+            co_almacen: co_almacen
         });
         var count = storePedido.getCount();
         storePedido.insert(count, pedido);
@@ -463,6 +469,7 @@ Ext.define('MG.controller.ventas.Facturaciones', {
                         precio0: record.data['precio0'],
                         total: record.data['total'],
                         lote: record.data['lote'],
+                        co_almacen: record.data['co_almacen'],
                         vencimiento: record.data['vencimiento']
                     }];
                     detalle.push(registro);
@@ -708,6 +715,7 @@ Ext.define('MG.controller.ventas.Facturaciones', {
         grid.up('window').down('textfield[name=txtLote]').setValue(record.get('no_lote'));
         grid.up('window').down('textfield[name=txtVencimiento]').setValue(record.get('fe_vencimiento'));
         grid.up('window').down('textfield[name=txtStockLote]').setValue(record.get('ca_stock'));
+        grid.up('window').down('textfield[name=co_almacen]').setValue(record.get('co_almacen'));
     },
     getSecuencia: function(combo, coTipoDocumento){
         var nuSerie;

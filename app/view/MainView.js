@@ -10,7 +10,7 @@ Ext.define('MG.view.MainView', {
             },{
                 region: 'center',
                 xtype: 'tabmain'
-            },{
+            }/*,{
                 region: 'west',
                 id: 'launcher',
                 collapsible: true,
@@ -21,7 +21,7 @@ Ext.define('MG.view.MainView', {
                 items: [{
                     xtype: 'menutouch'
                 }]
-            }],
+            }*/],
         this.callParent(arguments);
     }      
 });

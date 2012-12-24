@@ -70,7 +70,7 @@ Ext.define('MG.view.mantenimiento.producto.PnlProductos' ,{
             labelWidth: 45,
             enableKeyEvents: true,
             flex: 1
-        },{
+        }/*,{
             xtype: "combobox",
             name: "cboCategorias", 
             fieldLabel: "Categoria",
@@ -92,7 +92,7 @@ Ext.define('MG.view.mantenimiento.producto.PnlProductos' ,{
             editable: false,
             labelWidth: 75,
             width: 250
-        }]
+        }*/]
         this.bbar = Ext.create('Ext.PagingToolbar', {
             store: 'Productos',
             displayInfo: true,

@@ -26,7 +26,11 @@
     background-image: url('../images/editar-16x16.png') !important;
 }
 
-.ico-editar {
+.ico-editar-small {
+    background-image: url('../images/editar-16x16.png') !important;
+}
+
+.ico-editar-medium {
     background-image: url('../images/editar-24x24.png') !important;
 }
 
@@ -34,8 +38,12 @@
     background-image: url('../images/eliminar-24x24.png') !important;
 }
 
-.ico-aceptar {
+.ico-aceptar-medium {
     background-image: url('../images/aceptar-24x24.png') !important;
+}
+
+.ico-aceptar-large {
+    background-image: url('../images/aceptar-32x32.png') !important;
 }
 
 .ico-cancelar {
@@ -92,4 +100,16 @@
 
 .ico-exportar-medium {
     background-image: url('../images/exportar-medium.png') !important;
+}
+
+.ico-cliente-small {
+    background-image: url('../images/cliente-16x16.png') !important;
+}
+
+.ico-buscar-small {
+    background-image: url('../images/buscar-16x16.png') !important;
+}
+
+.ico-limpiar-large {
+    background-image: url('../images/limpiar-32x32.png') !important;
 }

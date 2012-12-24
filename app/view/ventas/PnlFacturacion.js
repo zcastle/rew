@@ -52,7 +52,7 @@ Ext.define('MG.view.ventas.PnlFacturacion', {
                         xtype: 'button',
                         name: 'btnCambiarSerie',
                         text: 'Cambiar',
-                        iconCls: 'ico-medium'
+                        iconCls: 'ico-editar-small'
                     }]
                 },{
                     layout: {
@@ -75,7 +75,7 @@ Ext.define('MG.view.ventas.PnlFacturacion', {
                         xtype: 'button',
                         name: 'btnNuevoCliente',
                         text: 'Nuevo',
-                        iconCls: 'ico-medium'
+                        iconCls: 'ico-cliente-small'
                     }]
                 },{
                     layout: {
@@ -106,7 +106,7 @@ Ext.define('MG.view.ventas.PnlFacturacion', {
                         xtype: 'button',
                         name: 'btnBuscarGuiaRemision',
                         text: 'Buscar',
-                        iconCls: 'ico-medium'
+                        iconCls: 'ico-buscar-small'
                     },{
                         xtype: "textfield",
                         name: "txtBuscarComprobante",
@@ -118,7 +118,7 @@ Ext.define('MG.view.ventas.PnlFacturacion', {
                         xtype: 'button',
                         name: 'btnBuscarComprobante',
                         text: 'Buscar',
-                        iconCls: 'ico-medium'
+                        iconCls: 'ico-buscar-small'
                     },{
                         xtype: "combobox",
                         name: "cboFormaPago", 
@@ -228,6 +228,7 @@ Ext.define('MG.view.ventas.PnlFacturacion', {
                     }
                 },{
                     xtype: 'actioncolumn',
+                    name: 'actionRemover',
                     width: 20,
                     menuDisabled: true,
                     items: [{
@@ -291,17 +292,17 @@ Ext.define('MG.view.ventas.PnlFacturacion', {
                     },{
                         text: 'Limpiar todo',
                         name: 'btnLimpiarTodo',
-                        iconCls: 'ico-large',
+                        iconCls: 'ico-limpiar-large',
                         scale: 'large'
-                    },{
+                    },/*{
                         text: 'Imprimir',
                         name: 'btnImprimir',
                         iconCls: 'ico-large',
                         scale: 'large'
-                    },{
+                    },*/{
                         text: 'Procesar Venta',
                         name: 'btnProcesar',
-                        iconCls: 'ico-large',
+                        iconCls: 'ico-aceptar-large',
                         scale: 'large'
                     }]
                 }]

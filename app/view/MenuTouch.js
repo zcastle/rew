@@ -4,7 +4,7 @@ Ext.define('MG.view.MenuTouch', {
     initComponent: function() {
         this.items = [{
             xtype: 'dataview',
-            store: 'Imagen',
+            store: 'Launcher',
             tpl: [
             '<tpl for=".">',
             '<div class="thumb-wrap">',
