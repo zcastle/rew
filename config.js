@@ -1,7 +1,7 @@
 Ext.onReady(function() {
     Ext.define('AppGlobals', {
         singleton: true,
-        DEBUG: true,
+        DEBUG: false,
         IS_ROOT: true,
         //ROLES
         //ROL_ID: 2,
