@@ -58,5 +58,9 @@ Ext.define('MG.model.Producto', {
         name: 'receta'
     },{
         name: 'ca_stock'
+    },{
+        name: 'nu_orden'
+    },{
+        name: 'co_destino'
     }]
 });

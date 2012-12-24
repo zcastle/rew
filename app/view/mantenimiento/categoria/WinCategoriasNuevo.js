@@ -36,6 +36,15 @@ Ext.define('MG.view.mantenimiento.categoria.WinCategoriasNuevo', {
                 name: 'no_categoria',
                 fieldLabel: 'Categoria',
                 allowBlank: false
+            },{
+                xtype: 'combobox',
+                name: 'co_destino',
+                fieldLabel: 'Destino',
+                store: 'Destino',
+                valueField: 'co_destino',
+                displayField: 'no_destino',
+                queryMode: 'local',
+                editable: false
             }]
         }],
         this.buttons = [{

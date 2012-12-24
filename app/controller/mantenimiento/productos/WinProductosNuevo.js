@@ -9,7 +9,8 @@ Ext.define('MG.controller.mantenimiento.productos.WinProductosNuevo', {
     'UnidadesVenta',
     'Almacen',
     'Precio',
-    'Receta'
+    'Receta',
+    'Destino'
     ],
     refs: [{
         ref: 'MainView',
@@ -78,11 +79,13 @@ Ext.define('MG.controller.mantenimiento.productos.WinProductosNuevo', {
         win.down('checkbox[name=fl_serv]').hide();
         win.down('fieldset[name=zonaPrecios]').hide();
         win.down('fieldcontainer[name=zonaRecetas]').hide();
+        win.down('fieldcontainer[name=zonaOrdenDestino]').hide();
         //win.down('fieldcontainer[name=zonaPresentacion]').hide();
         if(AppGlobals.MODELO_NEGOCIO == AppGlobals.MODELO_NEGOCIO_DSILVANA){
             win.down('fieldcontainer[name=zonaRecetas]').show();
             win.down('checkbox[name=fl_serv]').show();
             win.down('combobox[name=co_grupo]').show();
+            win.down('fieldcontainer[name=zonaOrdenDestino]').show();
         } else if(AppGlobals.MODELO_NEGOCIO == AppGlobals.MODELO_NEGOCIO_MELY_GIN){
             win.down('fieldcontainer[name=zonaMarca]').show();
             win.down('fieldcontainer[name=zonaPaisProcedencia]').show();
@@ -103,6 +106,7 @@ Ext.define('MG.controller.mantenimiento.productos.WinProductosNuevo', {
             },
             scope: this
         });
+        this.getDestinoStore().load();
     },
     onAfterRenderWinProductosNuevo: function(win){
         if(this.getMainView().down('hidden').getValue() == ''){
@@ -345,11 +349,13 @@ Ext.define('MG.controller.mantenimiento.productos.WinProductosNuevo', {
                 case '10':
                     this.getMainView().down('fieldcontainer[name=zonaUnidadMedida]').show();
                     this.getMainView().down('fieldcontainer[name=zonaStock]').show();
+                    this.getMainView().down('fieldcontainer[name=zonaOrdenDestino]').hide();
                     break;
                 case '40':
                     this.getMainView().down('numberfield[name=precio0]').show();
                     this.getMainView().down('checkbox[name=fl_serv]').show();
                     this.getMainView().down('fieldcontainer[name=zonaRecetas]').show();
+                    this.getMainView().down('fieldcontainer[name=zonaOrdenDestino]').show();
                     break;
             }
         }

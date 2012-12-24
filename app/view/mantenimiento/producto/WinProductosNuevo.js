@@ -250,6 +250,36 @@ Ext.define('MG.view.mantenimiento.producto.WinProductosNuevo', {
                         }]
                     },{
                         xtype: 'fieldcontainer',
+                        layout: 'vbox',
+                        name: 'zonaOrdenDestino',
+                        width: 355,
+                        defaults: {
+                            xtype: 'numberfield',
+                            msgTarget: 'side',
+                            flex: 1
+                        },
+                        items: [{
+                            name: 'nu_orden',
+                            fieldLabel: 'Orden',
+                            allowNegative: false,
+                            hideTrigger: true,
+                            keyNavEnabled: false,
+                            mouseWheelEnabled: false,
+                            labelWidth: 90
+                        },{
+                            xtype: 'combobox',
+                            name: 'co_destino',
+                            fieldLabel: 'Destino',
+                            labelWidth: 90,
+                            store: 'Destino',
+                            valueField: 'co_destino',
+                            displayField: 'no_destino',
+                            queryMode: 'local',
+                            editable: false,
+                            width: 355
+                        }]
+                    },{
+                        xtype: 'fieldcontainer',
                         layout: 'hbox',
                         width: 355,
                         defaults: {

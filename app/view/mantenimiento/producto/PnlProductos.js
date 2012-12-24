@@ -104,12 +104,12 @@ Ext.define('MG.view.mantenimiento.producto.PnlProductos' ,{
                 name: 'btnNuevo',
                 iconCls: 'ico-nuevo',
                 scale: 'medium'
-            },{
+            }/*,{
                 text: 'Lotes',
                 name: 'btnMostrarLotes',
                 iconCls: 'ico-medium',
                 scale: 'medium'
-            }/*,{
+            },{
                 xtype: 'exporterbutton',
                 data: this
             }*/]

@@ -10,5 +10,9 @@ Ext.define('MG.model.Categoria', {
         name: 'co_grupo'
     },{
         name: 'no_grupo'
+    },{
+        name: 'co_destino'
+    },{
+        name: 'no_destino'
     }]
 });

@@ -42,11 +42,11 @@ Ext.define('MG.controller.MainView', {
             //this.getController('TabMain').addTab('Ajuste de Inventario', 'pnlajusteinventario');
             //this.getController('TabMain').addTab('Consultar Kardex', 'pnlconsultarkardex');
             //Ext.widget('winconsultarstock').show();
-            //this.getController('TabMain').addTab('Categorias', 'pnlcategorias');
+            this.getController('TabMain').addTab('Categorias', 'pnlcategorias');
             //this.getController('TabMain').addTab('Unidades de Medida', 'pnlunidadmedida');
             //this.getController('TabMain').addTab('Crear', 'pnlordenabastecimientocrear');
             //this.getController('TabMain').addTab('Transferencia de Productos', 'pnltransferencia');
-            this.getController('TabMain').addTab('Usuarios', 'pnlusuarios');
+            //this.getController('TabMain').addTab('Usuarios', 'pnlusuarios');
         }
     },
     loadMenu: function(){

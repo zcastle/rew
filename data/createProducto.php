@@ -2,23 +2,40 @@
 
 require_once '../lib/dbapdo.class.php';
 
+function getCodigo($conn, $conteo){
+    $queryCodigo = "SELECT RIGHT(CONCAT('0000000',MAX(co_producto) + $conteo), 7) AS co_producto 
+                    FROM m_productos";
+    $stmtCodigo = $conn->prepare($queryCodigo);
+    $stmtCodigo->execute();
+    $result = $stmtCodigo->fetch(PDO::FETCH_OBJ);
+    return $result->co_producto;
+}
+
 if ($_POST) {
     $conn = new dbapdo();
     $data = json_decode($_REQUEST["productos"]);
     $co_empresa = $_REQUEST["co_empresa"];
+    
+    $c=1;
+    $co_producto = '';
+    $conteo = 1;
 
-    $queryCodigo = "SELECT RIGHT(CONCAT('0000000',MAX(co_producto) + 1), 7) FROM m_productos";
-    $stmtCodigo = $conn->prepare($queryCodigo);
-    $stmtCodigo->execute();
-    $result = $stmtCodigo->fetchAll();
-    $co_producto = $result[0][0];
+    while($c>=1){
+        $co_producto = getCodigo($conn, $conteo);
+        $queryExiste = "SELECT COUNT(*) AS count FROM m_productos WHERE co_producto = '$co_producto'";
+        $stmtExiste = $conn->prepare($queryExiste);
+        $stmtExiste->execute();
+        $resultExiste = $stmtExiste->fetch(PDO::FETCH_OBJ);
+        $c = $resultExiste->count;
+        $conteo = $conteo + 1;
+    }
 
     $query = "INSERT INTO m_productos (
               co_producto, co_grupo, co_categoria, co_sub_categoria,
               no_producto, co_pais_procedencia, co_unidad, v_presenta,
               no_presentacion, va_compra, precio0, precio1, stk_min, stk_max,
-              cuenta_vta, cuenta_vt2, fl_igv, fl_serv, fe_creacion, co_empresa)
-              VALUES(?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, NOW(), ?)";
+              cuenta_vta, cuenta_vt2, fl_igv, fl_serv, fe_creacion, co_empresa, nu_orden, co_destino)
+              VALUES(?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, NOW(), ?, ?, ?)";
 
     $stmt = $conn->prepare($query);
     $stmt->bindParam(1, $co_producto);
@@ -40,6 +57,8 @@ if ($_POST) {
     $stmt->bindParam(17, $data->fl_igv);
     $stmt->bindParam(18, $data->fl_serv);
     $stmt->bindParam(19, $co_empresa);
+    $stmt->bindParam(20, $data->nu_orden == '' ? 0 : $data->nu_orden);
+    $stmt->bindParam(21, $data->co_destino);
     $stmt->execute();
 
     $queryDelete = "DELETE FROM r_productos_precios WHERE co_producto = ?";

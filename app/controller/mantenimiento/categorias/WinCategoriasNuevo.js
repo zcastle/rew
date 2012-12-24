@@ -9,7 +9,8 @@ Ext.define('MG.controller.mantenimiento.categorias.WinCategoriasNuevo', {
     }],
     stores: [
     'Categorias',
-    'Grupo'
+    'Grupo',
+    'Destino'
     ],
     init: function() {
         this.control({
@@ -27,6 +28,7 @@ Ext.define('MG.controller.mantenimiento.categorias.WinCategoriasNuevo', {
     onRenderedWinCategoriasNuevo: function(){
         this.getGrupoStore().proxy.extraParams.co_empresa = AppGlobals.CIA;
         this.getGrupoStore().load();
+        this.getDestinoStore().load();
     },
     onClickBtnCrear: function(btn){
         var form = btn.up('window').down('form');

@@ -10,10 +10,13 @@ if ($_POST) {
     $start = $_REQUEST['start'];
     $limit = $_REQUEST['limit'];
 
-    $query = "SELECT mc.id, mc.co_categoria, mc.no_categoria, mc.co_grupo, mg.no_grupo
-              FROM m_categorias mc INNER JOIN m_grupos mg ON mc.co_grupo = mg.co_grupo
-              AND mc.co_empresa = mg.co_empresa
-              WHERE mc.co_empresa LIKE '%$co_empresa%'";
+    $query = "SELECT mc.id, mc.co_categoria, mc.no_categoria, mc.co_grupo, mg.no_grupo,
+                IFNULL(mc.nu_orden, 0) AS nu_orden,
+                mc.co_destino,
+                (SELECT no_destino FROM m_destinos WHERE co_destino = mc.co_destino) AS no_destino
+                FROM m_categorias mc INNER JOIN m_grupos mg ON mc.co_grupo = mg.co_grupo
+                AND mc.co_empresa = mg.co_empresa
+                WHERE mc.co_empresa LIKE '%$co_empresa%'";
     if($no_categoria <> ''){
         $query .= " AND mc.no_categoria LIKE '$no_categoria%'";
     }
@@ -26,7 +29,15 @@ if ($_POST) {
     $stmt->execute();
     $result = $stmt->fetchAll();
 
-    $queryCount = "SELECT * FROM m_categorias mc INNER JOIN m_grupos mg ON mc.co_grupo = mg.co_grupo";
+    $queryCount = "SELECT * FROM m_categorias mc INNER JOIN m_grupos mg 
+                    ON mc.co_grupo = mg.co_grupo AND mc.co_empresa = mg.co_empresa
+                    WHERE mc.co_empresa LIKE '%$co_empresa%'";
+    if($no_categoria <> ''){
+        $query .= " AND mc.no_categoria LIKE '$no_categoria%'";
+    }
+    if($co_grupo <> ''){
+        $query .= " AND mc.co_grupo = '$co_grupo'";
+    }
 
     $stmtCount = $conn->prepare($queryCount);
     $stmtCount->execute();

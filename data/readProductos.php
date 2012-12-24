@@ -36,7 +36,10 @@ if ($_POST) {
         mp.fl_igv,
         mp.fl_serv,
         mp.fl_eliminado,
-        (SELECT IFNULL(SUM(ca_stock), 0) FROM r_stock_producto WHERE co_producto = mp.co_producto) AS ca_stock
+        (SELECT IFNULL(SUM(ca_stock), 0) FROM r_stock_producto WHERE co_producto = mp.co_producto) AS ca_stock,
+        IFNULL(mp.nu_orden, 0) AS nu_orden,
+        mp.co_destino,
+        (SELECT no_destino FROM m_destinos WHERE co_destino = mp.co_destino) AS no_destino
         FROM m_productos AS mp
         WHERE mp.fl_eliminado = 'N' AND mp.co_empresa LIKE '%$co_empresa%'";
     if ($no_producto <> "") {
