@@ -1,4 +1,4 @@
-Ext.define('MG.model.FacturacionConsultar', {
+Ext.define('rewsoft.model.FacturacionConsultar', {
     extend: 'Ext.data.Model',
     fields: [{
         name: 'fecha', 

@@ -1,10 +1,11 @@
-Ext.define('MG.store.Destino', {
+Ext.define('rewsoft.store.Destino', {
     extend: 'Ext.data.Store',
-    model: 'MG.model.Destino',
+    model: 'rewsoft.model.Destino',
     proxy: {
         type: 'ajax',
         url: 'data/readDestino.php',
         reader: {
+            type: 'json',
             root: 'destino'
         },
         actionMethods: {

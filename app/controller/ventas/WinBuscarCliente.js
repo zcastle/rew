@@ -1,4 +1,4 @@
-Ext.define('MG.controller.ventas.WinBuscarCliente', {
+Ext.define('rewsoft.controller.ventas.WinBuscarCliente', {
     extend: 'Ext.app.Controller',
     views: [
     'ventas.WinBuscarCliente'

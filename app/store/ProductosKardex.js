@@ -1,6 +1,6 @@
-Ext.define('MG.store.ProductosKardex', {
+Ext.define('rewsoft.store.ProductosKardex', {
     extend: 'Ext.data.Store',
-    model: 'MG.model.Producto',
+    model: 'rewsoft.model.Producto',
     proxy: {
         type: 'ajax',
         api:{
@@ -9,7 +9,7 @@ Ext.define('MG.store.ProductosKardex', {
         reader: {
             type: 'json',
             successProperty: 'success',
-            root: 'productos',
+            root: 'productos'
         },
         actionMethods: {
             read: 'POST'

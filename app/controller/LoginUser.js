@@ -1,4 +1,4 @@
-Ext.define('MG.controller.LoginUser', {
+Ext.define('rewsoft.controller.LoginUser', {
     extend: 'Ext.app.Controller',
     views: [
     'LoginUser',
@@ -38,7 +38,7 @@ Ext.define('MG.controller.LoginUser', {
     },
     onRenderLoginUser: function(){
         //this.getLoginUser().down('combobox[name=cboCia]').hide();
-        this.getUsuariosStore().proxy.extraParams.co_empresa = AppGlobals.CIA;
+        this.getUsuariosStore().proxy.extraParams.co_empresa = rewsoft.AppGlobals.CIA;
         this.getUsuariosStore().proxy.extraParams.co_usuario = '';
         this.getUsuariosStore().load();
     },
@@ -70,37 +70,37 @@ Ext.define('MG.controller.LoginUser', {
                 //waitTitle: 'Authenticando..',
                 //waitMsg: 'Iniciando sesion...',
                 success: function(frm, action) {
-                    AppGlobals.CO_USUARIO = this.getMainView().down('combobox[name=txtUsuario]').getValue();
-                    AppGlobals.RAZON_SOCIAL = this.getMainView().down('combobox[name=cboCia]').getStore().findRecord('co_empresa', AppGlobals.CIA).data.no_razon_social
-                    Ext.getCmp('lblNoRazonSocial').setText(AppGlobals.RAZON_SOCIAL + ' - TC: ' + AppGlobals.TIPO_CAMBIO_VENTA);
+                    rewsoft.AppGlobals.CO_USUARIO = this.getMainView().down('combobox[name=txtUsuario]').getValue();
+                    rewsoft.AppGlobals.RAZON_SOCIAL = this.getMainView().down('combobox[name=cboCia]').getStore().findRecord('co_empresa', rewsoft.AppGlobals.CIA).data.no_razon_social
+                    Ext.getCmp('lblNoRazonSocial').setText(rewsoft.AppGlobals.RAZON_SOCIAL + ' - TC: ' + rewsoft.AppGlobals.TIPO_CAMBIO_VENTA);
                     this.getCard().getLayout().setActiveItem(1);
                     this.getMainView().hide();
                     var obj = Ext.decode(action.response.responseText);
-                    AppGlobals.SERIE_FV = obj.data.serie_fv;
-                    AppGlobals.SERIE_BV = obj.data.serie_bv;
+                    rewsoft.AppGlobals.SERIE_FV = obj.data.serie_fv;
+                    rewsoft.AppGlobals.SERIE_BV = obj.data.serie_bv;
                     switch(obj.data.id_rol){
                         case 1:
                             //ADMINISTRADOR
-                            AppGlobals.ROL_ACTIVO = AppGlobals.ROL_ADMINISTRADOR;
+                            rewsoft.AppGlobals.ROL_ACTIVO = rewsoft.AppGlobals.ROL_ADMINISTRADOR;
                             break;
                         case 2:
                             //VENTAS
-                            AppGlobals.ROL_ACTIVO = AppGlobals.ROL_VENTAS;
+                            rewsoft.AppGlobals.ROL_ACTIVO = rewsoft.AppGlobals.ROL_VENTAS;
                             break;
                         case 3:
                             //ALMACEN
-                            AppGlobals.ROL_ACTIVO = AppGlobals.ROL_ALMACEN;
+                            rewsoft.AppGlobals.ROL_ACTIVO = rewsoft.AppGlobals.ROL_ALMACEN;
                             break;
                         case 4:
                             //JEFE VENTAS
-                            AppGlobals.ROL_ACTIVO = AppGlobals.ROL_VENTAS_JEFE;
+                            rewsoft.AppGlobals.ROL_ACTIVO = rewsoft.AppGlobals.ROL_VENTAS_JEFE;
                             break;
                         case 5:
                             //JEFE ALMACEN
-                            AppGlobals.ROL_ACTIVO = AppGlobals.ROL_ALMACEN_JEFE;
+                            rewsoft.AppGlobals.ROL_ACTIVO = rewsoft.AppGlobals.ROL_ALMACEN_JEFE;
                             break;
                     }
-                    this.setMenus(AppGlobals.ROL_ACTIVO);
+                    this.setMenus(rewsoft.AppGlobals.ROL_ACTIVO);
                     Ext.getBody().unmask();
                 },
                 failure: function(frm, action) {
@@ -111,7 +111,7 @@ Ext.define('MG.controller.LoginUser', {
                         Ext.Msg.alert('Login!', 'Error al logear. Intentar otra vez'); 
                     }
                     form.reset();
-                    this.getMainView().down('combobox[name=cboCia]').setValue(AppGlobals.CIA);
+                    this.getMainView().down('combobox[name=cboCia]').setValue(rewsoft.AppGlobals.CIA);
                     Ext.getBody().unmask();
                 }
             });
@@ -120,7 +120,7 @@ Ext.define('MG.controller.LoginUser', {
         }
     },
     onBeforeRenderCboCia: function(combo){
-        combo.setValue(AppGlobals.CIA);
+        combo.setValue(rewsoft.AppGlobals.CIA);
     },
     onSelectCboCia: function(){
         //this.getMainView().down('textfield[name=txtUsuario]').focus();
@@ -134,38 +134,38 @@ Ext.define('MG.controller.LoginUser', {
         }, this)
         Ext.getCmp('mnuConfiguracionusuario').show();
         switch(rol){
-            case AppGlobals.ROL_ADMINISTRADOR:
+            case rewsoft.AppGlobals.ROL_ADMINISTRADOR:
                 //ADMINISTRADOR
-                if(AppGlobals.MODELO_NEGOCIO == AppGlobals.MODELO_NEGOCIO_MELY_GIN){
+                if(rewsoft.AppGlobals.MODELO_NEGOCIO == rewsoft.AppGlobals.MODELO_NEGOCIO_MELY_GIN){
                     Ext.getCmp('mnuVentas').show();
                 }
                 Ext.getCmp('mnuCompras').show();
                 Ext.getCmp('mnuAlmacen').show();
-                if(AppGlobals.MODELO_NEGOCIO == AppGlobals.MODELO_NEGOCIO_MELY_GIN){
+                if(rewsoft.AppGlobals.MODELO_NEGOCIO == rewsoft.AppGlobals.MODELO_NEGOCIO_MELY_GIN){
                     Ext.getCmp('mnuContabilidad').show();
                 }
                 Ext.getCmp('mnuMantenimiento').show();
                 Ext.getCmp('mnuConfiguracion').show();
                 Ext.getCmp('mnuConfiguracionusuario').hide();
                 break;
-            case AppGlobals.ROL_VENTAS:
+            case rewsoft.AppGlobals.ROL_VENTAS:
                 //VENTAS
-                if(AppGlobals.MODELO_NEGOCIO == AppGlobals.MODELO_NEGOCIO_MELY_GIN){
+                if(rewsoft.AppGlobals.MODELO_NEGOCIO == rewsoft.AppGlobals.MODELO_NEGOCIO_MELY_GIN){
                     Ext.getCmp('mnuVentas').show();
                 }
                 break;
-            case AppGlobals.ROL_ALMACEN:
+            case rewsoft.AppGlobals.ROL_ALMACEN:
                 //ALMACEN
                 Ext.getCmp('mnuAlmacen').show();
                 break;
-            case AppGlobals.ROL_VENTAS_JEFE:
+            case rewsoft.AppGlobals.ROL_VENTAS_JEFE:
                 //JEFE VENTAS
-                if(AppGlobals.MODELO_NEGOCIO == AppGlobals.MODELO_NEGOCIO_MELY_GIN){
+                if(rewsoft.AppGlobals.MODELO_NEGOCIO == rewsoft.AppGlobals.MODELO_NEGOCIO_MELY_GIN){
                     Ext.getCmp('mnuVentas').show();
                 }
                 Ext.getCmp('mnuMantenimiento').show();
                 break;
-            case AppGlobals.ROL_ALMACEN_JEFE:
+            case rewsoft.AppGlobals.ROL_ALMACEN_JEFE:
                 //JEFE ALMACEN
                 Ext.getCmp('mnuAlmacen').show();
                 Ext.getCmp('mnuMantenimiento').show();

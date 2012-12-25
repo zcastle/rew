@@ -1,4 +1,4 @@
-Ext.define('MG.view.MenuTouch', {
+Ext.define('rewsoft.view.MenuTouch', {
     extend: 'Ext.panel.Panel',
     alias: 'widget.menutouch',
     initComponent: function() {

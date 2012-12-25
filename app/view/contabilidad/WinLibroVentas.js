@@ -1,4 +1,4 @@
-Ext.define('MG.view.contabilidad.WinLibroVentas', {
+Ext.define('rewsoft.view.contabilidad.WinLibroVentas', {
     extend: 'Ext.Window',
     alias: 'widget.winlibroventas',
     title: 'Libro Ventas',

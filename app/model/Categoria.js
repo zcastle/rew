@@ -1,4 +1,4 @@
-Ext.define('MG.model.Categoria', {
+Ext.define('rewsoft.model.Categoria', {
     extend: 'Ext.data.Model',
     fields: [{
         name: 'id'

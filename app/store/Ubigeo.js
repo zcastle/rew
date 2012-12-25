@@ -1,11 +1,12 @@
-Ext.define('MG.store.Ubigeo', {
+Ext.define('rewsoft.store.Ubigeo', {
     extend: 'Ext.data.Store',
-    model: 'MG.model.Ubigeo',
+    model: 'rewsoft.model.Ubigeo',
     autoLoad: true,
     proxy: {
         type: 'ajax',
         url: 'data/readUbigeo.php',
         reader: {
+            type: 'json',
             root: 'ubigeo'
         },
         actionMethods: {

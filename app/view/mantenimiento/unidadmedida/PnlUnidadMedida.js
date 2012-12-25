@@ -1,4 +1,4 @@
-Ext.define('MG.view.mantenimiento.unidadmedida.PnlUnidadMedida' ,{
+Ext.define('rewsoft.view.mantenimiento.unidadmedida.PnlUnidadMedida' ,{
     extend: 'Ext.grid.Panel',
     alias : 'widget.pnlunidadmedida',
     store: 'UnidadesVenta',

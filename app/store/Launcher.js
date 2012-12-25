@@ -1,6 +1,6 @@
-Ext.define('MG.store.Launcher', {
+Ext.define('rewsoft.store.Launcher', {
     extend: 'Ext.data.Store',
-    model: 'MG.model.Launcher',
+    model: 'rewsoft.model.Launcher',
     autoLoad: true,
     data: [
         {src: 'resources/images/ajax.png', caption: 'Facturacion', action: 'mnuVentasFacturacion'},

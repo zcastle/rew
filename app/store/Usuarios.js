@@ -1,6 +1,6 @@
-Ext.define('MG.store.Usuarios', {
+Ext.define('rewsoft.store.Usuarios', {
     extend: 'Ext.data.Store',
-    model: 'MG.model.Usuario',
+    model: 'rewsoft.model.Usuario',
     proxy: {
         type: 'ajax',
         api: {

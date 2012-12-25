@@ -1,4 +1,4 @@
-Ext.define('MG.controller.almacen.OrdenesDespacho', {
+Ext.define('rewsoft.controller.almacen.OrdenesDespacho', {
     extend: 'Ext.app.Controller',
     views: [
     'almacen.PnlOrdenesDespacho'

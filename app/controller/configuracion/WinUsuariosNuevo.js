@@ -1,4 +1,4 @@
-Ext.define('MG.controller.configuracion.WinUsuariosNuevo', {
+Ext.define('rewsoft.controller.configuracion.WinUsuariosNuevo', {
     extend: 'Ext.app.Controller',
     views: [
     'configuracion.WinUsuariosNuevo'

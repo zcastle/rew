@@ -1,10 +1,11 @@
-Ext.define('MG.store.AlmacenTranslado', {
+Ext.define('rewsoft.store.AlmacenTranslado', {
     extend: 'Ext.data.Store',
-    model: 'MG.model.Almacen',
+    model: 'rewsoft.model.Almacen',
     proxy: {
         type: 'ajax',
         url: 'data/readAlmacen.php',
         reader: {
+            type: 'json',
             root: 'almacen'
         },
         actionMethods: {

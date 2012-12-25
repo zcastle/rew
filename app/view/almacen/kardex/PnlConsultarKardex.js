@@ -1,4 +1,4 @@
-Ext.define('MG.view.almacen.kardex.PnlConsultarKardex', {
+Ext.define('rewsoft.view.almacen.kardex.PnlConsultarKardex', {
     extend: 'Ext.grid.Panel',
     alias: 'widget.pnlconsultarkardex',
     store: 'Kardex',
@@ -72,7 +72,7 @@ Ext.define('MG.view.almacen.kardex.PnlConsultarKardex', {
             flex: 1,
             layout: {
                 type: 'hbox',
-                pack: 'start',
+                pack: 'start'
             },
             defaults: {
                 xtype: 'container',

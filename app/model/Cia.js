@@ -1,4 +1,4 @@
-Ext.define('MG.model.Cia', {
+Ext.define('rewsoft.model.Cia', {
     extend: 'Ext.data.Model',
     fields: [{
         name: 'co_empresa'

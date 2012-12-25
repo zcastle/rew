@@ -1,4 +1,4 @@
-Ext.define('MG.controller.almacen.abastecimiento.PnlOrdenAbastecimientoCrear', {
+Ext.define('rewsoft.controller.almacen.abastecimiento.PnlOrdenAbastecimientoCrear', {
     extend: 'Ext.app.Controller',
     views: [
     'almacen.abastecimiento.PnlOrdenAbastecimientoCrear',
@@ -47,7 +47,7 @@ Ext.define('MG.controller.almacen.abastecimiento.PnlOrdenAbastecimientoCrear', {
         this.getProductosStore().pageSize = 50;
         this.getProductosStore().proxy.extraParams.no_producto = null;
         this.getProductosStore().proxy.extraParams.co_grupo = null;
-        this.getProductosStore().proxy.extraParams.co_empresa = AppGlobals.CIA;
+        this.getProductosStore().proxy.extraParams.co_empresa = rewsoft.AppGlobals.CIA;
         this.getProductosStore().load();
         this.getSecuencia('OA');
     },
@@ -156,9 +156,9 @@ Ext.define('MG.controller.almacen.abastecimiento.PnlOrdenAbastecimientoCrear', {
                 Ext.Ajax.request({
                     url: 'data/procesarOrdenAbastecimiento.php',
                     params: {
-                        cia: AppGlobals.CIA,
+                        cia: rewsoft.AppGlobals.CIA,
                         numeroDocumento: numeroDocumento,
-                        co_usuario: AppGlobals.CO_USUARIO,
+                        co_usuario: rewsoft.AppGlobals.CO_USUARIO,
                         observacion: null,
                         detalle: Ext.encode(detalle)
                     },
@@ -190,7 +190,7 @@ Ext.define('MG.controller.almacen.abastecimiento.PnlOrdenAbastecimientoCrear', {
         Ext.Ajax.request({
             url: 'data/readNumeroSecuencia.php',
             params: {
-                cia: AppGlobals.CIA,
+                cia: rewsoft.AppGlobals.CIA,
                 tipoDocumento: coTipoDocumento
             },
             scope: this,
@@ -210,7 +210,7 @@ Ext.define('MG.controller.almacen.abastecimiento.PnlOrdenAbastecimientoCrear', {
         Ext.Ajax.request({
             url: 'data/setNumeroSecuencia.php',
             params: {
-                cia: AppGlobals.CIA,
+                cia: rewsoft.AppGlobals.CIA,
                 tipoDocumento: coTipoDocumento,
                 nu_serie: this.nu_serie,
                 nu_secuencia: null
@@ -247,7 +247,7 @@ Ext.define('MG.controller.almacen.abastecimiento.PnlOrdenAbastecimientoCrear', {
     addProducto: function(co_producto, no_producto, cantidad, unidad){
         var gridPedido = this.getMainView().down('grid[name=gridPedido]');
         var storePedido = gridPedido.getStore();
-        var pedido = Ext.create('MG.store.Pedidos', {
+        var pedido = Ext.create('rewsoft.store.Pedidos', {
             co_producto: co_producto,
             no_producto: no_producto,
             cantidad: cantidad,
@@ -256,5 +256,5 @@ Ext.define('MG.controller.almacen.abastecimiento.PnlOrdenAbastecimientoCrear', {
         var count = storePedido.getCount();
         storePedido.insert(count, pedido);
         this.setTotalItems(gridPedido);
-    },
+    }
 });

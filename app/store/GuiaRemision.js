@@ -1,6 +1,6 @@
-Ext.define('MG.store.GuiaRemision', {
+Ext.define('rewsoft.store.GuiaRemision', {
     extend: 'Ext.data.Store',
-    model: 'MG.model.GuiaRemision',
+    model: 'rewsoft.model.GuiaRemision',
     autoLoad: true,
     proxy: {
         type: 'ajax',
@@ -8,6 +8,7 @@ Ext.define('MG.store.GuiaRemision', {
             read: 'data/readGuiaRemision.php'
         },
         reader: {
+            type: 'json',
             root: 'guiaremision'
         },
         actionMethods: {

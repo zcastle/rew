@@ -1,4 +1,4 @@
-Ext.define('MG.controller.mantenimiento.productos.WinCategoriasListar', {
+Ext.define('rewsoft.controller.mantenimiento.productos.WinCategoriasListar', {
     extend: 'Ext.app.Controller',
     views: [
     'mantenimiento.producto.WinCategorias'
@@ -29,7 +29,7 @@ Ext.define('MG.controller.mantenimiento.productos.WinCategoriasListar', {
         var co_grupo = this.getController('mantenimiento.productos.WinProductosNuevo').getMainView().down('combobox[name=co_grupo]').getValue();
         this.getCategoriasStore().proxy.extraParams.no_categoria = null;
         this.getCategoriasStore().proxy.extraParams.co_grupo = co_grupo;
-        this.getCategoriasStore().proxy.extraParams.co_empresa = AppGlobals.CIA;
+        this.getCategoriasStore().proxy.extraParams.co_empresa = rewsoft.AppGlobals.CIA;
         this.getCategoriasStore().load();
     },
     onRenderedGridCategorias: function(grid){

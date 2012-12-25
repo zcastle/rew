@@ -1,4 +1,4 @@
-Ext.define('MG.controller.mantenimiento.productos.WinSubCategoriasListar', {
+Ext.define('rewsoft.controller.mantenimiento.productos.WinSubCategoriasListar', {
     extend: 'Ext.app.Controller',
     views: [
     'mantenimiento.producto.WinSubCategorias'

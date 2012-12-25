@@ -1,4 +1,4 @@
-Ext.define('MG.model.OrdenDespacho', {
+Ext.define('rewsoft.model.OrdenDespacho', {
     extend: 'Ext.data.Model',
     fields: [{
         name: 'fecha'

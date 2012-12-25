@@ -1,4 +1,4 @@
-Ext.define('MG.view.mantenimiento.producto.WinMostrarLotes', {
+Ext.define('rewsoft.view.mantenimiento.producto.WinMostrarLotes', {
     extend: 'Ext.Window',
     alias: 'widget.winproductosmostrarlotes',
     title: 'Lotes',

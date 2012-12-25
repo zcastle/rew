@@ -1,4 +1,4 @@
-Ext.define('MG.model.Receta', {
+Ext.define('rewsoft.model.Receta', {
     extend: 'Ext.data.Model',
     fields: [{
         name: 'co_producto'

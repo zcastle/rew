@@ -1,4 +1,4 @@
-Ext.define('MG.view.almacen.transferencia.WinCantidad', {
+Ext.define('rewsoft.view.almacen.transferencia.WinCantidad', {
     extend: 'Ext.Window',
     alias: 'widget.winalmacentransferenciacantidad',
     title: 'Ingreso de Cantidad',

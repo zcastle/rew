@@ -1,4 +1,4 @@
-Ext.define('MG.view.configuracion.WinUsuariosNuevo', {
+Ext.define('rewsoft.view.configuracion.WinUsuariosNuevo', {
     extend: 'Ext.Window',
     alias: 'widget.winusuariosnuevo',
     title: 'Usuarios',
@@ -20,7 +20,7 @@ Ext.define('MG.view.configuracion.WinUsuariosNuevo', {
             items: [{
                 xtype: 'hiddenfield',
                 name: 'co_empresa',
-                value: AppGlobals.CIA
+                value: rewsoft.AppGlobals.CIA
             },{
                 fieldLabel: 'Nombres',
                 name: 'no_usuario'

@@ -1,4 +1,4 @@
-Ext.define('MG.view.mantenimiento.categoria.PnlCategorias' ,{
+Ext.define('rewsoft.view.mantenimiento.categoria.PnlCategorias' ,{
     extend: 'Ext.grid.Panel',
     alias : 'widget.pnlcategorias',
     store: 'Categorias',

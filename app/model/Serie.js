@@ -1,4 +1,4 @@
-Ext.define('MG.model.Serie', {
+Ext.define('rewsoft.model.Serie', {
     extend: 'Ext.data.Model',
     fields: [{
         name: 'co_documento'

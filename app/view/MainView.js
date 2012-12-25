@@ -1,4 +1,4 @@
-Ext.define('MG.view.MainView', {
+Ext.define('rewsoft.view.MainView', {
     extend: 'Ext.panel.Panel',
     alias: 'widget.mainview',
     layout: 'border',

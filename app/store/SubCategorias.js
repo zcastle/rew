@@ -1,6 +1,6 @@
-Ext.define('MG.store.SubCategorias', {
+Ext.define('rewsoft.store.SubCategorias', {
     extend: 'Ext.data.Store',
-    model: 'MG.model.SubCategoria',
+    model: 'rewsoft.model.SubCategoria',
     pageSize: 25,
     proxy: {
         type: 'ajax',
@@ -8,10 +8,12 @@ Ext.define('MG.store.SubCategorias', {
             read: 'data/readSubCategorias.php'
         },
         reader: {
+            type: 'json',
             root: 'subcategorias',
             totalProperty: 'totalCount'
         },
         writer: {
+            type: 'json',
             encode: true,  
             writeAllFields: true,
             root: 'subcategorias'

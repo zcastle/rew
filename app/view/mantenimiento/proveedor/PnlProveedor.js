@@ -1,4 +1,4 @@
-Ext.define('MG.view.mantenimiento.proveedor.PnlProveedor' ,{
+Ext.define('rewsoft.view.mantenimiento.proveedor.PnlProveedor' ,{
     extend: 'Ext.grid.Panel',
     alias : 'widget.pnlproveedor',
     store: 'mantenimiento.Proveedores',

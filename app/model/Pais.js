@@ -1,4 +1,4 @@
-Ext.define('MG.model.Pais', {
+Ext.define('rewsoft.model.Pais', {
     extend: 'Ext.data.Model',
     fields: [{
         name: 'co_pais'

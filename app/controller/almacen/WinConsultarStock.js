@@ -1,4 +1,4 @@
-Ext.define('MG.controller.almacen.WinConsultarStock', {
+Ext.define('rewsoft.controller.almacen.WinConsultarStock', {
     extend: 'Ext.app.Controller',
     views: [
     'almacen.WinConsultarStock'
@@ -24,7 +24,7 @@ Ext.define('MG.controller.almacen.WinConsultarStock', {
     },
     onClickBtnVerStock: function(button){
         var mostrarLotes = this.getMainView().down('checkboxfield[name=chkMostrarLotes]').getValue();
-        var win = window.open('data/reportes/reporteConsultaStock.php?cia='+AppGlobals.CIA+'&lotes='+mostrarLotes, '_blank');
+        var win = window.open('data/reportes/reporteConsultaStock.php?cia='+rewsoft.AppGlobals.CIA+'&lotes='+mostrarLotes, '_blank');
         //win.print();
         this.getMainView().close();
     }

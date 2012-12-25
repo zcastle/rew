@@ -1,4 +1,4 @@
-Ext.define('MG.model.GuiaRemision', {
+Ext.define('rewsoft.model.GuiaRemision', {
     extend: 'Ext.data.Model',
     fields: [{
         name: 'fe_guia'

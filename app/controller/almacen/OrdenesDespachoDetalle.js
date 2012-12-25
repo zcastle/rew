@@ -1,4 +1,4 @@
-Ext.define('MG.controller.almacen.OrdenesDespachoDetalle', {
+Ext.define('rewsoft.controller.almacen.OrdenesDespachoDetalle', {
     extend: 'Ext.app.Controller',
     views: [
     'almacen.WinOrdenesDespachoDetalle'

@@ -1,8 +1,5 @@
-Ext.define('MG.controller.MainView', {
+Ext.define('rewsoft.controller.MainView', {
     extend: 'Ext.app.Controller',
-    views: [
-    'MainView'
-    ],
     refs: [{
         ref: 'Card',
         selector: 'card'
@@ -24,12 +21,12 @@ Ext.define('MG.controller.MainView', {
         });
     },
     onMainViewRendered: function() {
-        //AppGlobals.MODELO_NEGOCIO = AppGlobals.MODELO_NEGOCIO_MELY_GIN;
-        AppGlobals.MODELO_NEGOCIO = AppGlobals.MODELO_NEGOCIO_DSILVANA;
+        //rewsoft.AppGlobals.MODELO_NEGOCIO = rewsoft.AppGlobals.MODELO_NEGOCIO_MELY_GIN;
+        rewsoft.AppGlobals.MODELO_NEGOCIO = rewsoft.AppGlobals.MODELO_NEGOCIO_DSILVANA;
         this.loadMenu();
-        if(AppGlobals.DEBUG){
+        if(rewsoft.AppGlobals.DEBUG){
             console.log('Debug activado');
-            this.getLoginUser().hide();
+            //this.getLoginUser().hide();
             this.getCard().getLayout().setActiveItem(1);
             //this.getController('TabMain').addTab('Facturacion', 'pnlventasfacturacion', 'ico-facturacion-small');
             //this.getController('TabMain').addTab('Ordenes de Despacho', 'pnlordenesdespacho');
@@ -42,11 +39,13 @@ Ext.define('MG.controller.MainView', {
             //this.getController('TabMain').addTab('Ajuste de Inventario', 'pnlajusteinventario');
             //this.getController('TabMain').addTab('Consultar Kardex', 'pnlconsultarkardex');
             //Ext.widget('winconsultarstock').show();
-            this.getController('TabMain').addTab('Categorias', 'pnlcategorias');
+            //this.getController('TabMain').addTab('Categorias', 'pnlcategorias');
             //this.getController('TabMain').addTab('Unidades de Medida', 'pnlunidadmedida');
             //this.getController('TabMain').addTab('Crear', 'pnlordenabastecimientocrear');
             //this.getController('TabMain').addTab('Transferencia de Productos', 'pnltransferencia');
             //this.getController('TabMain').addTab('Usuarios', 'pnlusuarios');
+        } else {
+            Ext.widget('loginuser');
         }
     },
     loadMenu: function(){
@@ -54,7 +53,7 @@ Ext.define('MG.controller.MainView', {
             id: 'tbMain'
         });
         
-        if(AppGlobals.MODELO_NEGOCIO == AppGlobals.MODELO_NEGOCIO_MELY_GIN){
+        if(rewsoft.AppGlobals.MODELO_NEGOCIO == rewsoft.AppGlobals.MODELO_NEGOCIO_MELY_GIN){
             tb.add({
                 text: 'Ventas',
                 name: 'mnuVentas',
@@ -108,7 +107,7 @@ Ext.define('MG.controller.MainView', {
             }]
         });
         
-        if(AppGlobals.MODELO_NEGOCIO == AppGlobals.MODELO_NEGOCIO_MELY_GIN){
+        if(rewsoft.AppGlobals.MODELO_NEGOCIO == rewsoft.AppGlobals.MODELO_NEGOCIO_MELY_GIN){
             tb.add({
                 text: 'Almacen',
                 name: 'mnuAlmacen',
@@ -165,7 +164,7 @@ Ext.define('MG.controller.MainView', {
             });
         }
 
-        if(AppGlobals.MODELO_NEGOCIO == AppGlobals.MODELO_NEGOCIO_MELY_GIN){
+        if(rewsoft.AppGlobals.MODELO_NEGOCIO == rewsoft.AppGlobals.MODELO_NEGOCIO_MELY_GIN){
             tb.add({
                 text: 'Contabilidad',
                 name: 'mnuContabilidad',
@@ -180,7 +179,7 @@ Ext.define('MG.controller.MainView', {
             });
         }
 
-        if(AppGlobals.MODELO_NEGOCIO == AppGlobals.MODELO_NEGOCIO_DSILVANA){
+        if(rewsoft.AppGlobals.MODELO_NEGOCIO == rewsoft.AppGlobals.MODELO_NEGOCIO_DSILVANA){
             tb.add({
                 text: 'Reportes',
                 name: 'mnuReportes',
@@ -196,7 +195,7 @@ Ext.define('MG.controller.MainView', {
         }
         
 
-        if(AppGlobals.MODELO_NEGOCIO == AppGlobals.MODELO_NEGOCIO_MELY_GIN){
+        if(rewsoft.AppGlobals.MODELO_NEGOCIO == rewsoft.AppGlobals.MODELO_NEGOCIO_MELY_GIN){
             tb.add({
                 text: 'Mantenimiento',
                 name: 'mnuMantenimiento',
@@ -279,7 +278,7 @@ Ext.define('MG.controller.MainView', {
             baseCls: 'etiqueta',
             xtype: 'label',
             id: 'lblNoRazonSocial',
-            text: AppGlobals.RAZON_SOCIAL + ' - Tipo de Cambio: ' + AppGlobals.TIPO_CAMBIO_VENTA,
+            text: rewsoft.AppGlobals.RAZON_SOCIAL + ' - Tipo de Cambio: ' + rewsoft.AppGlobals.TIPO_CAMBIO_VENTA,
             margins: '0 5 0 0'
         });
         

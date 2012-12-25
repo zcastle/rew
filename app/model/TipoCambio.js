@@ -1,4 +1,4 @@
-Ext.define('MG.model.TipoCambio', {
+Ext.define('rewsoft.model.TipoCambio', {
     extend: 'Ext.data.Model',
     fields: [{
         name: 'id'

@@ -1,4 +1,4 @@
-Ext.define('MG.model.IngresoProductos', {
+Ext.define('rewsoft.model.IngresoProductos', {
     extend: 'Ext.data.Model',
     fields: [{
         name: 'co_producto'

@@ -1,4 +1,4 @@
-Ext.define('MG.model.Almacen', {
+Ext.define('rewsoft.model.Almacen', {
     extend: 'Ext.data.Model',
     fields: [{
         name: 'co_almacen'

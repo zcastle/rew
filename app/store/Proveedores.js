@@ -1,6 +1,6 @@
-Ext.define('MG.store.Proveedores', {
+Ext.define('rewsoft.store.Proveedores', {
     extend: 'Ext.data.Store',
-    model: 'MG.model.Proveedor',
+    model: 'rewsoft.model.Proveedor',
     proxy: {
         type: 'ajax',
         api:{

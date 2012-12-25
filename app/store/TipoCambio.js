@@ -1,6 +1,6 @@
-Ext.define('MG.store.TipoCambio', {
+Ext.define('rewsoft.store.TipoCambio', {
     extend: 'Ext.data.Store',
-    model: 'MG.model.TipoCambio',
+    model: 'rewsoft.model.TipoCambio',
     proxy: {
         type: 'ajax',
         url: 'data/readTipoCambio.php',
@@ -9,6 +9,7 @@ Ext.define('MG.store.TipoCambio', {
             update: 'data/updateTipoCambio.php'
         },
         reader: {
+            type: 'json',
             root: 'tipocambio'
         },
         writer: {

@@ -1,4 +1,4 @@
-Ext.define('MG.view.almacen.WinCantidad', {
+Ext.define('rewsoft.view.almacen.WinCantidad', {
     extend: 'Ext.Window',
     alias: 'widget.winalmacencantidad',
     title: 'Ingreso de Cantidad',
@@ -79,7 +79,7 @@ Ext.define('MG.view.almacen.WinCantidad', {
                     hideTrigger: true,
                     keyNavEnabled: false,
                     mouseWheelEnabled: false,
-                    decimalPrecision: AppGlobals.DECIMALES,
+                    decimalPrecision: rewsoft.AppGlobals.DECIMALES,
                     labelWidth: 65,
                     width: 150
                 },{
@@ -94,7 +94,7 @@ Ext.define('MG.view.almacen.WinCantidad', {
                     hideTrigger: true,
                     keyNavEnabled: false,
                     mouseWheelEnabled: false,
-                    decimalPrecision: AppGlobals.DECIMALES,
+                    decimalPrecision: rewsoft.AppGlobals.DECIMALES,
                     labelWidth: 100,
                     flex: 1,
                     margins: '0 0 0 5'

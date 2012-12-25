@@ -1,4 +1,4 @@
-Ext.define('MG.view.mantenimiento.unidadmedida.WinUnidadMedidaNuevo', {
+Ext.define('rewsoft.view.mantenimiento.unidadmedida.WinUnidadMedidaNuevo', {
     extend: 'Ext.window.Window',
     alias : 'widget.winunidadmedidanuevo',
     title: 'Unidades de Medida',

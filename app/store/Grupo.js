@@ -1,10 +1,11 @@
-Ext.define('MG.store.Grupo', {
+Ext.define('rewsoft.store.Grupo', {
     extend: 'Ext.data.Store',
-    model: 'MG.model.Grupo',
+    model: 'rewsoft.model.Grupo',
     proxy: {
         type: 'ajax',
         url: 'data/readGrupos.php',
         reader: {
+            type: 'json',
             root: 'grupos'
         },
         actionMethods: {

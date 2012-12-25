@@ -1,4 +1,4 @@
-Ext.define('MG.controller.mantenimiento.productos.WinProductosNuevo', {
+Ext.define('rewsoft.controller.mantenimiento.productos.WinProductosNuevo', {
     extend: 'Ext.app.Controller',
     views: [
     'mantenimiento.producto.WinProductosNuevo'
@@ -81,21 +81,21 @@ Ext.define('MG.controller.mantenimiento.productos.WinProductosNuevo', {
         win.down('fieldcontainer[name=zonaRecetas]').hide();
         win.down('fieldcontainer[name=zonaOrdenDestino]').hide();
         //win.down('fieldcontainer[name=zonaPresentacion]').hide();
-        if(AppGlobals.MODELO_NEGOCIO == AppGlobals.MODELO_NEGOCIO_DSILVANA){
+        if(rewsoft.AppGlobals.MODELO_NEGOCIO == rewsoft.AppGlobals.MODELO_NEGOCIO_DSILVANA){
             win.down('fieldcontainer[name=zonaRecetas]').show();
             win.down('checkbox[name=fl_serv]').show();
             win.down('combobox[name=co_grupo]').show();
             win.down('fieldcontainer[name=zonaOrdenDestino]').show();
-        } else if(AppGlobals.MODELO_NEGOCIO == AppGlobals.MODELO_NEGOCIO_MELY_GIN){
+        } else if(rewsoft.AppGlobals.MODELO_NEGOCIO == rewsoft.AppGlobals.MODELO_NEGOCIO_MELY_GIN){
             win.down('fieldcontainer[name=zonaMarca]').show();
             win.down('fieldcontainer[name=zonaPaisProcedencia]').show();
             win.down('fieldcontainer[name=zonaPrecioCaja]').show();
             //win.down('fieldcontainer[name=zonaPresentacion]').show();
             win.down('fieldset[name=zonaPrecios]').show();
         }
-        this.getGrupoStore().proxy.extraParams.co_empresa = AppGlobals.CIA;
+        this.getGrupoStore().proxy.extraParams.co_empresa = rewsoft.AppGlobals.CIA;
         this.getGrupoStore().load();
-        this.getUnidadesVentaStore().proxy.extraParams.co_empresa = AppGlobals.CIA;
+        this.getUnidadesVentaStore().proxy.extraParams.co_empresa = rewsoft.AppGlobals.CIA;
         this.getUnidadesVentaStore().load();
         this.getPrecioStore().proxy.extraParams.co_producto = this.getMainView().down('hidden').getValue();
         this.getPrecioStore().load();
@@ -115,7 +115,7 @@ Ext.define('MG.controller.mantenimiento.productos.WinProductosNuevo', {
             win.down('displayfield[name=no_sub_categoria]').setValue('NACIONAL');
             win.down('textfield[name=co_pais_procedencia]').setValue('00001');
             win.down('displayfield[name=no_pais_procedencia]').setValue('PERU');
-            if(AppGlobals.MODELO_NEGOCIO == AppGlobals.MODELO_NEGOCIO_MELY_GIN){
+            if(rewsoft.AppGlobals.MODELO_NEGOCIO == rewsoft.AppGlobals.MODELO_NEGOCIO_MELY_GIN){
                 win.down('combobox[name=co_unidad]').setValue('6');
             }else{
                 win.down('combobox[name=co_unidad]').setValue('1');
@@ -154,10 +154,10 @@ Ext.define('MG.controller.mantenimiento.productos.WinProductosNuevo', {
                         receta.push(registro);
                     });
                     values.receta = receta;
-                    if(AppGlobals.MODELO_NEGOCIO == AppGlobals.MODELO_NEGOCIO_MELY_GIN){
+                    if(rewsoft.AppGlobals.MODELO_NEGOCIO == rewsoft.AppGlobals.MODELO_NEGOCIO_MELY_GIN){
                         this.getProductosStore().proxy.extraParams.co_empresa = '01-02-03';
                     }else{
-                        this.getProductosStore().proxy.extraParams.co_empresa = AppGlobals.CIA;
+                        this.getProductosStore().proxy.extraParams.co_empresa = rewsoft.AppGlobals.CIA;
                     }
                     this.getProductosStore().insert(0, values);
                     this.getProductosStore().sync({
@@ -227,7 +227,7 @@ Ext.define('MG.controller.mantenimiento.productos.WinProductosNuevo', {
         var grid = this.getMainView().down('grid');
         if(per > 0){
             var precio0 = costo * ((per / 100) + 1);
-            var precio = Ext.create('MG.store.Precio', {
+            var precio = Ext.create('rewsoft.store.Precio', {
                 va_per: per,
                 va_precio: precio0
             });
@@ -339,7 +339,7 @@ Ext.define('MG.controller.mantenimiento.productos.WinProductosNuevo', {
         });
     },
     onSelectCoGrupo: function(combo){
-        if(AppGlobals.MODELO_NEGOCIO == AppGlobals.MODELO_NEGOCIO_DSILVANA){
+        if(rewsoft.AppGlobals.MODELO_NEGOCIO == rewsoft.AppGlobals.MODELO_NEGOCIO_DSILVANA){
             this.getMainView().down('numberfield[name=precio0]').hide();
             this.getMainView().down('fieldcontainer[name=zonaStock]').hide();
             this.getMainView().down('checkbox[name=fl_serv]').hide();
@@ -373,7 +373,7 @@ Ext.define('MG.controller.mantenimiento.productos.WinProductosNuevo', {
     },
     addProducto: function(co_producto, no_producto, ca_producto, co_unidad, no_unidad, ca_unidad, va_compra, co_almacen, no_almacen){
         var va_total = va_compra * ca_producto;
-        var precio = Ext.create('MG.store.Receta', {
+        var precio = Ext.create('rewsoft.store.Receta', {
             co_producto: co_producto,
             no_producto: no_producto,
             ca_producto: ca_producto,

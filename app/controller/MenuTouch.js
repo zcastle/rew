@@ -1,4 +1,4 @@
-Ext.define('MG.controller.MenuTouch', {
+Ext.define('rewsoft.controller.MenuTouch', {
     extend: 'Ext.app.Controller',
     views: [
     'MenuTouch'

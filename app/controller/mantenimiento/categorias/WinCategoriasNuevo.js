@@ -1,4 +1,4 @@
-Ext.define('MG.controller.mantenimiento.categorias.WinCategoriasNuevo', {
+Ext.define('rewsoft.controller.mantenimiento.categorias.WinCategoriasNuevo', {
     extend: 'Ext.app.Controller',
     views: [
     'mantenimiento.categoria.WinCategoriasNuevo'
@@ -26,7 +26,7 @@ Ext.define('MG.controller.mantenimiento.categorias.WinCategoriasNuevo', {
         });
     },
     onRenderedWinCategoriasNuevo: function(){
-        this.getGrupoStore().proxy.extraParams.co_empresa = AppGlobals.CIA;
+        this.getGrupoStore().proxy.extraParams.co_empresa = rewsoft.AppGlobals.CIA;
         this.getGrupoStore().load();
         this.getDestinoStore().load();
     },
@@ -36,10 +36,10 @@ Ext.define('MG.controller.mantenimiento.categorias.WinCategoriasNuevo', {
             Ext.Msg.confirm('Confirmacion', 'Esta seguro de querer grabar la categoria?', function(btn){
                 if(btn=='yes'){
                     var values = form.getValues();
-                    if(AppGlobals.MODELO_NEGOCIO == AppGlobals.MODELO_NEGOCIO_MELY_GIN){
+                    if(rewsoft.AppGlobals.MODELO_NEGOCIO == rewsoft.AppGlobals.MODELO_NEGOCIO_MELY_GIN){
                         this.getCategoriasStore().proxy.extraParams.co_empresa = '01-02-03';
                     } else {
-                        this.getCategoriasStore().proxy.extraParams.co_empresa = AppGlobals.CIA;
+                        this.getCategoriasStore().proxy.extraParams.co_empresa = rewsoft.AppGlobals.CIA;
                     }
                     this.getCategoriasStore().insert(0, values);
                     this.getCategoriasStore().sync({

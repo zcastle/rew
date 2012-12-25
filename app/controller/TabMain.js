@@ -1,4 +1,4 @@
-Ext.define('MG.controller.TabMain', {
+Ext.define('rewsoft.controller.TabMain', {
     extend: 'Ext.app.Controller',
     views: [
     'TabMain'

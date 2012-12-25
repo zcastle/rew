@@ -1,4 +1,4 @@
-Ext.define('MG.controller.configuracion.WinUsuariosUpdate', {
+Ext.define('rewsoft.controller.configuracion.WinUsuariosUpdate', {
     extend: 'Ext.app.Controller',
     views: [
     'configuracion.WinUsuariosUpdate'
@@ -21,8 +21,8 @@ Ext.define('MG.controller.configuracion.WinUsuariosUpdate', {
         });
     },
     onRenderWinUsuariosUpdate: function(win) {
-        this.getUsuariosStore().proxy.extraParams.co_empresa = AppGlobals.CIA;
-        this.getUsuariosStore().proxy.extraParams.co_usuario = AppGlobals.CO_USUARIO;
+        this.getUsuariosStore().proxy.extraParams.co_empresa = rewsoft.AppGlobals.CIA;
+        this.getUsuariosStore().proxy.extraParams.co_usuario = rewsoft.AppGlobals.CO_USUARIO;
         this.getUsuariosStore().load({
             callback: function(record, operation, success) {
                 if(success){

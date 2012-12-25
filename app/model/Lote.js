@@ -1,4 +1,4 @@
-Ext.define('MG.model.Lote', {
+Ext.define('rewsoft.model.Lote', {
     extend: 'Ext.data.Model',
     fields: [{
         name: 'no_lote'

@@ -1,4 +1,4 @@
-Ext.define('MG.model.Destino', {
+Ext.define('rewsoft.model.Destino', {
     extend: 'Ext.data.Model',
     fields: [{
         name: 'co_destino'

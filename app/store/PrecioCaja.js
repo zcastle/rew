@@ -1,10 +1,11 @@
-Ext.define('MG.store.PrecioCaja', {
+Ext.define('rewsoft.store.PrecioCaja', {
     extend: 'Ext.data.Store',
-    model: 'MG.model.PrecioCaja',
+    model: 'rewsoft.model.PrecioCaja',
     proxy: {
         type: 'ajax',
         url: 'data/readPreciosCaja.php',
         reader: {
+            type: 'json',
             root: 'precios'
         },
         actionMethods: {

@@ -1,6 +1,6 @@
-Ext.define('MG.store.Pedidos', {
+Ext.define('rewsoft.store.Pedidos', {
     extend: 'Ext.data.Store',
-    model: 'MG.model.Pedido',
+    model: 'rewsoft.model.Pedido',
     /*proxy: {
         type: 'ajax',
         url: 'data/pedidos.json',

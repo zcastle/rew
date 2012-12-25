@@ -1,4 +1,4 @@
-Ext.define('MG.controller.ventas.WinNuevoCliente', {
+Ext.define('rewsoft.controller.ventas.WinNuevoCliente', {
     extend: 'Ext.app.Controller',
     views: [
     'ventas.WinNuevoCliente'

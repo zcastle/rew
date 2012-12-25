@@ -1,4 +1,4 @@
-Ext.define('MG.view.mantenimiento.producto.WinProductosCantidad', {
+Ext.define('rewsoft.view.mantenimiento.producto.WinProductosCantidad', {
     extend: 'Ext.Window',
     alias: 'widget.winproductoscantidad',
     title: 'Productos',

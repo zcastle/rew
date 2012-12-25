@@ -1,4 +1,4 @@
-Ext.define('MG.controller.mantenimiento.unidadmedida.PnlUnidadMedida', {
+Ext.define('rewsoft.controller.mantenimiento.unidadmedida.PnlUnidadMedida', {
     extend: 'Ext.app.Controller',
     views: [
     'mantenimiento.unidadmedida.PnlUnidadMedida'
@@ -23,7 +23,7 @@ Ext.define('MG.controller.mantenimiento.unidadmedida.PnlUnidadMedida', {
         });
     },
     onRenderedPnlCategorias: function(grid) {
-        this.getUnidadesVentaStore().proxy.extraParams.co_empresa = AppGlobals.CIA;
+        this.getUnidadesVentaStore().proxy.extraParams.co_empresa = rewsoft.AppGlobals.CIA;
         this.getUnidadesVentaStore().load();
     },
     onItemDblClickPnlCategorias: function(Grid, record){

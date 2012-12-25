@@ -1,4 +1,4 @@
-Ext.define('MG.model.Moneda', {
+Ext.define('rewsoft.model.Moneda', {
     extend: 'Ext.data.Model',
     fields: [{
         name: 'codigo', 

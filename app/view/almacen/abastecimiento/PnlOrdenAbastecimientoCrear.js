@@ -1,4 +1,4 @@
-Ext.define('MG.view.almacen.abastecimiento.PnlOrdenAbastecimientoCrear', {
+Ext.define('rewsoft.view.almacen.abastecimiento.PnlOrdenAbastecimientoCrear', {
     extend: 'Ext.panel.Panel',
     alias: 'widget.pnlordenabastecimientocrear',
     border: false,

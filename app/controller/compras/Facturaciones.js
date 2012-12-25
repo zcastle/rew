@@ -1,5 +1,5 @@
 
-Ext.define('MG.controller.compras.Facturaciones', {
+Ext.define('rewsoft.controller.compras.Facturaciones', {
     extend: 'Ext.app.Controller',
     views: [
     'compras.PnlFacturacion',
@@ -162,7 +162,7 @@ Ext.define('MG.controller.compras.Facturaciones', {
         var storePedido = gridPedido.getStore();
         var storeProductos = gridProducto.getSelectionModel().selected.items[0].data;
         var total = cantidad * storeProductos.unitario;
-        var pedido = Ext.create('MG.store.Pedidos', {
+        var pedido = Ext.create('rewsoft.store.Pedidos', {
             codigo: storeProductos.codigo,
             producto: storeProductos.producto,
             presentacion: storeProductos.presentacion,
@@ -189,10 +189,10 @@ Ext.define('MG.controller.compras.Facturaciones', {
             totalS = totalS + record.data['total'];
         });
         
-        neto = Ext.util.Format.number(totalS / AppGlobals.VA_IGV, "0,000.00");
-        igv = Ext.util.Format.number(neto * AppGlobals.VA_IGV_2, "0,000.00");
+        neto = Ext.util.Format.number(totalS / rewsoft.AppGlobals.VA_IGV, "0,000.00");
+        igv = Ext.util.Format.number(neto * rewsoft.AppGlobals.VA_IGV_2, "0,000.00");
         totalS = Ext.util.Format.number(totalS, "0,000.00");
-        totalD = Ext.util.Format.number(totalS / AppGlobals.TIPO_CAMBIO_VENTA, "0,000.00");
+        totalD = Ext.util.Format.number(totalS / rewsoft.AppGlobals.TIPO_CAMBIO_VENTA, "0,000.00");
         
         neto = neto + '';
         igv = igv + '';

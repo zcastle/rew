@@ -1,6 +1,6 @@
-Ext.define('MG.store.DocumentosAlmacen', {
+Ext.define('rewsoft.store.DocumentosAlmacen', {
     extend: 'Ext.data.Store',
-    model: 'MG.model.Documento',
+    model: 'rewsoft.model.Documento',
     autoLoad: true,
     proxy: {
         type: 'ajax',
@@ -8,6 +8,7 @@ Ext.define('MG.store.DocumentosAlmacen', {
             read: 'data/readDocumentos.php'
         },
         reader: {
+            type: 'json',
             root: 'documentos'
         },
         actionMethods: {

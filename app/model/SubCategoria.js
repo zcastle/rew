@@ -1,4 +1,4 @@
-Ext.define('MG.model.SubCategoria', {
+Ext.define('rewsoft.model.SubCategoria', {
     extend: 'Ext.data.Model',
     fields: [{
         name: 'co_sub_categoria'

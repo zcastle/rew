@@ -1,6 +1,6 @@
-Ext.define('MG.store.Monedas', {
+Ext.define('rewsoft.store.Monedas', {
     extend: 'Ext.data.Store',
-    model: 'MG.model.Moneda',
+    model: 'rewsoft.model.Moneda',
     //autoLoad: true,
     //pageSize: 20,
     //remoteSort: true,

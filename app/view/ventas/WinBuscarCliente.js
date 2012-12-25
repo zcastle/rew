@@ -1,4 +1,4 @@
-Ext.define('MG.view.ventas.WinBuscarCliente', {
+Ext.define('rewsoft.view.ventas.WinBuscarCliente', {
     extend: 'Ext.Window',
     alias: 'widget.winbuscarcliente',
     title: 'Clientes',

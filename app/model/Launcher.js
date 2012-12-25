@@ -1,4 +1,4 @@
-Ext.define('MG.model.Launcher', {
+Ext.define('rewsoft.model.Launcher', {
     extend: 'Ext.data.Model',
     fields: [{
         name: 'src', 

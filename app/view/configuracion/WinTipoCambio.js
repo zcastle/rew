@@ -1,4 +1,4 @@
-Ext.define('MG.view.configuracion.WinTipoCambio', {
+Ext.define('rewsoft.view.configuracion.WinTipoCambio', {
     extend: 'Ext.Window',
     alias: 'widget.wintipocambio',
     title: 'Tipo de Cambio',

@@ -1,4 +1,4 @@
-Ext.define('MG.model.Rol', {
+Ext.define('rewsoft.model.Rol', {
     extend: 'Ext.data.Model',
     fields: [{
         name: 'id_rol'

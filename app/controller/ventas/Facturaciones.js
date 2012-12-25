@@ -1,4 +1,4 @@
-Ext.define('MG.controller.ventas.Facturaciones', {
+Ext.define('rewsoft.controller.ventas.Facturaciones', {
     extend: 'Ext.app.Controller',
     views: [
     'ventas.PnlFacturacion',
@@ -131,17 +131,17 @@ Ext.define('MG.controller.ventas.Facturaciones', {
         this.getProductosStore().pageSize = 50;
         this.getProductosStore().proxy.extraParams.no_producto = '';
         this.getProductosStore().proxy.extraParams.co_grupo = '';
-        this.getProductosStore().proxy.extraParams.co_empresa = AppGlobals.CIA;
+        this.getProductosStore().proxy.extraParams.co_empresa = rewsoft.AppGlobals.CIA;
         this.getProductosStore().load();
         this.getFormaPagoStore().load();
-        this.getUsuariosStore().proxy.extraParams.co_empresa = AppGlobals.CIA;
+        this.getUsuariosStore().proxy.extraParams.co_empresa = rewsoft.AppGlobals.CIA;
         this.getUsuariosStore().load();
         //this.getUsuariosStore().filter('id_rol', '2');
         this.getUsuariosStore().filter(function(r) {
             var value = r.get('id_rol');
             return (value == 1 || value == 2);
         });
-        if(AppGlobals.ROL_ACTIVO==AppGlobals.ROL_ADMINISTRADOR){
+        if(rewsoft.AppGlobals.ROL_ACTIVO==rewsoft.AppGlobals.ROL_ADMINISTRADOR){
             this.getMainView().down('button[name=btnCambiarSerie]').show();
             this.getMainView().down('combobox[name=cboVendedor]').enable();
         }else{
@@ -158,14 +158,14 @@ Ext.define('MG.controller.ventas.Facturaciones', {
         this.getPrecioStore().load();
         this.getPrecioCajaStore().proxy.extraParams.co_producto = win.down('hidden[name=txtCodigo]').getValue();
         this.getPrecioCajaStore().load();
-        if(AppGlobals.ROL_ACTIVO==AppGlobals.ROL_ADMINISTRADOR){
+        if(rewsoft.AppGlobals.ROL_ACTIVO==rewsoft.AppGlobals.ROL_ADMINISTRADOR){
             win.down('textfield[name=txtCosto]').show();
         }else{
             win.down('textfield[name=txtCosto]').hide();
         }
     },
     onRenderedWinGuiasRemision: function(win){
-        this.getGuiaRemisionStore().proxy.extraParams.cia = AppGlobals.CIA;
+        this.getGuiaRemisionStore().proxy.extraParams.cia = rewsoft.AppGlobals.CIA;
         this.getGuiaRemisionStore().load();
         win.down('grid').getView().on('viewready', function(grd){
             var maps = new Ext.util.KeyMap(grd.getEl(), [{
@@ -216,13 +216,13 @@ Ext.define('MG.controller.ventas.Facturaciones', {
         this.onSelectCboTipoDocumentos(combo);
     },
     onBeforeRenderCboFormaPago: function(combo) {
-        combo.setValue(AppGlobals.FORMA_PAGO_DEFAULT);
+        combo.setValue(rewsoft.AppGlobals.FORMA_PAGO_DEFAULT);
     },
     onBeforeRenderCboUnidadVenta: function(combo){
         combo.setValue('UND');
     },
     onBeforeRenderCboVendedor: function(combo){
-        combo.setValue(AppGlobals.CO_USUARIO);
+        combo.setValue(rewsoft.AppGlobals.CO_USUARIO);
     },
     onSelectCboClientes: function(combo, record) {
         this.getMainView().down('textfield[name=txtRuc]').setValue(record[0].get('ruc'));
@@ -235,7 +235,7 @@ Ext.define('MG.controller.ventas.Facturaciones', {
         var viewWinVentasCantidad = Ext.widget('winventascantidad');
         var gridPedido = this.getMainView().down('grid[name=gridPedido]');
         viewWinVentasCantidad.down('hidden').setValue(record.get('co_producto'));
-        this.getLotesStore().proxy.extraParams.co_empresa = AppGlobals.CIA;
+        this.getLotesStore().proxy.extraParams.co_empresa = rewsoft.AppGlobals.CIA;
         this.getLotesStore().proxy.extraParams.co_producto = record.get('co_producto');
         this.getLotesStore().proxy.extraParams.co_almacen = '';
         this.getLotesStore().proxy.extraParams.fl_stock = 'S';
@@ -262,7 +262,7 @@ Ext.define('MG.controller.ventas.Facturaciones', {
             viewWinVentasCantidad.down('textfield[name=txtCliente]').setValue(rs);
             viewWinVentasCantidad.down('textfield[name=txtCliente]').show();
             viewWinVentasCantidad.down('grid[name=gridHistorialPedido]').show();
-            this.getHistorialCompraProductosStore().proxy.extraParams.co_empresa = AppGlobals.CIA;
+            this.getHistorialCompraProductosStore().proxy.extraParams.co_empresa = rewsoft.AppGlobals.CIA;
             this.getHistorialCompraProductosStore().proxy.extraParams.co_cliente = ruc;
             this.getHistorialCompraProductosStore().proxy.extraParams.co_producto = record.get('co_producto');
             this.getHistorialCompraProductosStore().load();
@@ -358,7 +358,7 @@ Ext.define('MG.controller.ventas.Facturaciones', {
         var gridPedido = this.getMainView().down('grid[name=gridPedido]');
         var storePedido = gridPedido.getStore();
         var total = cantidad * precio0;
-        var pedido = Ext.create('MG.store.Pedidos', {
+        var pedido = Ext.create('rewsoft.store.Pedidos', {
             co_producto: co_producto,
             no_producto: no_producto,
             //presentacion: storeProductos.presentacion,
@@ -390,10 +390,10 @@ Ext.define('MG.controller.ventas.Facturaciones', {
             totalS = totalS + record.data['total'];
         });
         
-        neto = this.formatNumber2(totalS / AppGlobals.VA_IGV);
-        igv = this.formatNumber2(neto * AppGlobals.VA_IGV_2);
+        neto = this.formatNumber2(totalS / rewsoft.AppGlobals.VA_IGV);
+        igv = this.formatNumber2(neto * rewsoft.AppGlobals.VA_IGV_2);
         totalS = this.formatNumber2(totalS);
-        totalD = this.formatNumber2(totalS / AppGlobals.TIPO_CAMBIO_VENTA);
+        totalD = this.formatNumber2(totalS / rewsoft.AppGlobals.TIPO_CAMBIO_VENTA);
         
         neto = neto + '';
         igv = igv + '';
@@ -480,7 +480,7 @@ Ext.define('MG.controller.ventas.Facturaciones', {
                 Ext.Ajax.request({
                     url: 'data/procesarVenta.php',
                     params: {
-                        cia: AppGlobals.CIA,
+                        cia: rewsoft.AppGlobals.CIA,
                         coCliente: coCliente,
                         tipoComprobante: coTipoDocumento,
                         numeroDocumento: numeroDocumento,
@@ -541,13 +541,13 @@ Ext.define('MG.controller.ventas.Facturaciones', {
                 Ext.Ajax.request({
                     url: 'data/procesarOrdenDespacho.php',
                     params: {
-                        cia: AppGlobals.CIA,
+                        cia: rewsoft.AppGlobals.CIA,
                         coCliente: coCliente,
                         numeroDocumento: numeroDocumento,
                         neto: neto,
                         igv: igv,
                         total: total,
-                        co_vendedor: AppGlobals.CO_USUARIO,
+                        co_vendedor: rewsoft.AppGlobals.CO_USUARIO,
                         detalle: Ext.encode(detalle)
                     },
                     scope: this,
@@ -575,7 +575,7 @@ Ext.define('MG.controller.ventas.Facturaciones', {
         var coCliente = this.getMainView().down('textfield[name=txtRuc]').getValue();
         var coFormaPago = this.getMainView().down('combobox[name=cboFormaPago]').getValue();
         if(coFormaPago  == 'CONTADO'){
-            coFormaPago  = AppGlobals.FORMA_PAGO_DEFAULT;
+            coFormaPago  = rewsoft.AppGlobals.FORMA_PAGO_DEFAULT;
         }
         Ext.Msg.confirm('Confirmacion', 'Esta seguro de querer procesar la '+tipoDocumento+' No.: '+numeroDocumento+' ?', function(btn){
             if(btn=='yes'){
@@ -601,7 +601,7 @@ Ext.define('MG.controller.ventas.Facturaciones', {
                 Ext.Ajax.request({
                     url: 'data/procesarGuiaRemision.php',
                     params: {
-                        cia: AppGlobals.CIA,
+                        cia: rewsoft.AppGlobals.CIA,
                         coCliente: coCliente,
                         tipoComprobante: coTipoDocumento,
                         numeroDocumento: numeroDocumento,
@@ -609,7 +609,7 @@ Ext.define('MG.controller.ventas.Facturaciones', {
                         igv: igv,
                         total: total,
                         co_forma_pago: coFormaPago,
-                        co_vendedor: AppGlobals.CO_USUARIO,
+                        co_vendedor: rewsoft.AppGlobals.CO_USUARIO,
                         detalle: Ext.encode(detalle)
                     },
                     scope: this,
@@ -637,7 +637,7 @@ Ext.define('MG.controller.ventas.Facturaciones', {
         var coCliente = this.getMainView().down('textfield[name=txtRuc]').getValue();
         var coFormaPago = this.getMainView().down('combobox[name=cboFormaPago]').getValue();
         if(coFormaPago  == 'CONTADO'){
-            coFormaPago  = AppGlobals.FORMA_PAGO_DEFAULT;
+            coFormaPago  = rewsoft.AppGlobals.FORMA_PAGO_DEFAULT;
         }
         Ext.Msg.confirm('Confirmacion', 'Esta seguro de querer procesar la '+tipoDocumento+' No.: '+numeroDocumento+' ?', function(btn){
             if(btn=='yes'){
@@ -660,7 +660,7 @@ Ext.define('MG.controller.ventas.Facturaciones', {
                 Ext.Ajax.request({
                     url: 'data/procesarCotizacion.php',
                     params: {
-                        cia: AppGlobals.CIA,
+                        cia: rewsoft.AppGlobals.CIA,
                         coCliente: coCliente,
                         tipoComprobante: coTipoDocumento,
                         numeroDocumento: numeroDocumento,
@@ -668,7 +668,7 @@ Ext.define('MG.controller.ventas.Facturaciones', {
                         igv: igv,
                         total: total,
                         co_forma_pago: coFormaPago,
-                        co_vendedor: AppGlobals.CO_USUARIO,
+                        co_vendedor: rewsoft.AppGlobals.CO_USUARIO,
                         detalle: Ext.encode(detalle)
                     },
                     scope: this,
@@ -703,7 +703,7 @@ Ext.define('MG.controller.ventas.Facturaciones', {
     },
     imprimirFactura: function(tipo_comprobante, numero_comprobante){
         //window.open("data/imprimirFactura.php?detalle="+Ext.encode(detalle), '_blank');
-        window.open("data/comprobantes/imprimirFactura.php?cia="+AppGlobals.CIA+"&tipo_comprobante="+tipo_comprobante+"&numero_comprobante="+numero_comprobante, '_blank');
+        window.open("data/comprobantes/imprimirFactura.php?cia="+rewsoft.AppGlobals.CIA+"&tipo_comprobante="+tipo_comprobante+"&numero_comprobante="+numero_comprobante, '_blank');
     },
     formatNumber4: function(value){
         return Ext.util.Format.number(value, "0,000.0000");
@@ -720,15 +720,15 @@ Ext.define('MG.controller.ventas.Facturaciones', {
     getSecuencia: function(combo, coTipoDocumento){
         var nuSerie;
         if(coTipoDocumento=='FV'){
-            nuSerie = AppGlobals.SERIE_FV;
+            nuSerie = rewsoft.AppGlobals.SERIE_FV;
         }else {
-            nuSerie = AppGlobals.SERIE_BV;
+            nuSerie = rewsoft.AppGlobals.SERIE_BV;
         }
         nuSerie = '00'.concat(nuSerie);
         Ext.Ajax.request({
             url: 'data/readNumeroSecuencia.php',
             params: {
-                cia: AppGlobals.CIA,
+                cia: rewsoft.AppGlobals.CIA,
                 tipoDocumento: coTipoDocumento,
                 nuSerie: nuSerie
             },
@@ -749,7 +749,7 @@ Ext.define('MG.controller.ventas.Facturaciones', {
         Ext.Ajax.request({
             url: 'data/setNumeroSecuencia.php',
             params: {
-                cia: AppGlobals.CIA,
+                cia: rewsoft.AppGlobals.CIA,
                 tipoDocumento: coTipoDocumento,
                 nu_serie: this.nu_serie,
                 nu_secuencia: null
@@ -773,7 +773,7 @@ Ext.define('MG.controller.ventas.Facturaciones', {
     },
     onSelectCboTipoDocumentos: function(combo){
         var coTipoDocumento = this.getTipoDocumento();
-        this.getSeriesStore().proxy.extraParams.cia = AppGlobals.CIA;
+        this.getSeriesStore().proxy.extraParams.cia = rewsoft.AppGlobals.CIA;
         this.getSeriesStore().proxy.extraParams.tipoDocumento = coTipoDocumento;
         this.getSeriesStore().load();
         try{
@@ -788,7 +788,7 @@ Ext.define('MG.controller.ventas.Facturaciones', {
             if(coTipoDocumento == 'BV' || coTipoDocumento == 'FV'){
                 this.getMainView().down('textfield[name=txtBuscarGuiaRemision]').show();
                 this.getMainView().down('button[name=btnBuscarGuiaRemision]').show();
-                if(AppGlobals.ROL_ACTIVO==AppGlobals.ROL_ADMINISTRADOR){
+                if(rewsoft.AppGlobals.ROL_ACTIVO==rewsoft.AppGlobals.ROL_ADMINISTRADOR){
                     this.getMainView().down('button[name=btnCambiarSerie]').show();
                 }else{
                     this.getMainView().down('button[name=btnCambiarSerie]').hide();
@@ -866,7 +866,7 @@ Ext.define('MG.controller.ventas.Facturaciones', {
                                     Ext.Ajax.request({
                                         url: 'data/setNumeroSecuencia.php',
                                         params: {
-                                            cia: AppGlobals.CIA,
+                                            cia: rewsoft.AppGlobals.CIA,
                                             tipoDocumento: co_documento,
                                             nu_serie: nu_serie,
                                             nu_secuencia: text

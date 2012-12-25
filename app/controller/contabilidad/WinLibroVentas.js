@@ -1,4 +1,4 @@
-Ext.define('MG.controller.contabilidad.WinLibroVentas', {
+Ext.define('rewsoft.controller.contabilidad.WinLibroVentas', {
     extend: 'Ext.app.Controller',
     views: [
     'contabilidad.WinLibroVentas'

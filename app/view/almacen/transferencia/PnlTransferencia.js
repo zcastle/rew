@@ -1,4 +1,4 @@
-Ext.define('MG.view.almacen.transferencia.PnlTransferencia', {
+Ext.define('rewsoft.view.almacen.transferencia.PnlTransferencia', {
     extend: 'Ext.panel.Panel',
     alias: 'widget.pnltransferencia',
     border: false,

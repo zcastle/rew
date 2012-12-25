@@ -1,4 +1,4 @@
-Ext.define('MG.controller.reportes.WinRegistroVentas', {
+Ext.define('rewsoft.controller.reportes.WinRegistroVentas', {
     extend: 'Ext.app.Controller',
     views: [
     'reportes.WinRegistroVentas'
@@ -39,7 +39,7 @@ Ext.define('MG.controller.reportes.WinRegistroVentas', {
                 Ext.Msg.alert('Atencion','El mes de Fin debe ser mayor o igual al mes de Inicio');
                 return;
             }
-            window.open('data/reportes/reporteRegistroVentas.php?cia='+AppGlobals.CIA+'&fe_ini_month='+fe_ini_month+'&fe_ini_year='+fe_ini_year+'&fe_fin_month='+fe_fin_month+'&fe_fin_year='+fe_fin_year, '_blank');
+            window.open('data/reportes/reporteRegistroVentas.php?cia='+rewsoft.AppGlobals.CIA+'&fe_ini_month='+fe_ini_month+'&fe_ini_year='+fe_ini_year+'&fe_fin_month='+fe_fin_month+'&fe_fin_year='+fe_fin_year, '_blank');
             this.getMainView().close();
         }
     },
@@ -52,7 +52,7 @@ Ext.define('MG.controller.reportes.WinRegistroVentas', {
                 Ext.Msg.alert('Atencion','El año de Fin debe ser mayor o igual al año de Inicio');
                 return;
             }
-            window.open('data/reportes/reporteRegistroVentas.php?cia='+AppGlobals.CIA+'&fe_ini='+fe_ini+'&fe_fin='+fe_fin, '_blank');
+            window.open('data/reportes/reporteRegistroVentas.php?cia='+rewsoft.AppGlobals.CIA+'&fe_ini='+fe_ini+'&fe_fin='+fe_fin, '_blank');
             this.getMainView().close();
         }
     }

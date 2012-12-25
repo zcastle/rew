@@ -1,4 +1,4 @@
-Ext.define('MG.view.mantenimiento.producto.WinSubCategorias', {
+Ext.define('rewsoft.view.mantenimiento.producto.WinSubCategorias', {
     extend: 'Ext.Window',
     alias: 'widget.winsubcategorias',
     title: 'Marcas',

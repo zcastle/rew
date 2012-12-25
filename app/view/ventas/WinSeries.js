@@ -1,4 +1,4 @@
-Ext.define('MG.view.ventas.WinSeries', {
+Ext.define('rewsoft.view.ventas.WinSeries', {
     extend: 'Ext.Window',
     alias: 'widget.winseries',
     title: 'Series',

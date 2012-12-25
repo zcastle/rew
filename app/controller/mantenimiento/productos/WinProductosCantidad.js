@@ -1,4 +1,4 @@
-Ext.define('MG.controller.mantenimiento.productos.WinProductosCantidad', {
+Ext.define('rewsoft.controller.mantenimiento.productos.WinProductosCantidad', {
     extend: 'Ext.app.Controller',
     views: [
     'mantenimiento.producto.WinProductosCantidad'
@@ -24,7 +24,7 @@ Ext.define('MG.controller.mantenimiento.productos.WinProductosCantidad', {
         });
     },
     onRenderedWinProductosCantidad: function() {
-        this.getAlmacenStore().proxy.extraParams.co_empresa = AppGlobals.CIA;
+        this.getAlmacenStore().proxy.extraParams.co_empresa = rewsoft.AppGlobals.CIA;
         this.getAlmacenStore().load();
     },
     onAfterRenderedWinProductosCantidad: function(win){

@@ -1,4 +1,4 @@
-Ext.define('MG.view.LoginUser', {
+Ext.define('rewsoft.view.LoginUser', {
     extend: 'Ext.window.Window',
     alias : 'widget.loginuser',
     id: 'frmLogin',
@@ -10,6 +10,7 @@ Ext.define('MG.view.LoginUser', {
     modal: true,
     bodyStyle: 'background-image: url(resources/images/fondologinpie.png);',
     //layout: 'border',
+    autoShow: true,
     initComponent: function() {
         this.items = [{
             xtype: 'form',

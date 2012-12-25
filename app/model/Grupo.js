@@ -1,4 +1,4 @@
-Ext.define('MG.model.Grupo', {
+Ext.define('rewsoft.model.Grupo', {
     extend: 'Ext.data.Model',
     fields: [{
         name: 'co_grupo'

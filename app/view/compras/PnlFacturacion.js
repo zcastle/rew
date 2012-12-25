@@ -1,4 +1,4 @@
-Ext.define('MG.view.compras.PnlFacturacion', {
+Ext.define('rewsoft.view.compras.PnlFacturacion', {
     extend: 'Ext.panel.Panel',
     alias: 'widget.pnlcomprasfacturacion',
     border: false,

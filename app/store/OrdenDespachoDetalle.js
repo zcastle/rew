@@ -1,6 +1,6 @@
-Ext.define('MG.store.OrdenDespachoDetalle', {
+Ext.define('rewsoft.store.OrdenDespachoDetalle', {
     extend: 'Ext.data.Store',
-    model: 'MG.model.OrdenDespachoDetalle',
+    model: 'rewsoft.model.OrdenDespachoDetalle',
     pageSize: 25,
     proxy: {
         type: 'ajax',

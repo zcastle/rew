@@ -1,4 +1,4 @@
-Ext.define('MG.view.almacen.WinConsultarStock', {
+Ext.define('rewsoft.view.almacen.WinConsultarStock', {
     extend: 'Ext.Window',
     alias: 'widget.winconsultarstock',
     title: 'Consultar Stock',

@@ -1,4 +1,4 @@
-Ext.define('MG.controller.almacen.OrdenesDespachoDetalleLotes', {
+Ext.define('rewsoft.controller.almacen.OrdenesDespachoDetalleLotes', {
     extend: 'Ext.app.Controller',
     views: [
     'almacen.WinOrdenesDespachoDetalleLotes'
@@ -21,7 +21,7 @@ Ext.define('MG.controller.almacen.OrdenesDespachoDetalleLotes', {
         });
     },
     onRenderedWinOrdenesDespachoDetalleLotes: function(win) {
-        this.getLotesStore().proxy.extraParams.co_empresa = AppGlobals.CIA;
+        this.getLotesStore().proxy.extraParams.co_empresa = rewsoft.AppGlobals.CIA;
         this.getLotesStore().proxy.extraParams.co_producto = this.getMainView().down('displayfield[name=co_producto]').getValue();
         this.getLotesStore().load();
     },

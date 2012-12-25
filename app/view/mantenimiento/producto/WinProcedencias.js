@@ -1,4 +1,4 @@
-Ext.define('MG.view.mantenimiento.producto.WinProcedencias', {
+Ext.define('rewsoft.view.mantenimiento.producto.WinProcedencias', {
     extend: 'Ext.Window',
     alias: 'widget.winprocedencias',
     title: 'Procedencias',

@@ -1,4 +1,4 @@
-Ext.define('MG.controller.almacen.ajuste.PnlAjusteInventario', {
+Ext.define('rewsoft.controller.almacen.ajuste.PnlAjusteInventario', {
     extend: 'Ext.app.Controller',
     views: [
     'almacen.ajuste.PnlAjusteInventario',
@@ -70,7 +70,7 @@ Ext.define('MG.controller.almacen.ajuste.PnlAjusteInventario', {
         var gridPedido = this.getMainView().down('grid[name=gridPedido]');
         WinCantidad.down('hiddenfield[name=co_producto]').setValue(record.get('co_producto'));
         WinCantidad.down('label[name=no_producto]').setText(record.get('co_producto')+'-'+record.get('no_producto'));
-        this.getLotesStore().proxy.extraParams.co_empresa = AppGlobals.CIA;
+        this.getLotesStore().proxy.extraParams.co_empresa = rewsoft.AppGlobals.CIA;
         this.getLotesStore().proxy.extraParams.co_producto = record.get('co_producto');
         this.getLotesStore().load();
         var pos = this.getPosicion(gridPedido, record.get('co_producto'))
@@ -127,7 +127,7 @@ Ext.define('MG.controller.almacen.ajuste.PnlAjusteInventario', {
         var gridProducto = this.getMainView().down('grid[name=gridProductos]');
         var storePedido = gridPedido.getStore();
         var storeProductos = gridProducto.getSelectionModel().selected.items[0].data;
-        var pedido = Ext.create('MG.store.IngresoProductos', {
+        var pedido = Ext.create('rewsoft.store.IngresoProductos', {
             co_producto: storeProductos.co_producto,
             no_producto: storeProductos.no_producto,
             no_lote: no_lote,
@@ -154,7 +154,7 @@ Ext.define('MG.controller.almacen.ajuste.PnlAjusteInventario', {
     onItemDblClickGridPedido: function(gridPedido, record){
         var WinCantidad = Ext.widget('winalmacenajustecantidad');
         WinCantidad.down('form').loadRecord(record);
-        this.getLotesStore().proxy.extraParams.co_empresa = AppGlobals.CIA;
+        this.getLotesStore().proxy.extraParams.co_empresa = rewsoft.AppGlobals.CIA;
         this.getLotesStore().proxy.extraParams.co_producto = record.get('co_producto');
         this.getLotesStore().load();
         WinCantidad.show();
@@ -201,10 +201,10 @@ Ext.define('MG.controller.almacen.ajuste.PnlAjusteInventario', {
                 Ext.Ajax.request({
                     url: 'data/procesarAjusteInventario.php',
                     params: {
-                        cia: AppGlobals.CIA,
+                        cia: rewsoft.AppGlobals.CIA,
                         tipoComprobante: 'GA',
                         numeroDocumento: numeroDocumento,
-                        coUsuario: AppGlobals.CO_USUARIO,
+                        coUsuario: rewsoft.AppGlobals.CO_USUARIO,
                         observacion: observacion,
                         detalle: Ext.encode(detalle)
                     },
@@ -255,7 +255,7 @@ Ext.define('MG.controller.almacen.ajuste.PnlAjusteInventario', {
         Ext.Ajax.request({
             url: 'data/readNumeroSecuencia.php',
             params: {
-                cia: AppGlobals.CIA,
+                cia: rewsoft.AppGlobals.CIA,
                 tipoDocumento: 'GA',
                 nuSerie: '001'
             },
@@ -274,7 +274,7 @@ Ext.define('MG.controller.almacen.ajuste.PnlAjusteInventario', {
         Ext.Ajax.request({
             url: 'data/setNumeroSecuencia.php',
             params: {
-                cia: AppGlobals.CIA,
+                cia: rewsoft.AppGlobals.CIA,
                 tipoDocumento: 'GA',
                 nu_serie: '001',
                 nu_secuencia: null

@@ -1,4 +1,4 @@
-Ext.define('MG.controller.ventas.CuentasCobrar', {
+Ext.define('rewsoft.controller.ventas.CuentasCobrar', {
     extend: 'Ext.app.Controller',
     views: [
     'ventas.PnlCuentasCobrar'

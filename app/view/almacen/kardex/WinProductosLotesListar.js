@@ -1,4 +1,4 @@
-Ext.define('MG.view.almacen.kardex.WinProductosLotesListar', {
+Ext.define('rewsoft.view.almacen.kardex.WinProductosLotesListar', {
     extend: 'Ext.Window',
     alias: 'widget.winproductoskardexlotes',
     title: 'Lotes',

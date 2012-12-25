@@ -1,4 +1,4 @@
-Ext.define('MG.view.ventas.PnlCuentasCobrar' ,{
+Ext.define('rewsoft.view.ventas.PnlCuentasCobrar' ,{
     extend: 'Ext.grid.Panel',
     alias : 'widget.pnlcuentascobrar',
     store: 'CuentasCobrar',

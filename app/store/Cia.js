@@ -1,11 +1,12 @@
-Ext.define('MG.store.Cia', {
+Ext.define('rewsoft.store.Cia', {
     extend: 'Ext.data.Store',
-    model: 'MG.model.Cia',
+    model: 'rewsoft.model.Cia',
     autoLoad: true,
     proxy: {
         type: 'ajax',
         url: 'data/readCia.php',
         reader: {
+            type: 'json',
             root: 'cia'
         },
         actionMethods: {

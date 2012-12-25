@@ -1,4 +1,4 @@
-Ext.define('MG.view.compras.WinCantidad', {
+Ext.define('rewsoft.view.compras.WinCantidad', {
     extend: 'Ext.Window',
     alias: 'widget.wincomprascantidad',
     title: 'Ingreso de Cantidad',

@@ -1,4 +1,4 @@
-Ext.define('MG.view.mantenimiento.categoria.WinCategoriasNuevo', {
+Ext.define('rewsoft.view.mantenimiento.categoria.WinCategoriasNuevo', {
     extend: 'Ext.window.Window',
     alias : 'widget.wincategoriasnuevo',
     title: 'Categorias',

@@ -1,4 +1,4 @@
-Ext.define('MG.controller.mantenimiento.productos.PnlProductos', {
+Ext.define('rewsoft.controller.mantenimiento.productos.PnlProductos', {
     extend: 'Ext.app.Controller',
     views: [
     'mantenimiento.producto.PnlProductos'
@@ -30,7 +30,7 @@ Ext.define('MG.controller.mantenimiento.productos.PnlProductos', {
     onRenderedPnlProductos: function(grid) {
         this.getProductosStore().proxy.extraParams.no_producto = null;
         this.getProductosStore().proxy.extraParams.co_grupo = null;
-        this.getProductosStore().proxy.extraParams.co_empresa = AppGlobals.CIA;
+        this.getProductosStore().proxy.extraParams.co_empresa = rewsoft.AppGlobals.CIA;
         this.getProductosStore().load();
         //this.onClickBtnNuevo(null);
     },
@@ -81,7 +81,7 @@ Ext.define('MG.controller.mantenimiento.productos.PnlProductos', {
     addProducto: function(co_producto, no_producto, ca_producto, co_unidad, no_unidad, va_compra){
         var store = this.getWinProductosNuevo().down('grid[name=gridReceta]').getStore();
         var total = cantidad * costo_s;
-        var pedido = Ext.create('MG.store.Receta', {
+        var pedido = Ext.create('rewsoft.store.Receta', {
             co_producto: co_producto,
             no_producto: no_producto,
             va_compra: va_compra,

@@ -1,6 +1,6 @@
-Ext.define('MG.store.UnidadesVenta', {
+Ext.define('rewsoft.store.UnidadesVenta', {
     extend: 'Ext.data.Store',
-    model: 'MG.model.UnidadVenta',
+    model: 'rewsoft.model.UnidadVenta',
     pageSize: 25,
     proxy: {
         type: 'ajax',

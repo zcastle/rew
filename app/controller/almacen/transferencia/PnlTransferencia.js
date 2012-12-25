@@ -1,4 +1,4 @@
-Ext.define('MG.controller.almacen.transferencia.PnlTransferencia', {
+Ext.define('rewsoft.controller.almacen.transferencia.PnlTransferencia', {
     extend: 'Ext.app.Controller',
     views: [
     'almacen.transferencia.PnlTransferencia',
@@ -54,7 +54,7 @@ Ext.define('MG.controller.almacen.transferencia.PnlTransferencia', {
     onRenderPnlTransferencia: function() {
         this.getProductosStore().load();
         this.getSecuencia();
-        this.getAlmacenTransladoStore().proxy.extraParams.co_empresa = AppGlobals.CIA;
+        this.getAlmacenTransladoStore().proxy.extraParams.co_empresa = rewsoft.AppGlobals.CIA;
         this.getAlmacenTransladoStore().load();
     },
     onRenderedGridProductos: function(grid){
@@ -76,7 +76,7 @@ Ext.define('MG.controller.almacen.transferencia.PnlTransferencia', {
         WinCantidad.down('hiddenfield[name=co_producto]').setValue(record.get('co_producto'));
         WinCantidad.down('label[name=no_producto]').setText(record.get('co_producto')+'-'+record.get('no_producto'));
         var co_almacen = this.getMainView().down('combobox[name=cboAlmacenOrigen]').getValue();
-        this.getLotesStore().proxy.extraParams.co_empresa = AppGlobals.CIA;
+        this.getLotesStore().proxy.extraParams.co_empresa = rewsoft.AppGlobals.CIA;
         this.getLotesStore().proxy.extraParams.co_producto = record.get('co_producto');
         this.getLotesStore().proxy.extraParams.co_almacen = co_almacen;
         this.getLotesStore().load();
@@ -134,7 +134,7 @@ Ext.define('MG.controller.almacen.transferencia.PnlTransferencia', {
         var gridProducto = this.getMainView().down('grid[name=gridProductos]');
         var storePedido = gridPedido.getStore();
         var storeProductos = gridProducto.getSelectionModel().selected.items[0].data;
-        var pedido = Ext.create('MG.store.IngresoProductos', {
+        var pedido = Ext.create('rewsoft.store.IngresoProductos', {
             co_producto: storeProductos.co_producto,
             no_producto: storeProductos.no_producto,
             no_lote: no_lote,
@@ -162,7 +162,7 @@ Ext.define('MG.controller.almacen.transferencia.PnlTransferencia', {
         var WinCantidad = Ext.widget('winalmacentransferenciacantidad');
         WinCantidad.down('form').loadRecord(record);
         var co_almacen = this.getMainView().down('combobox[name=cboAlmacenOrigen]').getValue();
-        this.getLotesStore().proxy.extraParams.co_empresa = AppGlobals.CIA;
+        this.getLotesStore().proxy.extraParams.co_empresa = rewsoft.AppGlobals.CIA;
         this.getLotesStore().proxy.extraParams.co_producto = record.get('co_producto');
         this.getLotesStore().proxy.extraParams.co_almacen = co_almacen;
         this.getLotesStore().load();
@@ -203,17 +203,17 @@ Ext.define('MG.controller.almacen.transferencia.PnlTransferencia', {
                         co_unidad: record.data['co_unidad'],
                         no_lote: record.data['no_lote'],
                         fe_vencimiento: record.data['fe_vencimiento'],
-                        co_almacen_destino: record.data['co_almacen'],
+                        co_almacen_destino: record.data['co_almacen']
                     };
                     detalle.push(registro);
                 });
                 Ext.Ajax.request({
                     url: 'data/procesarGuiaTransferencia.php',
                     params: {
-                        cia: AppGlobals.CIA,
+                        cia: rewsoft.AppGlobals.CIA,
                         tipoComprobante: 'GT',
                         numeroDocumento: numeroDocumento,
-                        coUsuario: AppGlobals.CO_USUARIO,
+                        coUsuario: rewsoft.AppGlobals.CO_USUARIO,
                         co_almacen_origen: co_almacen_origen,
                         detalle: Ext.encode(detalle)
                     },
@@ -263,7 +263,7 @@ Ext.define('MG.controller.almacen.transferencia.PnlTransferencia', {
         Ext.Ajax.request({
             url: 'data/readNumeroSecuencia.php',
             params: {
-                cia: AppGlobals.CIA,
+                cia: rewsoft.AppGlobals.CIA,
                 tipoDocumento: 'GT',
                 nuSerie: '001'
             },
@@ -282,7 +282,7 @@ Ext.define('MG.controller.almacen.transferencia.PnlTransferencia', {
         Ext.Ajax.request({
             url: 'data/setNumeroSecuencia.php',
             params: {
-                cia: AppGlobals.CIA,
+                cia: rewsoft.AppGlobals.CIA,
                 tipoDocumento: 'GT',
                 nu_serie: '001',
                 nu_secuencia: null

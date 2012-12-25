@@ -1,6 +1,6 @@
-Ext.define('MG.store.Kardex', {
+Ext.define('rewsoft.store.Kardex', {
     extend: 'Ext.data.Store',
-    model: 'MG.model.Kardex',
+    model: 'rewsoft.model.Kardex',
     proxy: {
         type: 'ajax',
         url: 'data/readKardex.php',

@@ -1,4 +1,4 @@
-Ext.define('MG.controller.mantenimiento.SubCategorias', {
+Ext.define('rewsoft.controller.mantenimiento.SubCategorias', {
     extend: 'Ext.app.Controller',
     views: [
     'mantenimiento.categoria.PnlSubCategorias'

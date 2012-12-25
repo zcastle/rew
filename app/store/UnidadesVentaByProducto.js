@@ -1,6 +1,6 @@
-Ext.define('MG.store.UnidadesVentaByProducto', {
+Ext.define('rewsoft.store.UnidadesVentaByProducto', {
     extend: 'Ext.data.Store',
-    model: 'MG.model.UnidadVenta',
+    model: 'rewsoft.model.UnidadVenta',
     proxy: {
         type: 'ajax',
         url: 'data/readUnidadMedidaByProducto.php',

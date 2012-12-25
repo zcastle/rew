@@ -1,4 +1,4 @@
-Ext.define('MG.model.OrdenDespachoDetalle', {
+Ext.define('rewsoft.model.OrdenDespachoDetalle', {
     extend: 'Ext.data.Model',
     fields: [{
         name: 'co_producto'

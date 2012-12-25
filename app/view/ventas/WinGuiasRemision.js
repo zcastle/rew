@@ -1,4 +1,4 @@
-Ext.define('MG.view.ventas.WinGuiasRemision', {
+Ext.define('rewsoft.view.ventas.WinGuiasRemision', {
     extend: 'Ext.Window',
     alias: 'widget.winguiasremision',
     title: 'Guias de Remision',

@@ -1,4 +1,4 @@
-Ext.define('MG.controller.configuracion.WinTipoCambio', {
+Ext.define('rewsoft.controller.configuracion.WinTipoCambio', {
     extend: 'Ext.app.Controller',
     views: [
     'configuracion.WinTipoCambio'

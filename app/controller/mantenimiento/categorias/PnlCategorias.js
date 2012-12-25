@@ -1,4 +1,4 @@
-Ext.define('MG.controller.mantenimiento.categorias.PnlCategorias', {
+Ext.define('rewsoft.controller.mantenimiento.categorias.PnlCategorias', {
     extend: 'Ext.app.Controller',
     views: [
     'mantenimiento.categoria.PnlCategorias'
@@ -24,7 +24,7 @@ Ext.define('MG.controller.mantenimiento.categorias.PnlCategorias', {
         });
     },
     onRenderedPnlCategorias: function(grid) {
-        this.getCategoriasStore().proxy.extraParams.co_empresa = AppGlobals.CIA;
+        this.getCategoriasStore().proxy.extraParams.co_empresa = rewsoft.AppGlobals.CIA;
         this.getCategoriasStore().load();
     },
     onItemDblClickPnlCategorias: function(Grid, record){

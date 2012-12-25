@@ -1,4 +1,4 @@
-Ext.define('MG.view.almacen.WinOrdenesDespachoDetalle', {
+Ext.define('rewsoft.view.almacen.WinOrdenesDespachoDetalle', {
     extend: 'Ext.Window',
     alias: 'widget.winordenesdespachodetalle',
     title: 'Detalle de Orden',

@@ -1,4 +1,4 @@
-Ext.define('MG.view.almacen.PnlOrdenesDespacho' ,{
+Ext.define('rewsoft.view.almacen.PnlOrdenesDespacho' ,{
     extend: 'Ext.grid.Panel',
     alias : 'widget.pnlordenesdespacho',
     store: 'OrdenDespacho',

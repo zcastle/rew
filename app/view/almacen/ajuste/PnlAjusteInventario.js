@@ -1,4 +1,4 @@
-Ext.define('MG.view.almacen.ajuste.PnlAjusteInventario', {
+Ext.define('rewsoft.view.almacen.ajuste.PnlAjusteInventario', {
     extend: 'Ext.panel.Panel',
     alias: 'widget.pnlajusteinventario',
     border: false,

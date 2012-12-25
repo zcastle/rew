@@ -1,4 +1,4 @@
-Ext.define('MG.controller.mantenimiento.unidadmedida.WinUnidadMedidaNuevo', {
+Ext.define('rewsoft.controller.mantenimiento.unidadmedida.WinUnidadMedidaNuevo', {
     extend: 'Ext.app.Controller',
     views: [
     'mantenimiento.unidadmedida.WinUnidadMedidaNuevo'
@@ -31,10 +31,10 @@ Ext.define('MG.controller.mantenimiento.unidadmedida.WinUnidadMedidaNuevo', {
             Ext.Msg.confirm('Confirmacion', 'Esta seguro de querer grabar la unidad?', function(btn){
                 if(btn=='yes'){
                     var values = form.getValues();
-                    if(AppGlobals.MODELO_NEGOCIO == AppGlobals.MODELO_NEGOCIO_MELY_GIN){
+                    if(rewsoft.AppGlobals.MODELO_NEGOCIO == rewsoft.AppGlobals.MODELO_NEGOCIO_MELY_GIN){
                         this.getUnidadesVentaStore().proxy.extraParams.co_empresa = '01-02-03';
                     } else {
-                        this.getUnidadesVentaStore().proxy.extraParams.co_empresa = AppGlobals.CIA;
+                        this.getUnidadesVentaStore().proxy.extraParams.co_empresa = rewsoft.AppGlobals.CIA;
                     }
                     this.getUnidadesVentaStore().insert(0, values);
                     this.getUnidadesVentaStore().sync({

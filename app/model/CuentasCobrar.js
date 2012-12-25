@@ -1,4 +1,4 @@
-Ext.define('MG.model.CuentasCobrar', {
+Ext.define('rewsoft.model.CuentasCobrar', {
     extend: 'Ext.data.Model',
     fields: [{
         name: 'fecha'

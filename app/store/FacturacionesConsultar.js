@@ -1,11 +1,12 @@
-Ext.define('MG.store.FacturacionesConsultar', {
+Ext.define('rewsoft.store.FacturacionesConsultar', {
     extend: 'Ext.data.Store',
-    model: 'MG.model.FacturacionConsultar',
+    model: 'rewsoft.model.FacturacionConsultar',
     pageSize: 25,
     proxy: {
         type: 'ajax',
         url: 'data/readVentas.php',
         reader: {
+            type: 'json',
             root: 'ventas',
             totalProperty: 'totalCount'
         },

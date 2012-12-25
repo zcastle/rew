@@ -1,6 +1,6 @@
-Ext.define('MG.store.ConsultaRuc', {
+Ext.define('rewsoft.store.ConsultaRuc', {
     extend: 'Ext.data.Store',
-    model: 'MG.model.ConsultaRuc',
+    model: 'rewsoft.model.ConsultaRuc',
     proxy: {
         type: 'jsonp',
         url: 'http://www.openbusiness.pe/ceb/getRazonSocialFromSunat.php',

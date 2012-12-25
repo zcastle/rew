@@ -1,4 +1,4 @@
-Ext.define('MG.view.Card', {
+Ext.define('rewsoft.view.Card', {
     extend: 'Ext.panel.Panel',
     alias: 'widget.card',
     activeItem: 0,
@@ -14,7 +14,7 @@ Ext.define('MG.view.Card', {
             region: 'center'
         },{
             region: 'south',
-            title: 'REWSoft -> Gestion Comercial y Almacenes -> Desarrollado por openbusiness.pe [JC-v2.0]'
+            title: rewsoft.AppGlobals.NOTA_PIE
         }]
     },{
         id: 'card1',
@@ -24,7 +24,7 @@ Ext.define('MG.view.Card', {
             xtype: 'mainview'
         },{
             region: 'south',
-            title: 'REWSoft -> Gestion Comercial y Almacenes -> Desarrollado por openbusiness.pe [JC-v2.0]'
+            title: rewsoft.AppGlobals.NOTA_PIE
         }]
     }],
     initComponent: function() {

@@ -1,4 +1,4 @@
-Ext.define('MG.view.almacen.PnlIngresodeProducto', {
+Ext.define('rewsoft.view.almacen.PnlIngresodeProducto', {
     extend: 'Ext.panel.Panel',
     alias: 'widget.pnlingresodeproducto',
     border: false,
@@ -274,7 +274,7 @@ Ext.define('MG.view.almacen.PnlIngresodeProducto', {
                             fieldLabel: 'Neto'
                         },{
                             name: 'lblIgv',
-                            fieldLabel: 'IGV (' + AppGlobals.IGV + ')'
+                            fieldLabel: 'IGV (' + rewsoft.AppGlobals.IGV + ')'
                         },{
                             name: 'lblNoGravado',
                             fieldLabel: 'No gravado'

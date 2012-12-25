@@ -1,4 +1,4 @@
-Ext.define('MG.model.FormaPago', {
+Ext.define('rewsoft.model.FormaPago', {
     extend: 'Ext.data.Model',
     fields: [{
         name: 'co_forma_pago'

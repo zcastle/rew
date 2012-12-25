@@ -1,4 +1,4 @@
-Ext.define('MG.model.Pedido', {
+Ext.define('rewsoft.model.Pedido', {
     extend: 'Ext.data.Model',
     fields: [{
         name: 'co_producto'

@@ -1,4 +1,4 @@
-Ext.define('MG.store.Meses', {
+Ext.define('rewsoft.store.Meses', {
     extend: 'Ext.data.Store',
     fields: ['name', 'num'],
     data: (function() {

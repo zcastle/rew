@@ -1,4 +1,4 @@
-Ext.define('MG.view.configuracion.PnlUsuarios' ,{
+Ext.define('rewsoft.view.configuracion.PnlUsuarios' ,{
     extend: 'Ext.grid.Panel',
     alias : 'widget.pnlusuarios',
     store: 'Usuarios',

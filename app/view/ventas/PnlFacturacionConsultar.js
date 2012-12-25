@@ -1,4 +1,4 @@
-Ext.define('MG.view.ventas.PnlFacturacionConsultar' ,{
+Ext.define('rewsoft.view.ventas.PnlFacturacionConsultar' ,{
     extend: 'Ext.grid.Panel',
     alias : 'widget.pnlventasfacturacionconsultar',
     store: 'FacturacionesConsultar',

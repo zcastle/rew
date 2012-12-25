@@ -1,4 +1,4 @@
-Ext.define('MG.controller.almacen.IngresodeProductos', {
+Ext.define('rewsoft.controller.almacen.IngresodeProductos', {
     extend: 'Ext.app.Controller',
     views: [
     'almacen.PnlIngresodeProducto',
@@ -81,7 +81,7 @@ Ext.define('MG.controller.almacen.IngresodeProductos', {
             },
             'winalmacencantidad checkboxfield[name=chkSinLote]': {
                 change: this.onChangeChkSinLote
-            },
+            }
         });
     },
     onRenderedPnlIngresodeProducto: function(panel) {
@@ -89,11 +89,11 @@ Ext.define('MG.controller.almacen.IngresodeProductos', {
         this.getProductosStore().pageSize = 50;
         this.getProductosStore().proxy.extraParams.no_producto = null;
         this.getProductosStore().proxy.extraParams.co_grupo = null;
-        this.getProductosStore().proxy.extraParams.co_empresa = AppGlobals.CIA;
+        this.getProductosStore().proxy.extraParams.co_empresa = rewsoft.AppGlobals.CIA;
         this.getProductosStore().load();
         this.getFormaPagoStore().load();
         //this.getProveedoresStore().load();
-        this.getAlmacenStore().proxy.extraParams.co_empresa = AppGlobals.CIA;
+        this.getAlmacenStore().proxy.extraParams.co_empresa = rewsoft.AppGlobals.CIA;
         this.getAlmacenStore().load();
         panel.getEl().on('keypress', function (event, target){
             if(event.getKey() == event.ENTER) {
@@ -111,7 +111,7 @@ Ext.define('MG.controller.almacen.IngresodeProductos', {
         });
         this.getMainView().down('grid[name=gridPedido]').columns[2].hide();
         this.getMainView().down('grid[name=gridPedido]').columns[3].hide();
-        if(AppGlobals.MODELO_NEGOCIO == AppGlobals.MODELO_NEGOCIO_MELY_GIN){
+        if(rewsoft.AppGlobals.MODELO_NEGOCIO == rewsoft.AppGlobals.MODELO_NEGOCIO_MELY_GIN){
             this.getMainView().down('grid[name=gridPedido]').columns[2].show();
             this.getMainView().down('grid[name=gridPedido]').columns[3].show();
         }
@@ -128,7 +128,7 @@ Ext.define('MG.controller.almacen.IngresodeProductos', {
         }
         win.down('panel[name=zoneLotes]').hide();
         win.down('panel[name=gridLotes]').hide();
-        if(AppGlobals.MODELO_NEGOCIO == AppGlobals.MODELO_NEGOCIO_MELY_GIN){
+        if(rewsoft.AppGlobals.MODELO_NEGOCIO == rewsoft.AppGlobals.MODELO_NEGOCIO_MELY_GIN){
             win.down('panel[name=zoneLotes]').show();
             win.down('panel[name=gridLotes]').show();
         }
@@ -160,7 +160,7 @@ Ext.define('MG.controller.almacen.IngresodeProductos', {
         }, this);
     },
     onRenderedGridPedido: function(grid){
-        var pedido = Ext.create('MG.store.IngresoProductos', {
+        var pedido = Ext.create('rewsoft.store.IngresoProductos', {
             co_producto: null,
             no_producto: null,
             lote: null,
@@ -200,7 +200,7 @@ Ext.define('MG.controller.almacen.IngresodeProductos', {
     onItemDblClickGridPedido: function(gridPedido, record){
         var WinCantidad = Ext.widget('winalmacencantidad');
         WinCantidad.down('form').loadRecord(record);
-        this.getLotesStore().proxy.extraParams.co_empresa = AppGlobals.CIA;
+        this.getLotesStore().proxy.extraParams.co_empresa = rewsoft.AppGlobals.CIA;
         this.getLotesStore().proxy.extraParams.co_producto = record.get('co_producto');
         this.getLotesStore().load();
         WinCantidad.show();
@@ -209,7 +209,7 @@ Ext.define('MG.controller.almacen.IngresodeProductos', {
         var WinCantidad = Ext.widget('winalmacencantidad');
         var gridPedido = this.getMainView().down('grid[name=gridPedido]');
         WinCantidad.down('hiddenfield[name=co_producto]').setValue(record.get('co_producto'));
-        this.getLotesStore().proxy.extraParams.co_empresa = AppGlobals.CIA;
+        this.getLotesStore().proxy.extraParams.co_empresa = rewsoft.AppGlobals.CIA;
         this.getLotesStore().proxy.extraParams.co_producto = record.get('co_producto');
         this.getLotesStore().load();
         WinCantidad.down('label[name=no_producto]').setText(record.get('co_producto')+'-'+record.get('no_producto'));
@@ -283,7 +283,7 @@ Ext.define('MG.controller.almacen.IngresodeProductos', {
         var storePedido = gridPedido.getStore();
         var storeProductos = gridProducto.getSelectionModel().selected.items[0].data;
         var va_total = ca_producto * va_compra;
-        var pedido = Ext.create('MG.store.IngresoProductos', {
+        var pedido = Ext.create('rewsoft.store.IngresoProductos', {
             co_producto: storeProductos.co_producto,
             no_producto: storeProductos.no_producto,
             no_lote: no_lote,
@@ -294,7 +294,7 @@ Ext.define('MG.controller.almacen.IngresodeProductos', {
             co_unidad: co_unidad,
             no_unidad: no_unidad,
             va_total: va_total,
-            fl_igv: storeProductos.fl_igv,
+            fl_igv: storeProductos.fl_igv
         });
         var count = storePedido.getCount();
         storePedido.insert(count, pedido);
@@ -316,17 +316,17 @@ Ext.define('MG.controller.almacen.IngresodeProductos', {
         grid.store.each(function(record) {
             totalS = totalS + record.data['va_total'];
             if(record.data['fl_igv'] == 'S'){
-                neto = neto + (record.data['va_total'] / AppGlobals.VA_IGV);
+                neto = neto + (record.data['va_total'] / rewsoft.AppGlobals.VA_IGV);
             } else {
                 //neto = neto + record.data['va_total'];
                 no_gravado = no_gravado + record.data['va_total'];
             }
         });
         
-        neto = Ext.util.Format.number(neto, AppGlobals.FORMA_NUMBER);
-        igv = Ext.util.Format.number(neto * AppGlobals.VA_IGV_2, AppGlobals.FORMA_NUMBER);
-        totalS = Ext.util.Format.number(totalS, AppGlobals.FORMA_NUMBER);
-        totalD = Ext.util.Format.number(totalS / AppGlobals.TIPO_CAMBIO_VENTA, AppGlobals.FORMA_NUMBER);
+        neto = Ext.util.Format.number(neto, rewsoft.AppGlobals.FORMA_NUMBER);
+        igv = Ext.util.Format.number(neto * rewsoft.AppGlobals.VA_IGV_2, rewsoft.AppGlobals.FORMA_NUMBER);
+        totalS = Ext.util.Format.number(totalS, rewsoft.AppGlobals.FORMA_NUMBER);
+        totalD = Ext.util.Format.number(totalS / rewsoft.AppGlobals.TIPO_CAMBIO_VENTA, rewsoft.AppGlobals.FORMA_NUMBER);
         
         neto = neto + '';
         igv = igv + '';
@@ -427,7 +427,7 @@ Ext.define('MG.controller.almacen.IngresodeProductos', {
                 Ext.Ajax.request({
                     url: 'data/procesarIngresoProductos.php',
                     params: {
-                        cia: AppGlobals.CIA,
+                        cia: rewsoft.AppGlobals.CIA,
                         coProveedor: coProveedor,
                         tipoComprobante: coTipoDocumento,
                         numeroDocumento: numeroSerie+'-'+numeroDocumento,
@@ -436,13 +436,13 @@ Ext.define('MG.controller.almacen.IngresodeProductos', {
                         igv: va_igv,
                         va_no_gravado: va_no_gravado,
                         total: va_compra,
-                        coUsuario: AppGlobals.CO_USUARIO,
+                        coUsuario: rewsoft.AppGlobals.CO_USUARIO,
                         coAlmacen: coAlmacen,
                         co_forma_pago: co_forma_pago,
                         co_moneda: co_moneda,
                         va_tc: '0',
                         fe_compra: fe_compra,
-                        va_impuesto: AppGlobals.IGV,
+                        va_impuesto: rewsoft.AppGlobals.IGV,
                         detalle: Ext.encode(detalle)
                     },
                     scope: this,
@@ -546,7 +546,7 @@ Ext.define('MG.controller.almacen.IngresodeProductos', {
     onKeyPressVaCompraSinIgv: function(text, key){
         if(key.getKey() == key.ENTER){
             if(text.getValue() > 0 ){
-                var con_igv = text.getValue() * AppGlobals.VA_IGV;
+                var con_igv = text.getValue() * rewsoft.AppGlobals.VA_IGV;
                 this.getWinAlmacenCantidad().down('numberfield[name=va_compra]').setValue(con_igv);
             }
         }
@@ -554,7 +554,7 @@ Ext.define('MG.controller.almacen.IngresodeProductos', {
     onKeyPressVaCompra: function(text, key){
         if(key.getKey() == key.ENTER){
             if(text.getValue() > 0 ){
-                var sin_igv = text.getValue() / AppGlobals.VA_IGV;
+                var sin_igv = text.getValue() / rewsoft.AppGlobals.VA_IGV;
                 this.getWinAlmacenCantidad().down('numberfield[name=va_compra_sin_igv]').setValue(sin_igv);
             }
         }

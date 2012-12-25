@@ -1,6 +1,6 @@
-Ext.define('MG.store.Clientes', {
+Ext.define('rewsoft.store.Clientes', {
     extend: 'Ext.data.Store',
-    model: 'MG.model.Cliente',
+    model: 'rewsoft.model.Cliente',
     pageSize: 25,
     proxy: {
         type: 'ajax',

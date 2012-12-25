@@ -1,4 +1,4 @@
-Ext.define('MG.controller.configuracion.PnlUsuarios', {
+Ext.define('rewsoft.controller.configuracion.PnlUsuarios', {
     extend: 'Ext.app.Controller',
     views: [
     'configuracion.PnlUsuarios'

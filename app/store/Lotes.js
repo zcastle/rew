@@ -1,10 +1,11 @@
-Ext.define('MG.store.Lotes', {
+Ext.define('rewsoft.store.Lotes', {
     extend: 'Ext.data.Store',
-    model: 'MG.model.Lote',
+    model: 'rewsoft.model.Lote',
     proxy: {
         type: 'ajax',
         url: 'data/readLotes.php',
         reader: {
+            type: 'json',
             root: 'lotes'
         },
         actionMethods: {

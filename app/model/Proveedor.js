@@ -1,4 +1,4 @@
-Ext.define('MG.model.Proveedor', {
+Ext.define('rewsoft.model.Proveedor', {
     extend: 'Ext.data.Model',
     fields: [{
         name: 'id'

@@ -1,6 +1,6 @@
-Ext.define('MG.store.CuentasCobrar', {
+Ext.define('rewsoft.store.CuentasCobrar', {
     extend: 'Ext.data.Store',
-    model: 'MG.model.CuentasCobrar',
+    model: 'rewsoft.model.CuentasCobrar',
     pageSize: 25,
     proxy: {
         type: 'ajax',
@@ -16,7 +16,7 @@ Ext.define('MG.store.CuentasCobrar', {
             read: 'POST'
         },
         extraParams: {
-            coEmpresa: AppGlobals.CIA,
+            coEmpresa: rewsoft.AppGlobals.CIA,
             coEstado: '01'
         }
     }

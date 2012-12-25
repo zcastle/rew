@@ -1,11 +1,13 @@
-Ext.define('MG.store.Rol', {
+Ext.define('rewsoft.store.Rol', {
     extend: 'Ext.data.Store',
-    model: 'MG.model.Rol',
+    model: 'rewsoft.model.Rol',
     autoLoad: true,
     proxy: {
         type: 'ajax',
         url: 'data/readRoles.php',
         reader: {
+            type: 'json',
+        
             root: 'rol'
         },
         actionMethods: {

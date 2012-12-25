@@ -1,4 +1,4 @@
-Ext.define('MG.model.HistorialCompraProducto', {
+Ext.define('rewsoft.model.HistorialCompraProducto', {
     extend: 'Ext.data.Model',
     fields: [{
         name: 'fecha',

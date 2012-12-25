@@ -1,10 +1,7 @@
-Ext.define('MG.view.mantenimiento.producto.PnlProductos' ,{
+Ext.define('rewsoft.view.mantenimiento.producto.PnlProductos' ,{
     extend: 'Ext.grid.Panel',
     alias : 'widget.pnlproductos',
     store: 'Productos',
-    uses: [
-    'Ext.ux.Exporter'
-    ],
     initComponent: function() {
         this.columns = [{
             header: 'Codigo',    
@@ -109,9 +106,6 @@ Ext.define('MG.view.mantenimiento.producto.PnlProductos' ,{
                 name: 'btnMostrarLotes',
                 iconCls: 'ico-medium',
                 scale: 'medium'
-            },{
-                xtype: 'exporterbutton',
-                data: this
             }*/]
         });
         this.callParent(arguments);

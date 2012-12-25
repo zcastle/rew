@@ -1,4 +1,4 @@
-Ext.define('MG.model.Kardex', {
+Ext.define('rewsoft.model.Kardex', {
     extend: 'Ext.data.Model',
     fields: [{
         name: 'fe_creacion'

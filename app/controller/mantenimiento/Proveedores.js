@@ -1,4 +1,4 @@
-Ext.define('MG.controller.mantenimiento.Proveedores', {
+Ext.define('rewsoft.controller.mantenimiento.Proveedores', {
     extend: 'Ext.app.Controller',
     views: [
     'mantenimiento.proveedor.PnlProveedor'

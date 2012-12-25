@@ -1,4 +1,4 @@
-Ext.define('MG.controller.almacen.kardex.PnlConsultarKardex', {
+Ext.define('rewsoft.controller.almacen.kardex.PnlConsultarKardex', {
     extend: 'Ext.app.Controller',
     views: [
     'almacen.kardex.PnlConsultarKardex',
@@ -62,13 +62,13 @@ Ext.define('MG.controller.almacen.kardex.PnlConsultarKardex', {
     },
     onRenderedPnlConsultarKardex: function(grid) {
         this.getProductosKardexStore().proxy.extraParams.co_grupo = null;
-        this.getProductosKardexStore().proxy.extraParams.co_empresa = AppGlobals.CIA;
+        this.getProductosKardexStore().proxy.extraParams.co_empresa = rewsoft.AppGlobals.CIA;
         this.getProductosKardexStore().proxy.extraParams.no_producto = null;
-        this.getLotesStore().proxy.extraParams.co_empresa = AppGlobals.CIA;
+        this.getLotesStore().proxy.extraParams.co_empresa = rewsoft.AppGlobals.CIA;
         grid.columns[7].hide();
         grid.columns[8].hide();
         grid.down('container[name=zoneLotes]').hide();
-        if(AppGlobals.MODELO_NEGOCIO == AppGlobals.MODELO_NEGOCIO_MELY_GIN){
+        if(rewsoft.AppGlobals.MODELO_NEGOCIO == rewsoft.AppGlobals.MODELO_NEGOCIO_MELY_GIN){
             grid.down('container[name=zoneLotes]').show();
         }
     },
@@ -107,7 +107,7 @@ Ext.define('MG.controller.almacen.kardex.PnlConsultarKardex', {
         if(key.getKey() == key.ENTER){
             this.getLotesStore().proxy.extraParams.co_producto = this.getMainView().down('form').down('textfield[name=co_producto]').getValue();
             this.getLotesStore().proxy.extraParams.fl_stock = '';
-            if(AppGlobals.MODELO_NEGOCIO == AppGlobals.MODELO_NEGOCIO_MELY_GIN){
+            if(rewsoft.AppGlobals.MODELO_NEGOCIO == rewsoft.AppGlobals.MODELO_NEGOCIO_MELY_GIN){
                 this.getLotesStore().proxy.extraParams.co_almacen = this.getMainView().down('form').down('textfield[name=co_almacen]').getValue();
             }else{
                 this.getLotesStore().proxy.extraParams.co_almacen = '';
@@ -176,7 +176,7 @@ Ext.define('MG.controller.almacen.kardex.PnlConsultarKardex', {
     },
     onKeypressCoAlmacen: function(text, key) {
         if(key.getKey() == key.ENTER){
-            this.getAlmacenKardexStore().proxy.extraParams.co_empresa = AppGlobals.CIA;
+            this.getAlmacenKardexStore().proxy.extraParams.co_empresa = rewsoft.AppGlobals.CIA;
             this.getAlmacenKardexStore().proxy.extraParams.co_producto = this.getMainView().down('form').down('textfield[name=co_producto]').getValue();
             this.getAlmacenKardexStore().load();
             Ext.widget('winproductoskardexalmacen').show();
@@ -196,7 +196,7 @@ Ext.define('MG.controller.almacen.kardex.PnlConsultarKardex', {
         }, this);
     },
     onItemDblClickGridAlmacen: function(grid, record){
-        if(AppGlobals.MODELO_NEGOCIO == AppGlobals.MODELO_NEGOCIO_MELY_GIN){
+        if(rewsoft.AppGlobals.MODELO_NEGOCIO == rewsoft.AppGlobals.MODELO_NEGOCIO_MELY_GIN){
             this.getMainView().down('form').loadRecord(record);
             this.getMainView().down('form').down('textfield[name=no_lote]').focus();
             var co_producto = this.getMainView().down('form').down('textfield[name=co_producto]').getValue();

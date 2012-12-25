@@ -1,6 +1,6 @@
-Ext.define('MG.store.HistorialCompraProductos', {
+Ext.define('rewsoft.store.HistorialCompraProductos', {
     extend: 'Ext.data.Store',
-    model: 'MG.model.HistorialCompraProducto',
+    model: 'rewsoft.model.HistorialCompraProducto',
     pageSize: 5,
     proxy: {
         type: 'ajax',

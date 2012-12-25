@@ -1,4 +1,4 @@
-Ext.define('MG.controller.mantenimiento.productos.WinProcedenciasListar', {
+Ext.define('rewsoft.controller.mantenimiento.productos.WinProcedenciasListar', {
     extend: 'Ext.app.Controller',
     views: [
     'mantenimiento.producto.WinProcedencias'
