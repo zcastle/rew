@@ -16,7 +16,7 @@ Ext.define('rewsoft.store.Usuarios', {
         },
         writer: {
             type: 'json',
-            encode: true,  
+            encode: true,
             writeAllFields: true,
             root: 'usuario'
         },

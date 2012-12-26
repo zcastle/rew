@@ -8,14 +8,25 @@ if ($_POST) {
     $start = $_REQUEST['start'];
     $limit = $_REQUEST['limit'];
 
-    $query = "SELECT co_cliente AS codigo, no_cliente AS cliente, co_cliente AS ruc, 
-            de_direccion AS direccion, co_forma_pago
-              FROM m_clientes";
+    $query = "SELECT mc.co_cliente AS codigo, mc.no_cliente AS cliente, mc.co_cliente AS ruc, 
+            mc.de_direccion AS direccion, mc.co_forma_pago, mc.nu_telefono,
+            (SELECT no_forma_pago FROM m_forma_pago WHERE co_forma_pago = mc.co_forma_pago) AS no_forma_pago
+            FROM m_clientes AS mc";
     if($co_cliente <> ''){
-        $query .= " WHERE co_cliente = $co_cliente";
+        $query .= " WHERE mc.co_cliente = $co_cliente";
     }
     if($no_cliente <> ''){
-        $query .= " WHERE no_cliente LIKE '%$no_cliente%' OR co_cliente LIKE '$no_cliente%'";
+        //$query .= " WHERE mc.no_cliente LIKE '%$no_cliente%' OR mc.co_cliente LIKE '$no_cliente%'";
+
+        $query .= " WHERE ((";
+        $claves=explode(" ", $no_cliente);
+        $numero=count($trozos);
+        foreach ($claves as $v) {
+            $condicion[] = "mc.no_cliente LIKE '%$v%'";
+        }
+        $query .= implode(" AND ", $condicion);
+        $query .= ")";
+        $query .= " OR CONVERT(mc.co_cliente, UNSIGNED INTEGER) = '$no_cliente')";
     }
     $query .= " ORDER BY 2 LIMIT $start, $limit;";
 
@@ -28,7 +39,16 @@ if ($_POST) {
         $query .= " WHERE co_cliente = $co_cliente";
     }
     if($no_cliente <> ''){
-        $query .= " WHERE no_cliente LIKE '$no_cliente%'";
+        //$query .= " WHERE no_cliente LIKE '$no_cliente%'";
+        $query .= " WHERE ((";
+        $claves=explode(" ", $no_cliente);
+        $numero=count($trozos);
+        foreach ($claves as $v) {
+            $condicion[] = "mc.no_cliente LIKE '%$v%'";
+        }
+        $query .= implode(" AND ", $condicion);
+        $query .= ")";
+        $query .= " OR CONVERT(mc.co_cliente, UNSIGNED INTEGER) = '$no_cliente')";
     }
     $stmtCount = $conn->prepare($queryCount);
     $stmtCount->execute();

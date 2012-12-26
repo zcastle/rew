@@ -1,6 +1,6 @@
 Ext.define('rewsoft.AppGlobals', {
     singleton: true,
-    DEBUG: true,
+    DEBUG: false,
     //ROLES
     //ROL_ID: 2,
     ROL_ACTIVO: 'ADMIN',

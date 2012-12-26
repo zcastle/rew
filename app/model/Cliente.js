@@ -1,19 +1,18 @@
 Ext.define('rewsoft.model.Cliente', {
     extend: 'Ext.data.Model',
     fields: [{
-        name: 'codigo', 
-        type: 'string'
+        name: 'codigo'
     },{
-        name: 'cliente', 
-        type: 'string'
+        name: 'cliente'
     },{
-        name: 'ruc', 
-        type: 'string'
+        name: 'ruc'
     },{
-        name: 'direccion', 
-        type: 'string'
+        name: 'direccion'
     },{
-        name: 'co_forma_pago', 
-        type: 'string'
+        name: 'nu_telefono'
+    },{
+        name: 'co_forma_pago'
+    },{
+        name: 'no_forma_pago'
     }]
 });

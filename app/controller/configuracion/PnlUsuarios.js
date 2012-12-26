@@ -23,6 +23,9 @@ Ext.define('rewsoft.controller.configuracion.PnlUsuarios', {
         });
     },
     onRenderPnlUsuarios: function(win) {
+        this.getUsuariosStore().proxy.extraParams.co_empresa = rewsoft.AppGlobals.CIA;
+        this.getUsuariosStore().proxy.extraParams.co_usuario = '';
+        this.getUsuariosStore().load();
     },
     onClickBtnNuevo: function(){
         var view = Ext.widget('winusuariosnuevo');

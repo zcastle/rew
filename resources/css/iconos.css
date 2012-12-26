@@ -22,9 +22,6 @@
     background-image: url('../images/nuevo-32x32.png') !important;
 }
 
-.ico-editar-small {
-    background-image: url('../images/editar-16x16.png') !important;
-}
 
 .ico-editar-small {
     background-image: url('../images/editar-16x16.png') !important;
@@ -112,4 +109,8 @@
 
 .ico-limpiar-large {
     background-image: url('../images/limpiar-32x32.png') !important;
+}
+
+.favicon {
+    background-image: url('../images/favicon-16x16.png') !important;
 }

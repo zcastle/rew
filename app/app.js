@@ -3,7 +3,7 @@ Ext.application({
     	'rewsoft.AppGlobals',
         'Ext.layout.container.Card',
         'Ext.layout.container.Border',
-
+        'Ext.ux.layout.Center',
         'Ext.form.Panel',
         'Ext.form.Label',
         'Ext.form.field.ComboBox',
@@ -13,10 +13,8 @@ Ext.application({
         'Ext.form.field.Display',
         'Ext.form.FieldContainer',
         'Ext.form.FieldSet',
-
         'Ext.grid.column.Action',
         'Ext.data.proxy.JsonP',
-
         'rewsoft.view.Card',
         'rewsoft.view.MainView',
         'rewsoft.view.TabMain',
@@ -42,6 +40,8 @@ Ext.application({
 	    'mantenimiento.unidadmedida.WinUnidadMedidaNuevo',
 	    'mantenimiento.SubCategorias',
 	    'mantenimiento.Proveedores',
+        'mantenimiento.clientes.PnlClientes',
+        'mantenimiento.clientes.WinClientesNuevo',
 	    'ventas.Facturaciones',
 	    'ventas.CuentasCobrar',
 	    'ventas.WinBuscarCliente',

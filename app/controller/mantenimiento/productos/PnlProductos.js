@@ -28,8 +28,8 @@ Ext.define('rewsoft.controller.mantenimiento.productos.PnlProductos', {
         });
     },
     onRenderedPnlProductos: function(grid) {
-        this.getProductosStore().proxy.extraParams.no_producto = null;
-        this.getProductosStore().proxy.extraParams.co_grupo = null;
+        this.getProductosStore().proxy.extraParams.no_producto = '';
+        this.getProductosStore().proxy.extraParams.co_grupo = '';
         this.getProductosStore().proxy.extraParams.co_empresa = rewsoft.AppGlobals.CIA;
         this.getProductosStore().load();
         //this.onClickBtnNuevo(null);
@@ -74,7 +74,7 @@ Ext.define('rewsoft.controller.mantenimiento.productos.PnlProductos', {
     },
     onKeyUpTxtBuscar: function(text, key) {
         if((key.getKey() == key.BACKSPACE || key.getKey() == key.DELETE) && text.getValue().length == 0){
-            this.getProductosStore().proxy.extraParams.no_producto = null;
+            this.getProductosStore().proxy.extraParams.no_producto = '';
             this.getProductosStore().loadPage(1);
         }
     },
