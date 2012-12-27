@@ -4,6 +4,8 @@ Ext.application({
         'Ext.container.Viewport',
         'Ext.layout.container.Card',
         'Ext.layout.container.Border',
+        'Ext.TabPanel',
+        'Ext.grid.Panel',
         'Ext.ux.layout.Center',
         'Ext.form.Panel',
         'Ext.form.Label',
@@ -142,7 +144,7 @@ Ext.define('rewsoft.AppGlobals', {
     VA_IGV_2: 0.18,
     TIPO_CAMBIO_COMPRA: 2.65,
     TIPO_CAMBIO_VENTA: 2.60,
-    CIA: '01', //CODIGO DE LA EMPRESA SEGUN LA TB m_empresas
+    CIA: '06', //CODIGO DE LA EMPRESA SEGUN LA TB m_empresas
     NOMBRE_COMERCIAL: 'EMPRESA',
     RAZON_SOCIAL: 'EMPRESA SA',
     CO_USUARIO: 'ADMIN',
