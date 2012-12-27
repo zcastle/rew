@@ -1,5 +1,10 @@
 Ext.define('rewsoft.controller.MainView', {
     extend: 'Ext.app.Controller',
+    views: [
+    'MainView',
+    'LoginUser',
+    'Card'
+    ],
     refs: [{
         ref: 'Card',
         selector: 'card'

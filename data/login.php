@@ -11,9 +11,9 @@ if ($_POST) {
                             IFNULL(rus.serie_fv, 1) AS serie_fv, 
                             IFNULL(rus.serie_bv, 1) AS serie_bv, mu.id_rol
                             FROM (m_usuarios AS mu LEFT JOIN r_usuario_serie AS rus ON mu.co_usuario = rus.co_usuario)
-                            WHERE mu.co_usuario = ? AND mu.pw_usuario = ?");
+                            WHERE mu.co_usuario = ? AND mu.pw_usuario = MD5(?)");
     $stmt->bindParam(1, $usuario);
-    $stmt->bindParam(2, md5($clave));
+    $stmt->bindParam(2, $clave);
     $stmt->execute();
     $result = $stmt->fetch(PDO::FETCH_OBJ);
 
