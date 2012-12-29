@@ -8,7 +8,7 @@ if ($_POST) {
         $data = json_decode($_REQUEST['usuario']);
         $query = "UPDATE m_usuarios SET 
                         no_usuario = ?, ap_usuario = ?, nu_dni = ?, nu_telefono = ?, 
-                        de_direccion = ?, co_ubigeo = ?, co_usuario = ?, pw_usuario = ?, 
+                        de_direccion = ?, co_ubigeo = ?, co_usuario = ?, pw_usuario = MD5(?), 
                         id_rol = ? WHERE id = ?";
         $conn->beginTransaction();
         $stmt = $conn->prepare($query);
