@@ -45,7 +45,6 @@ if ($_POST) {
     if ($no_producto <> "") {
         $query .= " AND ((";
         $claves=explode(" ", $no_producto);
-        $numero=count($trozos);
         foreach ($claves as $v) {
             $condicion[] = "mp.no_producto LIKE '%$v%'";
         }
@@ -70,7 +69,6 @@ if ($_POST) {
     if ($no_producto <> "") {
         $queryCount .= " AND ((";
         $claves=explode(" ", $no_producto);
-        $numero=count($trozos);
         foreach ($claves as $v) {
             $condicion[] = "mp.no_producto LIKE '%$v%'";
         }
