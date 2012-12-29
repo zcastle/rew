@@ -24,6 +24,8 @@ Ext.define('rewsoft.controller.mantenimiento.categorias.PnlCategorias', {
         });
     },
     onRenderedPnlCategorias: function(grid) {
+        this.getCategoriasStore().proxy.extraParams.no_categoria = '';
+        this.getCategoriasStore().proxy.extraParams.co_grupo = '';
         this.getCategoriasStore().proxy.extraParams.co_empresa = rewsoft.AppGlobals.CIA;
         this.getCategoriasStore().load();
     },
