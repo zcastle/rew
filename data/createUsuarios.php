@@ -8,7 +8,7 @@ if ($_POST) {
         $data = json_decode($_REQUEST['usuario']);
         $query = "INSERT INTO m_usuarios (co_empresa, no_usuario, ap_usuario, nu_dni, nu_telefono, 
                                 de_direccion, co_ubigeo, co_usuario, pw_usuario, id_rol) 
-                VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
+                VALUES (?, ?, ?, ?, ?, ?, ?, ?, MD5(?), ?)";
         $conn->beginTransaction();
         $stmt = $conn->prepare($query);
         $stmt->bindParam(1, $data->co_empresa);
