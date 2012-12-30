@@ -51,7 +51,7 @@ Ext.define('rewsoft.controller.mantenimiento.productos.WinProductosCantidad', {
             if(co_unidad.length > 1){
                 var record = this.getMainView().down('combobox[name=cboUnidad]').findRecord('id', co_unidad);
                 ca_unidad = record.get('ca_sub_unidad');
-                costo_s = costo_s / record.get('ca_sub_unidad');
+                var costo_s = costo_s / record.get('ca_sub_unidad');
             }
             this.getController('mantenimiento.productos.WinProductosNuevo').addProducto(co_producto, no_producto, ca_producto, co_unidad, no_unidad, ca_unidad, va_compra, co_almacen, no_almacen);
             this.getMainView().close();

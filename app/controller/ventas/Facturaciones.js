@@ -724,7 +724,8 @@ Ext.define('rewsoft.controller.ventas.Facturaciones', {
         }else {
             nuSerie = rewsoft.AppGlobals.SERIE_BV;
         }
-        nuSerie = '00'.concat(nuSerie);
+        //nuSerie = '00'.concat(nuSerie);
+        //console.log(nuSerie);
         Ext.Ajax.request({
             url: 'data/readNumeroSecuencia.php',
             params: {

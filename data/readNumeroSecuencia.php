@@ -8,7 +8,7 @@ if ($_POST) {
     $tipoDocumento = $_REQUEST['tipoDocumento'];
     $nuSerie = $_REQUEST['nuSerie'];
 
-    $query = "SELECT CONCAT(nu_serie, '-', RIGHT(CONCAT('0000000', nu_secuencia), 7)) AS secuencia, 
+    $query = "SELECT CONCAT(RIGHT(CONCAT('000', nu_serie), 3), '-', RIGHT(CONCAT('0000000', nu_secuencia), 7)) AS secuencia, 
               nu_serie, nu_secuencia
               FROM m_secuenciales 
               WHERE co_empresa = '$cia' AND co_documento = '$tipoDocumento' AND nu_serie = '$nuSerie' 

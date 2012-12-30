@@ -26,6 +26,7 @@ Ext.define('rewsoft.controller.mantenimiento.productos.WinProductosListar', {
         });
     },
     onRenderedWinProductos: function() {
+        this.getProductosConsultaStore().proxy.extraParams.co_producto = '';
         this.getProductosConsultaStore().proxy.extraParams.co_empresa = rewsoft.AppGlobals.CIA;
         this.getProductosConsultaStore().proxy.extraParams.co_grupo = '10';
         this.getProductosConsultaStore().load();
