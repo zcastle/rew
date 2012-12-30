@@ -40,6 +40,7 @@ Ext.define('rewsoft.controller.LoginUser', {
         //this.getLoginUser().down('combobox[name=cboCia]').hide();
         this.getUsuariosStore().proxy.extraParams.co_empresa = rewsoft.AppGlobals.CIA;
         this.getUsuariosStore().proxy.extraParams.co_usuario = '';
+        this.getUsuariosStore().proxy.extraParams.is_login = true;
         this.getUsuariosStore().load();
     },
     /*onSelectUsuario: function(combo){

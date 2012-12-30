@@ -14,8 +14,8 @@ Ext.define('rewsoft.view.TabMain', {
                 border: false,
                 layout: 'ux.center',
                 items: [{
-                    bodyStyle: 'background-image: url(resources/images/melygin-logo.png); background-repeat: no-repeat;', //456 x 419
-                    //bodyStyle: 'background-image: url(resources/images/logo-500x93.png); background-repeat: no-repeat;',
+                    //bodyStyle: 'background-image: url(resources/images/melygin-logo.png); background-repeat: no-repeat;', //456 x 419
+                    bodyStyle: 'background-image: url(resources/images/logo-500x93.png); background-repeat: no-repeat;',
                     border: false,
                     width: 500,
                     padding: '15 0 0 0'

@@ -25,7 +25,8 @@ Ext.define('rewsoft.store.Usuarios', {
         },
         extraParams: {
             co_empresa: '',
-            co_usuario: ''
+            co_usuario: '',
+            is_login: true
         },
         listeners: {
             exception: function(proxy, response, operation){
