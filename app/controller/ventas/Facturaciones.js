@@ -273,7 +273,7 @@ Ext.define('rewsoft.controller.ventas.Facturaciones', {
         var columna = grid.up('grid').columns[columnIndex].name;
         var producto = record.get('no_producto');
         if(columna == 'actionRemover') {
-            Ext.Msg.confirm('Confirmacion', 'Estas seguro de querer remover el producto: ' + producto + '?', function(btn){
+            Ext.Msg.confirm('Confirmacion', 'Estas seguro de querer remover al producto: <span style=color:red; font-weidth: bold>' + producto + '<span>?', function(btn){
                 if(btn=='yes'){
                     grid.getStore().remove(record);
                     grid.getStore().sync();

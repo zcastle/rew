@@ -36,7 +36,7 @@ Ext.define('rewsoft.view.mantenimiento.unidadmedida.PnlUnidadMedida' ,{
                 iconCls: 'mousepointer'
             }]
         }];
-        this.dockedItems = [{
+        /*this.dockedItems = [{
             xtype: 'toolbar',
             border: false,
             dock: 'top',
@@ -48,7 +48,7 @@ Ext.define('rewsoft.view.mantenimiento.unidadmedida.PnlUnidadMedida' ,{
                 enableKeyEvents: true,
                 flex: 1
             }]
-        }]
+        }]*/
         this.bbar = Ext.create('Ext.PagingToolbar', {
             store: 'UnidadesVenta',
             displayInfo: true,

@@ -9,7 +9,7 @@ if ($_POST) {
     $limit = $_POST['limit'];
 
     $query = "SELECT co_sub_categoria, no_sub_categoria FROM m_sub_categorias";
-    if ($no_sub_categoria <> 'null') {
+    if ($no_sub_categoria <> '') {
         $query .= " WHERE no_sub_categoria LIKE '$no_sub_categoria%'";
     }
     $query .= " ORDER BY no_sub_categoria LIMIT $start, $limit;";
@@ -30,6 +30,6 @@ if ($_POST) {
                 "subcategorias" => $result
     ));
 } else {
-    echo ":P";
+    echo "{success: false, msg: 'Ha ocurrido algun Error'}";
 }
 ?>

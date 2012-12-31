@@ -28,7 +28,7 @@ Ext.define('rewsoft.store.Monedas', {
             read: 'POST'
         },
         extraParams: {
-            no_producto: null
+            no_producto: ''
         },
         simpleSortMode: true,
         autoSave: true

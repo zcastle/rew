@@ -175,6 +175,6 @@ $pdf->Cell(80, 0, 'TOTAL                     S/. '.$total, 0, true);
 $pdf->Output('GuiaRemision.pdf', 'I');
 //echo "{success: true}";
 /* } else {
-  echo ":P";
+  echo "{success: false, msg: 'Ha ocurrido algun Error'}";
   } */
 ?>

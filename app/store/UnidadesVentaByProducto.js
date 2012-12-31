@@ -13,7 +13,7 @@ Ext.define('rewsoft.store.UnidadesVentaByProducto', {
             read: 'POST'
         },
         extraParams: {
-            co_producto: null
+            co_producto: ''
         }
     }
 });

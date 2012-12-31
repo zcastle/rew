@@ -29,6 +29,6 @@ if ($_POST) {
         echo "{success: false, errors: {reason: 'Usuario o Clave incorrecta.'}}";
     }
 } else {
-    echo ":P";
+    echo "{success: false, msg: 'Ha ocurrido algun Error'}";
 }
 ?>

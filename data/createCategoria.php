@@ -15,6 +15,9 @@ if ($_POST) {
     $data = json_decode($_REQUEST["categorias"]);
     $co_empresa = $_REQUEST["co_empresa"];
 
+    $no_categoria = strtoupper($data->no_categoria);
+    $nu_orden = $data->nu_orden == '' ? 0 : $data->nu_orden;
+
     $c=1;
     $co_categoria = '';
     $conteo = 1;
@@ -35,12 +38,12 @@ if ($_POST) {
     $stmt = $conn->prepare($query);
     $stmt->bindParam(1, $co_empresa);
     $stmt->bindParam(2, $co_categoria);
-    $stmt->bindParam(3, strtoupper($data->no_categoria));
+    $stmt->bindParam(3, $no_categoria);
     $stmt->bindParam(4, $data->co_grupo);
-    $stmt->bindParam(5, $data->nu_orden == '' ? 0 : $data->nu_orden);
+    $stmt->bindParam(5, $nu_orden);
     $stmt->bindParam(6, $data->co_destino);
     $stmt->execute();
 } else {
-    echo ':P';
+    echo "{success: false, msg: 'Ha ocurrido algun Error'}";
 }
 ?>

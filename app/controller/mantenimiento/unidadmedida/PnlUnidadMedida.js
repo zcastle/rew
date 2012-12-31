@@ -43,7 +43,7 @@ Ext.define('rewsoft.controller.mantenimiento.unidadmedida.PnlUnidadMedida', {
             view.down('button[name=btnEditar]').show();
             view.show();
         } else if(columna == 'actionRemover') {
-            Ext.Msg.confirm('Confirmacion', 'Estas seguro de querer remover la unidad: ' + unidad + '?', function(btn){
+            Ext.Msg.confirm('Confirmacion', 'Estas seguro de querer remover al unidad: <span style=color:red; font-weidth: bold>' + unidad + '<span>?', function(btn){
                 if(btn=='yes'){
                     grid.getStore().remove(record);
                     grid.getStore().sync();

@@ -36,9 +36,9 @@ Ext.define('rewsoft.controller.mantenimiento.unidadmedida.WinUnidadMedidaNuevo',
                     } else {
                         this.getUnidadesVentaStore().proxy.extraParams.co_empresa = rewsoft.AppGlobals.CIA;
                     }
-                    this.getUnidadesVentaStore().insert(0, values);
+                    this.getUnidadesVentaStore().add(values);
                     this.getUnidadesVentaStore().sync({
-                        callback: function() {
+                        success: function(batch, options) {
                             this.getUnidadesVentaStore().load();
                         },
                         scope: this
@@ -59,7 +59,7 @@ Ext.define('rewsoft.controller.mantenimiento.unidadmedida.WinUnidadMedidaNuevo',
                     var values = form.getValues();
                     record.set(values);
                     this.getUnidadesVentaStore().sync({
-                        callback: function() {
+                        success: function(batch, options) {
                             this.getUnidadesVentaStore().load();
                         },
                         scope: this

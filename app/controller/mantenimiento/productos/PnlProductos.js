@@ -58,7 +58,7 @@ Ext.define('rewsoft.controller.mantenimiento.productos.PnlProductos', {
             view.down('button[name=btnEditar]').show();
             view.show();
         } else if(columna == 'actionRemover') {
-            Ext.Msg.confirm('Confirmacion', 'Estas seguro de querer remover el producto: ' + producto + '?', function(btn){
+            Ext.Msg.confirm('Confirmacion', 'Estas seguro de querer remover al producto: <span style=color:red; font-weidth: bold>' + producto + '<span>?', function(btn){
                 if(btn=='yes'){
                     grid.getStore().remove(record);
                     grid.getStore().sync();

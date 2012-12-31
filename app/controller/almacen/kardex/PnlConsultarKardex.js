@@ -61,9 +61,9 @@ Ext.define('rewsoft.controller.almacen.kardex.PnlConsultarKardex', {
         });
     },
     onRenderedPnlConsultarKardex: function(grid) {
-        this.getProductosKardexStore().proxy.extraParams.co_grupo = null;
+        this.getProductosKardexStore().proxy.extraParams.co_grupo = '';
         this.getProductosKardexStore().proxy.extraParams.co_empresa = rewsoft.AppGlobals.CIA;
-        this.getProductosKardexStore().proxy.extraParams.no_producto = null;
+        this.getProductosKardexStore().proxy.extraParams.no_producto = '';
         this.getLotesStore().proxy.extraParams.co_empresa = rewsoft.AppGlobals.CIA;
         grid.columns[7].hide();
         grid.columns[8].hide();
@@ -124,7 +124,7 @@ Ext.define('rewsoft.controller.almacen.kardex.PnlConsultarKardex', {
     },
     onKeyUpTxtBuscar: function(text, key){
         if((key.getKey() == key.BACKSPACE || key.getKey() == key.DELETE) && text.getValue().length == 0){
-            this.getProductosKardexStore().proxy.extraParams.no_producto = null;
+            this.getProductosKardexStore().proxy.extraParams.no_producto = '';
             this.getProductosKardexStore().load();
         }
     },

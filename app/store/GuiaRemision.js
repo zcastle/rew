@@ -15,7 +15,7 @@ Ext.define('rewsoft.store.GuiaRemision', {
             read: 'POST'
         },
         extraParams: {
-            cia: null
+            cia: ''
         }
     }
 });

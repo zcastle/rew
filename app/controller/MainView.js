@@ -26,8 +26,8 @@ Ext.define('rewsoft.controller.MainView', {
         });
     },
     onMainViewRendered: function() {
-        //rewsoft.AppGlobals.MODELO_NEGOCIO = rewsoft.AppGlobals.MODELO_NEGOCIO_MELY_GIN;
-        rewsoft.AppGlobals.MODELO_NEGOCIO = rewsoft.AppGlobals.MODELO_NEGOCIO_DSILVANA;
+        rewsoft.AppGlobals.MODELO_NEGOCIO = rewsoft.AppGlobals.MODELO_NEGOCIO_MELY_GIN;
+        //rewsoft.AppGlobals.MODELO_NEGOCIO = rewsoft.AppGlobals.MODELO_NEGOCIO_DSILVANA;
         this.loadMenu();
         if(rewsoft.AppGlobals.DEBUG){
             console.log('Debug activado');
@@ -45,11 +45,12 @@ Ext.define('rewsoft.controller.MainView', {
             //this.getController('TabMain').addTab('Consultar Kardex', 'pnlconsultarkardex');
             //Ext.widget('winconsultarstock').show();
             //this.getController('TabMain').addTab('Categorias', 'pnlcategorias');
-            //this.getController('TabMain').addTab('Unidades de Medida', 'pnlunidadmedida');
+            this.getController('TabMain').addTab('Unidades de Medida', 'pnlunidadmedida');
             //this.getController('TabMain').addTab('Crear', 'pnlordenabastecimientocrear');
             //this.getController('TabMain').addTab('Transferencia de Productos', 'pnltransferencia');
             //this.getController('TabMain').addTab('Usuarios', 'pnlusuarios');
-            this.getController('TabMain').addTab('Clientes', 'pnlclientes', 'tabs');
+            //this.getController('TabMain').addTab('Clientes', 'pnlclientes', 'tabs');
+            //this.getController('TabMain').addTab('Proveedores', 'pnlproveedores', 'tabs');
         } else {
             Ext.widget('loginuser');
         }
@@ -369,6 +370,9 @@ Ext.define('rewsoft.controller.MainView', {
                 break;
             case 'mnuMantenimientoClientes':
                 this.getController('TabMain').addTab(menuItem.text, 'pnlclientes', 'tabs');
+                break;
+            case 'mnuMantenimientoProveedores':
+                this.getController('TabMain').addTab(menuItem.text, 'pnlproveedores', 'tabs');
                 break;
         }
     }

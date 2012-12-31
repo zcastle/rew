@@ -20,6 +20,6 @@ if ($_POST) {
                 "tipocambio" => $result
     ));
 } else {
-    echo ":P";
+    echo "{success: false, msg: 'Ha ocurrido algun Error'}";
 }
 ?>

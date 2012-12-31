@@ -32,6 +32,6 @@ if ($_POST) {
                 "almacen" => $result
     ));
 } else {
-    echo ":P";
+    echo "{success: false, msg: 'Ha ocurrido algun Error'}";
 }
 ?>

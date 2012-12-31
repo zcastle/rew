@@ -22,7 +22,7 @@ Ext.define('rewsoft.store.SubCategorias', {
             read: 'POST'
         },
         extraParams: {
-            no_sub_categoria: null
+            no_sub_categoria: ''
         }
     }
 });

@@ -15,9 +15,9 @@ Ext.define('rewsoft.store.HistorialCompraProductos', {
             read: 'POST'
         },
         extraParams: {
-            co_empresa: null,
-            co_cliente: null,
-            co_producto: null
+            co_empresa: '',
+            co_cliente: '',
+            co_producto: ''
         }
     }
 });

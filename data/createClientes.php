@@ -2,11 +2,15 @@
 require_once '../lib/dbapdo.class.php';
 
 if ($_POST) {
+    $conn = new dbapdo();
     try{
-        $conn = new dbapdo();
         $data = json_decode($_REQUEST['clientes']);
         $edit = $_REQUEST['edit'];
         $c_f_p = $_REQUEST['c_f_p'];
+
+        $no_cliente = strtoupper($data->cliente);
+        $de_direccion = strtoupper($data->direccion);
+        $co_forma_pago = $data->co_forma_pago == '' ? $c_f_p : $data->co_forma_pago;
 
         $stmtCount = $conn->prepare('SELECT co_forma_pago FROM m_clientes WHERE co_cliente = ?');
         $stmtCount->bindParam(1, $data->codigo);
@@ -18,8 +22,8 @@ if ($_POST) {
         if ($rows >= 1) {
             if ($edit == 'true') {
                 $stmtU = $conn->prepare('UPDATE m_clientes SET no_cliente = ?, de_direccion = ? WHERE co_cliente = ?');
-                $stmtU->bindParam(1, strtoupper($data->cliente));
-                $stmtU->bindParam(2, strtoupper($data->direccion));
+                $stmtU->bindParam(1, $no_cliente);
+                $stmtU->bindParam(2, $de_direccion);
                 $stmtU->bindParam(3, $data->codigo);
                 $stmtU->execute();
                 echo "{success: true, edit: true, co_forma_pago: $co_forma_pago}";
@@ -32,16 +36,13 @@ if ($_POST) {
             $conn->beginTransaction();
             $stmt = $conn->prepare($query);
             $stmt->bindParam(1, $data->codigo);
-            $stmt->bindParam(2, strtoupper($data->cliente));
-            $stmt->bindParam(3, strtoupper($data->direccion));
+            $stmt->bindParam(2, $no_cliente);
+            $stmt->bindParam(3, $de_direccion);
             $stmt->bindParam(4, $data->nu_telefono);
-            $stmt->bindParam(5, $data->co_forma_pago == '' ? $c_f_p : $data->co_forma_pago);
+            $stmt->bindParam(5, $co_forma_pago);
             $stmt->execute();
             $conn->commit();
-
-            $razonSocial = strtoupper($data->cliente);
-            $direccion = strtoupper($data->direccion);
-            echo "{success: true, data: {nu_ruc: $data->codigo, no_cliente: '$razonSocial', direccion: '$direccion'}}";
+            echo "{success: true, data: {nu_ruc: $data->codigo, no_cliente: '$no_cliente', direccion: '$de_direccion'}}";
         }
     } catch (PDOException $e) {
         $conn->rollBack();

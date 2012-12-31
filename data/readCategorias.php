@@ -49,6 +49,6 @@ if ($_POST) {
                 "categorias" => $result
     ));
 } else {
-    echo ":P";
+    echo "{success: false, msg: 'Ha ocurrido algun Error'}";
 }
 ?>

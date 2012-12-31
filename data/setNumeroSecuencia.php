@@ -10,7 +10,7 @@ if ($_POST) {
     $nu_secuencia = $_REQUEST['nu_secuencia'];
     $nu_comprobante = $nu_serie . '-' . $nu_secuencia;
 
-    if ($nu_secuencia == null) {
+    if ($nu_secuencia == '') {
         $query = "UPDATE m_secuenciales 
               SET nu_secuencia = nu_secuencia + 1 
               WHERE co_empresa = '$cia' AND co_documento = '$tipoDocumento' and nu_serie = '$nu_serie';";

@@ -3,8 +3,8 @@
 require_once '../lib/dbapdo.class.php';
 
 if ($_POST) {
+    $conn = new dbapdo();
     try{
-        $conn = new dbapdo();
         $data = json_decode($_REQUEST['usuario']);
         $query = "DELETE FROM m_usuarios WHERE id = ?";
         $conn->beginTransaction();
@@ -23,6 +23,6 @@ if ($_POST) {
     }
     
 } else {
-    echo ":P";
+    echo "{success: false, msg: 'Ha ocurrido algun Error'}";
 }
 ?>

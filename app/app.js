@@ -42,9 +42,10 @@ Ext.application({
 	    'mantenimiento.unidadmedida.PnlUnidadMedida',
 	    'mantenimiento.unidadmedida.WinUnidadMedidaNuevo',
 	    'mantenimiento.SubCategorias',
-	    'mantenimiento.Proveedores',
         'mantenimiento.clientes.PnlClientes',
         'mantenimiento.clientes.WinClientesNuevo',
+        'mantenimiento.proveedores.PnlProveedores',
+        'mantenimiento.proveedores.WinProveedoresNuevo',
 	    'ventas.Facturaciones',
 	    'ventas.CuentasCobrar',
 	    'ventas.WinBuscarCliente',
@@ -128,7 +129,7 @@ Ext.apply('Ext.form.field.VTypes', {
 
 Ext.define('rewsoft.AppGlobals', {
     singleton: true,
-    DEBUG: false,
+    DEBUG: true,
     //ROLES
     //ROL_ID: 2,
     ROL_ACTIVO: 'ADMIN',
@@ -144,7 +145,7 @@ Ext.define('rewsoft.AppGlobals', {
     VA_IGV_2: 0.18,
     TIPO_CAMBIO_COMPRA: 2.65,
     TIPO_CAMBIO_VENTA: 2.60,
-    CIA: '06', //CODIGO DE LA EMPRESA SEGUN LA TB m_empresas
+    CIA: '01', //CODIGO DE LA EMPRESA SEGUN LA TB m_empresas
     NOMBRE_COMERCIAL: 'EMPRESA',
     RAZON_SOCIAL: 'EMPRESA SA',
     CO_USUARIO: 'ADMIN',

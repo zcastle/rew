@@ -20,7 +20,6 @@ if ($_POST) {
 
         $query .= " WHERE ((";
         $claves=explode(" ", $no_cliente);
-        $numero=count($trozos);
         foreach ($claves as $v) {
             $condicion[] = "mc.no_cliente LIKE '%$v%'";
         }
@@ -36,19 +35,18 @@ if ($_POST) {
     
     $queryCount = "SELECT COUNT(*) AS count FROM m_clientes";
     if($co_cliente <> ''){
-        $query .= " WHERE co_cliente = $co_cliente";
+        $queryCount .= " WHERE co_cliente = $co_cliente";
     }
     if($no_cliente <> ''){
         //$query .= " WHERE no_cliente LIKE '$no_cliente%'";
-        $query .= " WHERE ((";
+        $queryCount .= " WHERE ((";
         $claves=explode(" ", $no_cliente);
-        $numero=count($trozos);
         foreach ($claves as $v) {
             $condicion[] = "mc.no_cliente LIKE '%$v%'";
         }
-        $query .= implode(" AND ", $condicion);
-        $query .= ")";
-        $query .= " OR CONVERT(mc.co_cliente, UNSIGNED INTEGER) = '$no_cliente')";
+        $queryCount .= implode(" AND ", $condicion);
+        $queryCount .= ")";
+        $queryCount .= " OR CONVERT(mc.co_cliente, UNSIGNED INTEGER) = '$no_cliente')";
     }
     $stmtCount = $conn->prepare($queryCount);
     $stmtCount->execute();
@@ -61,6 +59,6 @@ if ($_POST) {
                 "clientes" => $result
     ));
 } else {
-    echo ":P";
+    echo "{success: false, msg: 'Ha ocurrido algun Error'}";
 }
 ?>

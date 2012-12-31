@@ -26,7 +26,7 @@ Ext.define('rewsoft.controller.mantenimiento.productos.WinSubCategoriasListar', 
         });
     },
     onRenderedWinCategorias: function() {
-        this.getSubCategoriasStore().proxy.extraParams.no_sub_categoria = null;
+        this.getSubCategoriasStore().proxy.extraParams.no_sub_categoria = '';
         this.getSubCategoriasStore().load();
     },
     onRenderedGridCategorias: function(grid){
@@ -55,7 +55,7 @@ Ext.define('rewsoft.controller.mantenimiento.productos.WinSubCategoriasListar', 
     },
     onKeyUpTxtBuscar: function(text, key) {
         if((key.getKey() == key.BACKSPACE || key.getKey() == key.DELETE) && text.getValue().length == 0){
-            this.getSubCategoriasStore().proxy.extraParams.no_sub_categoria = null;
+            this.getSubCategoriasStore().proxy.extraParams.no_sub_categoria = '';
             this.getSubCategoriasStore().load();
         }
     }

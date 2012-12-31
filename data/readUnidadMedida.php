@@ -12,7 +12,7 @@ if ($_POST) {
     $query = "SELECT id, no_unidad, no_sub_unidad, ca_sub_unidad, 
         IF(no_unidad = 'UNI', no_unidad, CONCAT(no_unidad, 'x', ca_sub_unidad, no_sub_unidad)) AS nombre 
         FROM m_unidades_medida WHERE co_empresa LIKE '%$co_empresa%'";
-    if($no_unidad <> 'null'){
+    if($no_unidad <> ''){
         $query .= " AND no_unidad LIKE '$no_unidad%'";
     }
     $query .= " ORDER BY no_unidad LIMIT $start, $limit;";
@@ -33,6 +33,6 @@ if ($_POST) {
                 "unidades" => $result
     ));
 } else {
-    echo ":P";
+    echo "{success: false, msg: 'Ha ocurrido algun Error'}";
 }
 ?>

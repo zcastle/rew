@@ -5,7 +5,10 @@ Ext.define('rewsoft.store.UnidadesVenta', {
     proxy: {
         type: 'ajax',
         api:{
-            read: 'data/readUnidadMedida.php'
+            read: 'data/readUnidadMedida.php',
+            create: 'data/createUnidadMedida.php',
+            update: 'data/updateUnidadMedida.php',
+            destroy: 'data/destroyUnidadMedida.php'
         },
         reader: {
             type: 'json',
@@ -23,8 +26,8 @@ Ext.define('rewsoft.store.UnidadesVenta', {
             read: 'POST'
         },
         extraParams: {
-            co_empresa: null,
-            no_unidad: null
+            co_empresa: '',
+            no_unidad: ''
         }
     }
 });

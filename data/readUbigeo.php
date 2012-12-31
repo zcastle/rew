@@ -19,6 +19,6 @@ if ($_POST) {
                 "ubigeo" => $result
     ));
 } else {
-    echo ":P";
+    echo "{success: false, msg: 'Ha ocurrido algun Error'}";
 }
 ?>

@@ -14,7 +14,7 @@ Ext.define('rewsoft.store.Pais', {
             read: 'POST'
         },
         extraParams: {
-            no_pais: null
+            no_pais: ''
         }
     }
 });

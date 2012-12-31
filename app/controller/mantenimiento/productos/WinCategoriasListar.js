@@ -27,7 +27,7 @@ Ext.define('rewsoft.controller.mantenimiento.productos.WinCategoriasListar', {
     },
     onRenderedWinCategorias: function() {
         var co_grupo = this.getController('mantenimiento.productos.WinProductosNuevo').getMainView().down('combobox[name=co_grupo]').getValue();
-        this.getCategoriasStore().proxy.extraParams.no_categoria = null;
+        this.getCategoriasStore().proxy.extraParams.no_categoria = '';
         this.getCategoriasStore().proxy.extraParams.co_grupo = co_grupo;
         this.getCategoriasStore().proxy.extraParams.co_empresa = rewsoft.AppGlobals.CIA;
         this.getCategoriasStore().load();
@@ -58,7 +58,7 @@ Ext.define('rewsoft.controller.mantenimiento.productos.WinCategoriasListar', {
     },
     onKeyUpTxtBuscar: function(text, key) {
         if((key.getKey() == key.BACKSPACE || key.getKey() == key.DELETE) && text.getValue().length == 0){
-            this.getCategoriasStore().proxy.extraParams.no_categoria = null;
+            this.getCategoriasStore().proxy.extraParams.no_categoria = '';
             this.getCategoriasStore().load();
         }
     }

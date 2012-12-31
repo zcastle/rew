@@ -15,6 +15,6 @@ if ($_POST) {
                 "documentos" => $result
     ));
 } else {
-    echo ":P";
+    echo "{success: false, msg: 'Ha ocurrido algun Error'}";
 }
 ?>

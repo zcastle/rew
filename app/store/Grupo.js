@@ -12,7 +12,7 @@ Ext.define('rewsoft.store.Grupo', {
             read: 'POST'
         },
         extraParams: {
-            co_empresa: null
+            co_empresa: ''
         }
     }
 });

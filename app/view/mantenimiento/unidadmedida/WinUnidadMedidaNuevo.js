@@ -24,9 +24,6 @@ Ext.define('rewsoft.view.mantenimiento.unidadmedida.WinUnidadMedidaNuevo', {
                 name: 'no_unidad',
                 fieldLabel: 'Unidad'
             },{
-                name: 'no_sub_unidad',
-                fieldLabel: 'Sub Unidad'
-            },{
                 xtype: 'numberfield',
                 name: 'ca_sub_unidad',
                 fieldLabel: 'Cantidad',
@@ -36,6 +33,9 @@ Ext.define('rewsoft.view.mantenimiento.unidadmedida.WinUnidadMedidaNuevo', {
                 hideTrigger: true,
                 keyNavEnabled: false,
                 mouseWheelEnabled: false
+            },{
+                name: 'no_sub_unidad',
+                fieldLabel: 'Sub Unidad'
             }]
         }],
         this.buttons = [{

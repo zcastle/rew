@@ -249,7 +249,7 @@ Ext.define('rewsoft.controller.almacen.transferencia.PnlTransferencia', {
     },
     onKeyUpTxtBuscar: function(text, key) {
         if((key.getKey() == key.BACKSPACE || key.getKey() == key.DELETE) && text.getValue().length == 0){
-            this.getProductosStore().proxy.extraParams.no_producto = null;
+            this.getProductosStore().proxy.extraParams.no_producto = '';
             this.getProductosStore().load();
         }
     },

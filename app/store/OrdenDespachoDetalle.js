@@ -13,7 +13,7 @@ Ext.define('rewsoft.store.OrdenDespachoDetalle', {
             read: 'POST'
         },
         extraParams: {
-            nu_documento: null
+            nu_documento: ''
         }
     }
 });

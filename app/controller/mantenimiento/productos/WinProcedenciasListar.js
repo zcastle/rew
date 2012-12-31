@@ -26,7 +26,7 @@ Ext.define('rewsoft.controller.mantenimiento.productos.WinProcedenciasListar', {
         });
     },
     onRenderedWinCategorias: function() {
-        this.getPaisStore().proxy.extraParams.no_pais = null;
+        this.getPaisStore().proxy.extraParams.no_pais = '';
         this.getPaisStore().load();
     },
     onRenderedGridPais: function(grid){
@@ -55,7 +55,7 @@ Ext.define('rewsoft.controller.mantenimiento.productos.WinProcedenciasListar', {
     },
     onKeyUpTxtBuscar: function(text, key) {
         if((key.getKey() == key.BACKSPACE || key.getKey() == key.DELETE) && text.getValue().length == 0){
-            this.getPaisStore().proxy.extraParams.no_pais = null;
+            this.getPaisStore().proxy.extraParams.no_pais = '';
             this.getPaisStore().load();
         }
     }

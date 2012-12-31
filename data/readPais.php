@@ -9,7 +9,7 @@ if ($_POST) {
     $limit = $_POST['limit'];
 
     $query = "SELECT co_pais, no_pais FROM m_paises";
-    if ($no_pais <> 'null') {
+    if ($no_pais <> '') {
         $query .= " WHERE no_pais LIKE '$no_pais%'";
     }
     $query .= " ORDER BY no_pais LIMIT $start, $limit;";
@@ -30,6 +30,6 @@ if ($_POST) {
                 "pais" => $result
     ));
 } else {
-    echo ":P";
+    echo "{success: false, msg: 'Ha ocurrido algun Error'}";
 }
 ?>

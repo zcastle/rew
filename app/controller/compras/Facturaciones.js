@@ -87,7 +87,7 @@ Ext.define('rewsoft.controller.compras.Facturaciones', {
         if(text.getValue().length > 2) {
             this.getProductosStore().proxy.extraParams.no_producto = text.getValue();
         }else if(text.getValue().length == 0){
-            this.getProductosStore().proxy.extraParams.no_producto = null;
+            this.getProductosStore().proxy.extraParams.no_producto = '';
         }
         this.getProductosStore().loadPage(1);
     },

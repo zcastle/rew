@@ -14,8 +14,8 @@ Ext.define('rewsoft.store.Series', {
             read: 'POST'
         },
         extraParams: {
-            cia: null,
-            tipoDocumento: null
+            cia: '',
+            tipoDocumento: ''
         }
     }
 });

@@ -62,6 +62,6 @@ if ($_POST) {
         echo "{success: false, msg: '$errorMessage'}";
     }
 } else {
-    echo ":P";
+    echo "{success: false, msg: 'Ha ocurrido algun Error'}";
 }
 ?>

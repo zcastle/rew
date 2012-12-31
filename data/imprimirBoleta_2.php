@@ -50,6 +50,6 @@ fclose($handle); // cierra el fichero PRN
 $salida = shell_exec('lpr PRN'); //lpr->puerto impresora, imprimir archivo PRN
 //echo "{success: true}";
 /* } else {
-  echo ":P";
+  echo "{success: false, msg: 'Ha ocurrido algun Error'}";
   } */
 ?>

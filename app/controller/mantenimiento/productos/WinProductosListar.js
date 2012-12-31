@@ -39,7 +39,7 @@ Ext.define('rewsoft.controller.mantenimiento.productos.WinProductosListar', {
     },
     onKeyUpTxtBuscar: function(text, key){
         if((key.getKey() == key.BACKSPACE || key.getKey() == key.DELETE) && text.getValue().length == 0){
-            this.getProductosConsultaStore().proxy.extraParams.no_producto = null;
+            this.getProductosConsultaStore().proxy.extraParams.no_producto = '';
             this.getProductosConsultaStore().load();
         }
     },

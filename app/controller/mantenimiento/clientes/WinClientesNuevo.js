@@ -32,7 +32,7 @@ Ext.define('rewsoft.controller.mantenimiento.clientes.WinClientesNuevo', {
         if(form.isValid()){
             Ext.Msg.confirm('Clientes', 'Grabar datos?', function(btn){
                 if(btn=='yes'){
-                    Ext.getBody().mask('Creando Usuario ...');
+                    Ext.getBody().mask('Creando Cliente ...');
                     this.getClientesStore().proxy.extraParams.co_cliente = '';
                     this.getClientesStore().proxy.extraParams.no_cliente = '';
                     this.getClientesStore().proxy.extraParams.edit = '';

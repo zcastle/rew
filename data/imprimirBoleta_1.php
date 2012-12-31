@@ -89,6 +89,6 @@ EOD;
 //============================================================+
     //echo "{success: true}";
 /*} else {
-    echo ":P";
+    echo "{success: false, msg: 'Ha ocurrido algun Error'}";
 }*/
 ?>

@@ -15,9 +15,9 @@ Ext.define('rewsoft.store.ProductosConsulta', {
             read: 'POST'
         },
         extraParams: {
-            no_producto: null,
-            co_grupo: null,
-            co_empresa: null
+            no_producto: '',
+            co_grupo: '',
+            co_empresa: ''
         }
     }
 });

@@ -12,7 +12,7 @@ Ext.define('rewsoft.store.Receta', {
             read: 'POST'
         },
         extraParams: {
-            co_producto: null
+            co_producto: ''
         }
     }
 });

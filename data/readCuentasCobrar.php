@@ -36,6 +36,6 @@ if ($_POST) {
                 "cuentascobrar" => $result
     ));
 } else {
-    echo ":P";
+    echo "{success: false, msg: 'Ha ocurrido algun Error'}";
 }
 ?>

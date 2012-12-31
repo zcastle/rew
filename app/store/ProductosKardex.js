@@ -15,10 +15,10 @@ Ext.define('rewsoft.store.ProductosKardex', {
             read: 'POST'
         },
         extraParams: {
-            co_producto: null,
-            no_producto: null,
-            co_grupo: null,
-            co_empresa: null
+            co_producto: '',
+            no_producto: '',
+            co_grupo: '',
+            co_empresa: ''
         }
     }
 });

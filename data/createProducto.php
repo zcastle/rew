@@ -15,6 +15,9 @@ if ($_POST) {
     $conn = new dbapdo();
     $data = json_decode($_REQUEST["productos"]);
     $co_empresa = $_REQUEST["co_empresa"];
+
+    $no_producto = strtoupper($data->no_producto);
+    $nu_orden = $data->nu_orden == '' ? 0 : $data->nu_orden;
     
     $c=1;
     $co_producto = '';
@@ -42,7 +45,7 @@ if ($_POST) {
     $stmt->bindParam(2, $data->co_grupo);
     $stmt->bindParam(3, $data->co_categoria);
     $stmt->bindParam(4, $data->co_sub_categoria);
-    $stmt->bindParam(5, strtoupper($data->no_producto));
+    $stmt->bindParam(5, $no_producto);
     $stmt->bindParam(6, $data->co_pais_procedencia);
     $stmt->bindParam(7, $data->co_unidad);
     $stmt->bindParam(8, $data->v_presenta);
@@ -57,7 +60,7 @@ if ($_POST) {
     $stmt->bindParam(17, $data->fl_igv);
     $stmt->bindParam(18, $data->fl_serv);
     $stmt->bindParam(19, $co_empresa);
-    $stmt->bindParam(20, $data->nu_orden == '' ? 0 : $data->nu_orden);
+    $stmt->bindParam(20, $nu_orden);
     $stmt->bindParam(21, $data->co_destino);
     $stmt->execute();
 

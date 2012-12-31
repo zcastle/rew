@@ -26,9 +26,9 @@ Ext.define('rewsoft.store.Categorias', {
             read: 'POST'
         },
         extraParams: {
-            no_categoria: null,
-            co_grupo: null,
-            co_empresa: null
+            no_categoria: '',
+            co_grupo: '',
+            co_empresa: ''
         }
     }
 });

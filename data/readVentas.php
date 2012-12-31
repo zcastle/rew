@@ -30,6 +30,6 @@ if ($_POST) {
                 "ventas" => $result
     ));
 } else {
-    echo ":P";
+    echo "{success: false, msg: 'Ha ocurrido algun Error'}";
 }
 ?>

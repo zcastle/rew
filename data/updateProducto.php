@@ -6,6 +6,9 @@ if ($_POST) {
     $conn = new dbapdo();
     $data = json_decode($_POST["productos"]);
 
+    $no_producto = strtoupper($data->no_producto);
+    $nu_orden = $data->nu_orden == '' ? 0 : $data->nu_orden;
+
     $query = "UPDATE m_productos SET
               co_grupo = ?, co_categoria = ?, co_sub_categoria = ?, no_producto = ?,
               co_pais_procedencia = ?, co_unidad = ?, v_presenta = ?, no_presentacion = ?,
@@ -18,7 +21,7 @@ if ($_POST) {
     $stmt->bindParam(1, $data->co_grupo);
     $stmt->bindParam(2, $data->co_categoria);
     $stmt->bindParam(3, $data->co_sub_categoria);
-    $stmt->bindParam(4, strtoupper($data->no_producto));
+    $stmt->bindParam(4, $no_producto);
     $stmt->bindParam(5, $data->co_pais_procedencia);
     $stmt->bindParam(6, $data->co_unidad);
     $stmt->bindParam(7, $data->v_presenta);
@@ -32,7 +35,7 @@ if ($_POST) {
     $stmt->bindParam(15, $data->cuenta_vt2);
     $stmt->bindParam(16, $data->fl_igv);
     $stmt->bindParam(17, $data->fl_serv);
-    $stmt->bindParam(18, $data->nu_orden == '' ? 0 : $data->nu_orden);
+    $stmt->bindParam(18, $nu_orden);
     $stmt->bindParam(19, $data->co_destino);
     $stmt->bindParam(20, $data->co_producto);
     $stmt->execute();

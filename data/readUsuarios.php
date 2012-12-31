@@ -37,6 +37,6 @@ if ($_POST) {
                 "is_login" => $is_login
     ));
 } else {
-    echo ":P";
+    echo "{success: false, msg: 'Ha ocurrido algun Error'}";
 }
 ?>

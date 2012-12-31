@@ -12,8 +12,8 @@ Ext.define('rewsoft.store.Almacen', {
             read: 'POST'
         },
         extraParams: {
-            co_empresa: null,
-            co_producto: null
+            co_empresa: '',
+            co_producto: ''
         }
     }
 });
