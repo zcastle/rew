@@ -2,7 +2,6 @@ Ext.define('rewsoft.controller.ventas.Facturaciones', {
     extend: 'Ext.app.Controller',
     views: [
     'ventas.PnlFacturacion',
-    'ventas.PnlFacturacionConsultar',
     'ventas.WinCantidad',
     'ventas.WinSeries',
     'ventas.WinGuiasRemision'
@@ -21,7 +20,6 @@ Ext.define('rewsoft.controller.ventas.Facturaciones', {
     'HistorialCompraProductos',
     'DocumentosFacturacion',
     'UnidadesVentaByProducto',
-    'FacturacionesConsultar',
     'Series',
     'ConsultaRuc',
     'FormaPago',
@@ -111,9 +109,6 @@ Ext.define('rewsoft.controller.ventas.Facturaciones', {
             'winventascantidad grid[name=gridPrecioCaja]': {
                 itemdblclick: this.onItemDblClickGridPrecioCaja
             },
-            'pnlventasfacturacionconsultar': {
-                render: this.onRenderedPnlFacturacionConsultar
-            },
             'winseries grid[name=gridSeries]': {
                 cellclick: this.onCellClickGridSeries,
                 itemdblclick: this.onItemDblClickGridSeries
@@ -148,9 +143,6 @@ Ext.define('rewsoft.controller.ventas.Facturaciones', {
             this.getMainView().down('button[name=btnCambiarSerie]').hide();
             this.getMainView().down('combobox[name=cboVendedor]').disable();
         }
-    },
-    onRenderedPnlFacturacionConsultar: function() {
-        this.getFacturacionesConsultarStore().load();
     },
     onRenderedWinCantidad: function(win){
     //this.getHistorialCompraProductosStore().load();
@@ -302,6 +294,7 @@ Ext.define('rewsoft.controller.ventas.Facturaciones', {
         if(this.validar(button)){
             var viewWinVentasCantidad = button.up('window');
             var gridPrecios = viewWinVentasCantidad.down('grid[name=gridPrecios]');
+            var gridPrecioCaja = viewWinVentasCantidad.down('grid[name=gridPrecioCaja]');
             var unitario = viewWinVentasCantidad.down('textfield[name=txtPrecio]');
             if(!this.validarPrecio(gridPrecios, unitario)){
                 Ext.Msg.alert('Validacion', 'Precio ingresado es invalido');
@@ -312,7 +305,17 @@ Ext.define('rewsoft.controller.ventas.Facturaciones', {
             var lote = viewWinVentasCantidad.down('textfield[name=txtLote]');
             var co_almacen = viewWinVentasCantidad.down('textfield[name=co_almacen]').getValue();
             var vencimiento = viewWinVentasCantidad.down('textfield[name=txtVencimiento]');
-            var unidad = viewWinVentasCantidad.down('combobox[name=cboUnidadVenta]').getRawValue();
+            var co_unidad = viewWinVentasCantidad.down('combobox[name=cboUnidadVenta]').getValue();
+            //var unidad = viewWinVentasCantidad.down('combobox[name=cboUnidadVenta]').getRawValue();
+            var unidad = 'UNI';
+            try{
+                var record = gridPrecioCaja.getSelectionModel().selected.items[0];
+                if(record.get('no_medida')=='UNIDAD'){
+                    unidad = 'UNI';
+                }else if(record.get('no_medida')=='CAJA'){
+                    unidad = 'CAJ';
+                }
+            }catch(e){}
             var gridPedido = this.getMainView().down('grid[name=gridPedido]');
             var pos = this.getPosicion(gridPedido, codigo.getValue())
 
@@ -323,13 +326,14 @@ Ext.define('rewsoft.controller.ventas.Facturaciones', {
                 this.editProducto(gridPedido, pos, 'total', total)
                 this.editProducto(gridPedido, pos, 'lote', lote.value)
                 this.editProducto(gridPedido, pos, 'vencimiento', vencimiento.value)
+                this.editProducto(gridPedido, pos, 'co_unidad', co_unidad)
                 this.editProducto(gridPedido, pos, 'unidad', unidad)
                 this.editProducto(gridPedido, pos, 'co_almacen', co_almacen)
                 this.setMontoTotal(gridPedido);
             }else{
                 var gridProducto = this.getMainView().down('grid[name=gridProductos]');
                 var storeProductos = gridProducto.getSelectionModel().selected.items[0].data;
-                this.addProducto(storeProductos.co_producto, storeProductos.no_producto, unitario.value, storeProductos.costo_s, cantidad.value, lote.value, vencimiento.value, unidad, co_almacen)
+                this.addProducto(storeProductos.co_producto, storeProductos.no_producto, unitario.value, storeProductos.costo_s, cantidad.value, lote.value, vencimiento.value, co_unidad, unidad, co_almacen)
             }
             button.up('window').close();
         }
@@ -354,7 +358,7 @@ Ext.define('rewsoft.controller.ventas.Facturaciones', {
         }
         return rpta;
     },
-    addProducto: function(co_producto, no_producto, precio0, costo_s, cantidad, lote, vencimiento, unidad, co_almacen){
+    addProducto: function(co_producto, no_producto, precio0, costo_s, cantidad, lote, vencimiento, co_unidad, unidad, co_almacen){
         var gridPedido = this.getMainView().down('grid[name=gridPedido]');
         var storePedido = gridPedido.getStore();
         var total = cantidad * precio0;
@@ -367,12 +371,13 @@ Ext.define('rewsoft.controller.ventas.Facturaciones', {
             precio0: precio0,
             costo_s: costo_s,
             cantidad: cantidad,
+            co_unidad: co_unidad,
             unidad: unidad,
             total: total,
             co_almacen: co_almacen
         });
-        var count = storePedido.getCount();
-        storePedido.insert(count, pedido);
+        //var count = storePedido.getCount();
+        storePedido.add(pedido);
         this.setMontoTotal(gridPedido);
     },
     editProducto: function(gridPedido, pos, campo, valor){
@@ -435,7 +440,6 @@ Ext.define('rewsoft.controller.ventas.Facturaciones', {
             this.onClickBtnProcesarOrdenDespacho(grid, button);
         }else if(coTipoDocumento == 'CC'){ //Cotizacion
             this.onClickBtnProcesarCotizacion(grid, button);
-            //console.log('Procesar Cotizacion');
         }
     },
     onClickBtnProcesarVenta: function(grid, button){
@@ -457,58 +461,67 @@ Ext.define('rewsoft.controller.ventas.Facturaciones', {
         var coFormaPago = this.getMainView().down('combobox[name=cboFormaPago]').getValue();
         Ext.Msg.confirm('Confirmacion', 'Esta seguro de querer procesar la '+tipoDocumento+' No.: '+numeroDocumento+' ?', function(btn){
             if(btn=='yes'){
-                Ext.getBody().mask('Procesando '+tipoDocumento+' No.: '+numeroDocumento+' ...');
-                var detalle = new Array();
-                var total = 0;
-                grid.store.each(function(record) {
-                    var registro = [{
-                        co_producto: record.data['co_producto'],
-                        no_producto: record.data['no_producto'],
-                        cantidad: record.data['cantidad'],
-                        unidad: record.data['unidad'],
-                        precio0: record.data['precio0'],
-                        total: record.data['total'],
-                        lote: record.data['lote'],
-                        co_almacen: record.data['co_almacen'],
-                        vencimiento: record.data['vencimiento']
-                    }];
-                    detalle.push(registro);
-                    total = total + record.data['total'];
-                });
-                var neto = total / 1.18;
-                var igv = neto * 0.18;
-                Ext.Ajax.request({
-                    url: 'data/procesarVenta.php',
-                    params: {
-                        cia: rewsoft.AppGlobals.CIA,
-                        coCliente: coCliente,
-                        tipoComprobante: coTipoDocumento,
-                        numeroDocumento: numeroDocumento,
-                        neto: neto,
-                        igv: igv,
-                        total: total,
-                        co_forma_pago: coFormaPago,
-                        co_vendedor: co_vendedor,
-                        nuGuiaRemision: nuGuiaRemision,
-                        fe_vencimiento: fe_vencimiento,
-                        detalle: Ext.encode(detalle)
-                    },
-                    scope: this,
-                    success: function(response){
-                        var obj = Ext.decode(response.responseText);
-                        if(obj.success) {
-                            //this.imprimirBoleta(detalle);
-                            this.imprimirFactura(coTipoDocumento, numeroDocumento);
-                            this.setSecuencial(coTipoDocumento, cboTipoDocumento);
-                            this.onClickBtnLimpiarTodoYes();
-                            Ext.getBody().unmask();
-                        } else {
-                            Ext.Msg.alert('Error!!!', 'Error en el proceso: ' + obj.msg);
-                        }
-                    },
-                    failure: function(response, dos, tres){
+                var fl_imprimir = 'N';
+                Ext.Msg.confirm('Impresion de comprobante', 'Desea imprimir la <span style=color:red; font-weidth: bold>'+tipoDocumento+' No.: '+numeroDocumento+'</span>?', function(btn){
+                    if(btn=='yes' || btn=='no'){
+                        fl_imprimir = btn=='yes' ? 'S' : 'N';
                     }
-                });
+                    Ext.getBody().mask('Procesando <span style=color:red; font-weidth: bold>'+tipoDocumento+' No.: '+numeroDocumento+'</span> ...');
+                    var detalle = new Array();
+                    var total = 0;
+                    grid.store.each(function(record) {
+                        var registro = [{
+                            co_producto: record.data['co_producto'],
+                            no_producto: record.data['no_producto'],
+                            cantidad: record.data['cantidad'],
+                            unidad: record.data['unidad'],
+                            precio0: record.data['precio0'],
+                            total: record.data['total'],
+                            lote: record.data['lote'],
+                            co_almacen: record.data['co_almacen'],
+                            vencimiento: record.data['vencimiento'],
+                            co_unidad: record.data['co_unidad'],
+                            no_unidad: record.data['unidad']
+                        }];
+                        detalle.push(registro);
+                        total = total + record.data['total'];
+                    });
+                    var neto = total / 1.18;
+                    var igv = neto * 0.18;
+                    Ext.Ajax.request({
+                        url: 'data/procesarVenta.php',
+                        params: {
+                            cia: rewsoft.AppGlobals.CIA,
+                            coCliente: coCliente,
+                            tipoComprobante: coTipoDocumento,
+                            numeroDocumento: numeroDocumento,
+                            neto: neto,
+                            igv: igv,
+                            total: total,
+                            co_forma_pago: coFormaPago,
+                            co_vendedor: co_vendedor,
+                            nuGuiaRemision: nuGuiaRemision,
+                            fe_vencimiento: fe_vencimiento,
+                            fl_imprimir: fl_imprimir,
+                            detalle: Ext.encode(detalle)
+                        },
+                        scope: this,
+                        success: function(response){
+                            var obj = Ext.decode(response.responseText);
+                            if(obj.success) {
+                                //this.imprimirBoleta(detalle);
+                                //this.imprimirFactura(coTipoDocumento, numeroDocumento);
+                                this.setSecuencial(coTipoDocumento, cboTipoDocumento);
+                                this.onClickBtnLimpiarTodoYes();
+                                Ext.getBody().unmask();
+                            } else {
+                                Ext.Msg.alert('Error!!!', 'Error en el proceso: ' + obj.msg);
+                            }
+                        },
+                        failure: function(response, dos, tres){
+                        }
+                    });
+                }, this);
             }
         }, this);
     },
@@ -582,6 +595,12 @@ Ext.define('rewsoft.controller.ventas.Facturaciones', {
                 Ext.getBody().mask('Procesando '+tipoDocumento+' No.: '+numeroDocumento+' ...');
                 var detalle = new Array();
                 var total = 0;
+                var fl_imprimir = 'N';
+                Ext.Msg.confirm('Impresion de comprobante', 'Desea imprimir la '+tipoDocumento+' No.: '+numeroDocumento+' ?', function(btn){
+                    if(btn=='yes'){
+                        fl_imprimir = 'S';
+                    }
+                }, this);
                 grid.store.each(function(record) {
                     var registro = [{
                         co_producto: record.data['co_producto'],
@@ -610,6 +629,7 @@ Ext.define('rewsoft.controller.ventas.Facturaciones', {
                         total: total,
                         co_forma_pago: coFormaPago,
                         co_vendedor: rewsoft.AppGlobals.CO_USUARIO,
+                        fl_imprimir: fl_imprimir,
                         detalle: Ext.encode(detalle)
                     },
                     scope: this,
@@ -725,7 +745,6 @@ Ext.define('rewsoft.controller.ventas.Facturaciones', {
             nuSerie = rewsoft.AppGlobals.SERIE_BV;
         }
         //nuSerie = '00'.concat(nuSerie);
-        //console.log(nuSerie);
         Ext.Ajax.request({
             url: 'data/readNumeroSecuencia.php',
             params: {

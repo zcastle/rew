@@ -16,8 +16,6 @@ if ($_POST) {
         $query .= " WHERE mc.co_cliente = $co_cliente";
     }
     if($no_cliente <> ''){
-        //$query .= " WHERE mc.no_cliente LIKE '%$no_cliente%' OR mc.co_cliente LIKE '$no_cliente%'";
-
         $query .= " WHERE ((";
         $claves=explode(" ", $no_cliente);
         foreach ($claves as $v) {
@@ -38,15 +36,14 @@ if ($_POST) {
         $queryCount .= " WHERE co_cliente = $co_cliente";
     }
     if($no_cliente <> ''){
-        //$query .= " WHERE no_cliente LIKE '$no_cliente%'";
         $queryCount .= " WHERE ((";
         $claves=explode(" ", $no_cliente);
         foreach ($claves as $v) {
-            $condicion[] = "mc.no_cliente LIKE '%$v%'";
+            $condicion2[] = "no_cliente LIKE '%$v%'";
         }
-        $queryCount .= implode(" AND ", $condicion);
+        $queryCount .= implode(" AND ", $condicion2);
         $queryCount .= ")";
-        $queryCount .= " OR CONVERT(mc.co_cliente, UNSIGNED INTEGER) = '$no_cliente')";
+        $queryCount .= " OR CONVERT(co_cliente, UNSIGNED INTEGER) = '$no_cliente')";
     }
     $stmtCount = $conn->prepare($queryCount);
     $stmtCount->execute();

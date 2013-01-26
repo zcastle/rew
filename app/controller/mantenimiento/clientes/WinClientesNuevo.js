@@ -45,7 +45,6 @@ Ext.define('rewsoft.controller.mantenimiento.clientes.WinClientesNuevo', {
                             this.getMainView().close();
                         },
                         failure: function(batch, options){
-                            console.log(options);
                             Ext.getBody().unmask();
                         },
                         scope: this

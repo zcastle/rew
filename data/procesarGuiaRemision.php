@@ -13,11 +13,11 @@ if ($_POST) {
     $va_venta = $_REQUEST['total'];
     $co_forma_pago = $_REQUEST['co_forma_pago'];
     $co_vendedor = $_REQUEST['co_vendedor'];
-
+    $fl_imprimir = $_REQUEST['fl_imprimir'];
     $detalle = json_decode(stripcslashes($_REQUEST['detalle']));
 
-    $sqlCabecera = "INSERT INTO c_guia_remision (co_empresa, fe_guia, nu_comprobante, co_cliente, va_neto, va_igv, va_venta, co_forma_pago, co_vendedor)
-                VALUES (:co_empresa, NOW(), :nu_comprobante, :co_cliente, :va_neto, :va_igv, :va_venta, :co_forma_pago, :co_vendedor)";
+    $sqlCabecera = "INSERT INTO c_guia_remision (co_empresa, fe_guia, nu_comprobante, co_cliente, va_neto, va_igv, va_venta, co_forma_pago, co_vendedor, fl_imprimir)
+                VALUES (:co_empresa, NOW(), :nu_comprobante, :co_cliente, :va_neto, :va_igv, :va_venta, :co_forma_pago, :co_vendedor, :fl_imprimir)";
 
     $sqlDetalle = "INSERT INTO d_guia_remision (nu_comprobante, co_producto, ca_producto, va_producto, nu_linea, no_lote, fe_vencimiento) 
                    VALUES(?,?,?,?,?,?,?)";
@@ -31,7 +31,8 @@ if ($_POST) {
         ':va_igv' => $va_igv,
         ':va_venta' => $va_venta,
         ':co_forma_pago' => $co_forma_pago,
-        ':co_vendedor' => $co_vendedor
+        ':co_vendedor' => $co_vendedor,
+        ':fl_imprimir' => $fl_imprimir
     ));
 
     $coProducto = null; $caProducto = null; $vaProducto = null; $noLote = null; $feVencimiento = null;

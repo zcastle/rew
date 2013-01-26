@@ -9,6 +9,9 @@ Ext.define('rewsoft.controller.ventas.WinBuscarCliente', {
     },{
         ref: 'PnlVentasFacturacion',
         selector: 'pnlventasfacturacion'
+    },{
+        ref: 'PnlVentasFacturacionConsultar',
+        selector: 'pnlventasfacturacionconsultar'
     }],
     stores: [
         'Clientes'
@@ -61,10 +64,16 @@ Ext.define('rewsoft.controller.ventas.WinBuscarCliente', {
         }, this);
     },
     onItemDblClickGridClientes: function(grid, record){
-        this.getPnlVentasFacturacion().down('textfield[name=txtRuc]').setValue(record.get('ruc'));
-        this.getPnlVentasFacturacion().down('textfield[name=txtCliente]').setValue(record.get('cliente'));
-        this.getPnlVentasFacturacion().down('textfield[name=txtDireccion]').setValue(record.get('direccion'));
-        this.getPnlVentasFacturacion().down('combobox[name=cboFormaPago]').setValue(record.get('co_forma_pago')+'');
+        try{
+            this.getPnlVentasFacturacion().down('textfield[name=txtRuc]').setValue(record.get('ruc'));
+            this.getPnlVentasFacturacion().down('textfield[name=txtCliente]').setValue(record.get('cliente'));
+            this.getPnlVentasFacturacion().down('textfield[name=txtDireccion]').setValue(record.get('direccion'));
+            this.getPnlVentasFacturacion().down('combobox[name=cboFormaPago]').setValue(record.get('co_forma_pago')+'');
+        }catch(e){console.log(e)}
+        try{
+            this.getPnlVentasFacturacionConsultar().down('hiddenfield[name=txtRuc]').setValue(record.get('ruc'));
+            this.getPnlVentasFacturacionConsultar().down('textfield[name=txtClientes]').setValue(record.get('cliente'));
+        }catch(e){console.log(e)}
         this.getMainView().close();
     }
 });

@@ -1,20 +1,20 @@
-Ext.define('rewsoft.store.FacturacionesConsultar', {
+Ext.define('rewsoft.store.FacturacionesConsultarDetalle', {
     extend: 'Ext.data.Store',
-    model: 'rewsoft.model.FacturacionConsultar',
-    pageSize: 25,
+    model: 'rewsoft.model.FacturacionConsultarDetalle',
     proxy: {
         type: 'ajax',
-        url: 'data/readVentas.php',
+        url: 'data/readVentasDetalle.php',
         reader: {
             type: 'json',
-            root: 'ventas',
+            root: 'ventasdetalle',
             totalProperty: 'totalCount'
         },
         actionMethods: {
             read: 'POST'
         },
         extraParams: {
-            doc: ''
+            tipo_comprobante: '',
+            nu_comprobante: ''
         }
     }
 });

@@ -46,8 +46,6 @@ Ext.define('rewsoft.controller.configuracion.WinTipoCambio', {
                 },
                 scope: this
             });
-        } else {
-            console.log('No Valido');
         }
     }
 });

@@ -30,7 +30,9 @@ Ext.define('rewsoft.controller.MainView', {
         //rewsoft.AppGlobals.MODELO_NEGOCIO = rewsoft.AppGlobals.MODELO_NEGOCIO_DSILVANA;
         this.loadMenu();
         if(rewsoft.AppGlobals.DEBUG){
-            console.log('Debug activado');
+            if(console){
+                console.log('Debug activado');
+            }
             //this.getLoginUser().hide();
             this.getCard().getLayout().setActiveItem(1);
             //this.getController('TabMain').addTab('Facturacion', 'pnlventasfacturacion', 'ico-facturacion-small');
@@ -45,12 +47,13 @@ Ext.define('rewsoft.controller.MainView', {
             //this.getController('TabMain').addTab('Consultar Kardex', 'pnlconsultarkardex');
             //Ext.widget('winconsultarstock').show();
             //this.getController('TabMain').addTab('Categorias', 'pnlcategorias');
-            this.getController('TabMain').addTab('Unidades de Medida', 'pnlunidadmedida');
+            //this.getController('TabMain').addTab('Unidades de Medida', 'pnlunidadmedida');
             //this.getController('TabMain').addTab('Crear', 'pnlordenabastecimientocrear');
             //this.getController('TabMain').addTab('Transferencia de Productos', 'pnltransferencia');
             //this.getController('TabMain').addTab('Usuarios', 'pnlusuarios');
             //this.getController('TabMain').addTab('Clientes', 'pnlclientes', 'tabs');
             //this.getController('TabMain').addTab('Proveedores', 'pnlproveedores', 'tabs');
+            this.getController('TabMain').addTab('Comprobantes', 'pnlventasfacturacionconsultar', 'tabs');
         } else {
             Ext.widget('loginuser');
         }
@@ -81,7 +84,7 @@ Ext.define('rewsoft.controller.MainView', {
                 },{
                     text: 'Consultar',
                     menu: [{
-                        text: 'Facturacion',
+                        text: 'Comprobantes',
                         iconCls: 'ico-consultar-small',
                         action: 'mnuVentasFacturacionConsultar'
                     },{

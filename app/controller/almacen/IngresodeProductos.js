@@ -175,7 +175,6 @@ Ext.define('rewsoft.controller.almacen.IngresodeProductos', {
             var maps = new Ext.KeyMap(grd.getEl(), [{
                 key: Ext.EventObject.INSERT,
                 fn: function(){
-                    console.log('Insertando')
                 },
                 scope: this
             }]);
@@ -517,7 +516,6 @@ Ext.define('rewsoft.controller.almacen.IngresodeProductos', {
                                     direccion: record[0].data.direccion
                                 },
                                 success: function(response){
-                                //console.log(response.responseText);
                                 }
                             });
                         }

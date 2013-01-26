@@ -47,6 +47,7 @@ Ext.application({
         'mantenimiento.proveedores.PnlProveedores',
         'mantenimiento.proveedores.WinProveedoresNuevo',
 	    'ventas.Facturaciones',
+        'ventas.FacturacionesConsultar',
 	    'ventas.CuentasCobrar',
 	    'ventas.WinBuscarCliente',
 	    'ventas.WinNuevoCliente',

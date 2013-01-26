@@ -407,9 +407,6 @@ Ext.define('rewsoft.controller.mantenimiento.productos.WinProductosNuevo', {
         this.getMainView().down('numberfield[name=precio0]').setValue(this.getMainView().down('displayfield[name=ventaSugerido]').getValue());
     },
     onFocusNoProducto: function(text, event, opt){
-        /*console.log(text);
-        console.log(event);
-        console.log(opt);*/
     },
     onMostrarFormula: function(check, newValue, oldValue){
         var formula = this.getMainView().down('displayfield[name=formula]')

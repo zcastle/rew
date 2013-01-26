@@ -40,7 +40,7 @@ Ext.define('rewsoft.view.LoginUser', {
                 name: 'txtUsuario',
                 store: 'Usuarios',
                 valueField: 'co_usuario',
-                displayField: 'no_usuario',
+                displayField: 'co_usuario',
                 editable: false,
                 baseCls: 'field',
                 fieldLabel: 'Usuario',
@@ -65,9 +65,10 @@ Ext.define('rewsoft.view.LoginUser', {
                 xtype: 'button',
                 text: 'Ingresar',
                 name: 'btnLogin',
-                iconCls: 'ico-large',
+                iconCls: 'ico-login',
                 scale: 'large',
-                margin: '5 5 0 340'
+                margin: '5 5 0 329',
+                padding: '5 10'
             }]
         }];
         this.callParent(arguments);

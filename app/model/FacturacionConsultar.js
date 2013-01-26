@@ -1,28 +1,22 @@
 Ext.define('rewsoft.model.FacturacionConsultar', {
     extend: 'Ext.data.Model',
     fields: [{
-        name: 'fecha', 
-        type: 'string'
+        name: 'fecha'
     },{
-        name: 'documento', 
-        type: 'string'
+        name: 'tipo_comprobante' 
     },{
-        name: 'numero', 
-        type: 'string'
+        name: 'documento'
     },{
-        name: 'ruc', 
-        type: 'string'
+        name: 'numero'
     },{
-        name: 'cliente',
-        type: 'string'
+        name: 'ruc'
     },{
-        name: 'neto', 
-        type: 'string'
+        name: 'cliente'
     },{
-        name: 'igv', 
-        type: 'string'
+        name: 'neto'
     },{
-        name: 'total', 
-        type: 'string'
+        name: 'igv'
+    },{
+        name: 'total'
     }]
 });

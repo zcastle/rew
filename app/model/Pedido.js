@@ -17,6 +17,8 @@ Ext.define('rewsoft.model.Pedido', {
     },{
         name: 'cantidad'
     },{
+        name: 'co_unidad'
+    },{
         name: 'unidad'
     },{
         name: 'total'

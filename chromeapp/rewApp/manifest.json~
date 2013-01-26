@@ -9,7 +9,7 @@
 	},
 	"app": {
 		"launch": {
-			"web_url": "http://rewsoft.local"
+			"web_url": "http://localhost/rewsoft"
 		}
 	},
 	"permissions": [

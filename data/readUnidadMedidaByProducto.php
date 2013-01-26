@@ -12,13 +12,13 @@ if ($_POST) {
     $stmtProducto->execute();
     $rows = $stmtProducto->fetch(PDO::FETCH_OBJ);
     
-    $queryUnidad = "SELECT CONCAT(id, 0) AS id, no_sub_unidad AS no_unidad, no_unidad AS no_sub_unidad, ca_sub_unidad
-                    FROM m_unidades_medida 
+    $queryUnidad = "SELECT id, no_unidad, no_sub_unidad, 0 AS ca_sub_unidad
+                    FROM m_unidades_medida
                     WHERE id = :id
                     UNION ALL
-                    SELECT id, no_unidad, no_sub_unidad, 0 AS ca_sub_unidad
-                    FROM m_unidades_medida
-                    WHERE id = :id;";
+                    SELECT CONCAT(id, 0) AS id, no_sub_unidad AS no_unidad, no_unidad AS no_sub_unidad, ca_sub_unidad
+                    FROM m_unidades_medida 
+                    WHERE id = :id";
     $stmtUnidad = $conn->prepare($queryUnidad);
     $stmtUnidad->bindParam(':id', $rows->co_unidad);
     $stmtUnidad->execute();

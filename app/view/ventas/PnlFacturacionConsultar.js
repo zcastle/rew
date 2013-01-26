@@ -65,14 +65,13 @@ Ext.define('rewsoft.view.ventas.PnlFacturacionConsultar' ,{
                 labelWidth: 70,
                 margins: '4 0 0 0'
             },{
-                xtype: "combobox",
-                name: "cboClientes", 
+                xtype: "hiddenfield",
+                name: "txtRuc",
+            },{
+                xtype: "textfield",
+                name: "txtClientes", 
                 fieldLabel: "Cliente",
-                store: 'Clientes',
-                valueField: 'codigo',
-                displayField: 'cliente',
-                queryMode: 'local',
-                typeAhead: true,
+                enableKeyEvents: true,
                 labelWidth: 45,
                 width: 400,
                 margins: '4 0 0 0'
@@ -80,6 +79,7 @@ Ext.define('rewsoft.view.ventas.PnlFacturacionConsultar' ,{
                 xtype: 'textfield',
                 name: 'txtBuscar',
                 fieldLabel: 'Buscar Documento',
+                enableKeyEvents: true,
                 labelWidth: 110,
                 flex: 1
             }]
@@ -93,7 +93,12 @@ Ext.define('rewsoft.view.ventas.PnlFacturacionConsultar' ,{
             '-', {
                 text: 'Detalle',
                 name: 'btnDetalle',
-                iconCls: 'ico-editar',
+                iconCls: 'ico-medium',
+                scale: 'medium'
+            },{
+                text: 'Limpiar Filtros',
+                name: 'btnLimpiarFiltros',
+                iconCls: 'ico-medium',
                 scale: 'medium'
             }]
         });

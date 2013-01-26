@@ -42,7 +42,6 @@ Ext.define('rewsoft.controller.mantenimiento.proveedores.WinProveedoresNuevo', {
                             this.getMainView().close();
                         },
                         failure: function(batch, options){
-                            console.log(options);
                             Ext.getBody().unmask();
                         },
                         scope: this
