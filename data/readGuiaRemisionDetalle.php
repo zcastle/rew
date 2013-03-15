@@ -10,7 +10,7 @@ if ($_POST) {
               dgr.no_lote, DATE_FORMAT(dgr.fe_vencimiento, '%d/%m/%Y') AS fe_vencimiento
               FROM d_guia_remision dgr INNER JOIN m_productos mp 
               ON dgr.co_producto = mp.co_producto
-              WHERE dgr.nu_comprobante = '$nuComprobante' 
+              WHERE dgr.nu_comprobante = '$nu_documento' 
               ORDER BY dgr.nu_linea;";
 
     $stmt = $conn->prepare($query);

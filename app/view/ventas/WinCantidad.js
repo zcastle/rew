@@ -2,7 +2,7 @@ Ext.define('rewsoft.view.ventas.WinCantidad', {
     extend: 'Ext.Window',
     alias: 'widget.winventascantidad',
     title: 'Ingreso de Cantidad',
-    width: 400,
+    width: 450,
     modal: true,
     resizable: false,
     initComponent: function() {
@@ -34,7 +34,7 @@ Ext.define('rewsoft.view.ventas.WinCantidad', {
                 hideTrigger: true,
                 keyNavEnabled: false,
                 mouseWheelEnabled: false,
-                labelWidth: 55,
+                labelWidth: 60,
                 width: 160,
                 value: 1,
                 margins: '0 0 0 5'
@@ -43,7 +43,7 @@ Ext.define('rewsoft.view.ventas.WinCantidad', {
                 name: 'txtCosto',
                 style: 'margin-top: 5px;',
                 fieldLabel: 'Valor Compra S/.',
-                labelWidth: 100,
+                labelWidth: 110,
                 flex: 1,
                 readOnly: true,
                 margins: '0 5 0 5'
@@ -64,12 +64,13 @@ Ext.define('rewsoft.view.ventas.WinCantidad', {
                 allowBlank: false,
                 allowDecimals: true,
                 decimalPrecision: 4,
+                decimalSeparator: '.',
                 minValue: 0,
                 enableKeyEvents: true,
                 hideTrigger: true,
                 keyNavEnabled: false,
                 mouseWheelEnabled: false,
-                labelWidth: 55,
+                labelWidth: 60,
                 width: 160,
                 margins: '0 0 0 5'
             },{
@@ -82,10 +83,27 @@ Ext.define('rewsoft.view.ventas.WinCantidad', {
                 displayField: 'no_unidad',
                 queryMode: 'local',
                 editable: false,
-                labelWidth: 100,
+                labelWidth: 110,
                 flex: 1,
                 margins: '0 5 0 5'
             }]
+        },{
+            xtype: 'numberfield',
+            name: 'txtTotal',
+            style: 'margin-top: 5px; margin-left: 5px;',
+            fieldLabel: 'Total S/.',
+            allowNegative: false,
+            allowBlank: false,
+            allowDecimals: true,
+            decimalPrecision: 4,
+            decimalSeparator: '.',
+            minValue: 0,
+            enableKeyEvents: true,
+            hideTrigger: true,
+            keyNavEnabled: false,
+            mouseWheelEnabled: false,
+            labelWidth: 60,
+            width: 160
         },{
             layout: {
                 type: 'hbox',
@@ -121,7 +139,7 @@ Ext.define('rewsoft.view.ventas.WinCantidad', {
                 xtype: 'grid',
                 name: 'gridPrecios',
                 height: 80,
-                width: 190,
+                width: 240,
                 store: 'Precio',
                 margins: '5 0 0 0',
                 columns: [{

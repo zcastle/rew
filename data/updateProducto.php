@@ -17,6 +17,12 @@ if ($_POST) {
               nu_orden = ?, co_destino = ?
               WHERE co_producto = ?";
 
+/*
+    $va_compra = number_format($data->va_compra, 4, '.', ',');
+    $precio0 = number_format($data->precio0, 4, '.', ',');
+    $precio1 = number_format($data->precio1, 4, '.', ',');
+*/
+
     $stmt = $conn->prepare($query);
     $stmt->bindParam(1, $data->co_grupo);
     $stmt->bindParam(2, $data->co_categoria);

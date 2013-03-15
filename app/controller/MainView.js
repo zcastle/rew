@@ -53,7 +53,9 @@ Ext.define('rewsoft.controller.MainView', {
             //this.getController('TabMain').addTab('Usuarios', 'pnlusuarios');
             //this.getController('TabMain').addTab('Clientes', 'pnlclientes', 'tabs');
             //this.getController('TabMain').addTab('Proveedores', 'pnlproveedores', 'tabs');
-            this.getController('TabMain').addTab('Comprobantes', 'pnlventasfacturacionconsultar', 'tabs');
+            //this.getController('TabMain').addTab('Comprobantes', 'pnlventasfacturacionconsultar', 'tabs');
+            //Ext.widget('wintipocambio').show();
+            this.getController('TabMain').addTab('Tipo de Cambio', 'pnltipocambio', 'tabs');
         } else {
             Ext.widget('loginuser');
         }
@@ -82,6 +84,15 @@ Ext.define('rewsoft.controller.MainView', {
                     iconCls: 'ico-facturacion-small',
                     action: 'mnuVentasCotizacion'
                 },{
+                    text: 'Notas de Credito',
+                    action: 'mnuVentasNotasdeCredito'
+                }/*,{
+                    text: 'Notas de Debito',
+                    action: 'mnuVentasNotasdeDebito'
+                }*/,{
+                    text: 'Cuentas por Cobrar',
+                    action: 'mnuVentasCuentasCobrar'
+                },{
                     text: 'Consultar',
                     menu: [{
                         text: 'Comprobantes',
@@ -91,15 +102,6 @@ Ext.define('rewsoft.controller.MainView', {
                         text: 'Cotizaciones',
                         action: 'mnuVentasCotizaciones'
                     }]
-                },{
-                    text: 'Notas de Credito',
-                    action: 'mnuVentasNotasdeCredito'
-                },{
-                    text: 'Notas de Debito',
-                    action: 'mnuVentasNotasdeDebito'
-                },{
-                    text: 'Cuentas por Cobrar',
-                    action: 'mnuVentasCuentasCobrar'
                 }]
             });
         }
@@ -356,14 +358,19 @@ Ext.define('rewsoft.controller.MainView', {
                 break;
             case 'mnuVentasGuiaRemision':
                 this.getController('TabMain').addTab(menuItem.text, 'pnlventasfacturacion', 'ico-facturacion-small');
-                this.getController('ventas.Facturaciones').getMainView().down('combo[name=cboTipoDocumento]').setValue('GR');
+                var combo = this.getController('ventas.Facturaciones').getMainView().down('combo[name=cboTipoDocumento]');
+                combo.setValue('GR');
+                this.getController('ventas.Facturaciones').onSelectCboTipoDocumentos(combo);
                 break;
             case 'mnuVentasCotizacion':
                 this.getController('TabMain').addTab(menuItem.text, 'pnlventasfacturacion', 'ico-facturacion-small');
-                this.getController('ventas.Facturaciones').getMainView().down('combo[name=cboTipoDocumento]').setValue('CC');
+                var combo = this.getController('ventas.Facturaciones').getMainView().down('combo[name=cboTipoDocumento]');
+                combo.setValue('CC');
+                this.getController('ventas.Facturaciones').onSelectCboTipoDocumentos(combo);
                 break;
             case 'mnuConfiguracionTipoCambio':
-                Ext.widget('wintipocambio').show();
+                //Ext.widget('wintipocambio').show();
+                this.getController('TabMain').addTab(menuItem.text, 'pnltipocambio', 'tabs');
                 break;
             case 'mnuConfiguracionUsuarios':
                 this.getController('TabMain').addTab(menuItem.text, 'pnlusuarios', 'tabs');
@@ -376,6 +383,12 @@ Ext.define('rewsoft.controller.MainView', {
                 break;
             case 'mnuMantenimientoProveedores':
                 this.getController('TabMain').addTab(menuItem.text, 'pnlproveedores', 'tabs');
+                break;
+            case 'mnuVentasNotasdeCredito':
+                this.getController('TabMain').addTab(menuItem.text, 'pnlventasfacturacion', 'ico-facturacion-small');
+                var combo = this.getController('ventas.Facturaciones').getMainView().down('combo[name=cboTipoDocumento]');
+                combo.setValue('NC');
+                this.getController('ventas.Facturaciones').onSelectCboTipoDocumentos(combo);
                 break;
         }
     }

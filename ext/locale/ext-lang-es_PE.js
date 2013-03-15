@@ -1,7 +1,12 @@
 /**
- * Spañol/Peru raducido por Jimbert Castillo 06/01/2013
+ * Spañol/Peru traducido por Jimbert Castillo 06/01/2013
  */
 Ext.onReady(function() {
+    Ext.define("Ext.locale.es.form.field.Number", {
+        override: "Ext.form.field.Number",
+        decimalSeparator: '.'
+    });
+
     var cm = Ext.ClassManager,
         exists = Ext.Function.bind(cm.get, cm);
 

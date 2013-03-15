@@ -64,7 +64,7 @@ class MYPDF extends TCPDF {
         $paginas = 'Pagina '.$this->getAliasNumPage().'/'.$this->getAliasNbPages();
         $this->SetY(-15);
         $this->SetFont('courier', 'I', 8);
-        $this->Cell(0, 0, $paginas, T, true);
+        $this->Cell(0, 0, $paginas, 'T', true);
         $this->Cell(0, 0, "Fecha Impresion: $this->fechaSistema", 0, true);
         $this->Cell(0, 0, "Hora Impresion: $this->horaSistema", 0, false);
     }
@@ -134,37 +134,37 @@ $pdf->Ln();
 $pdf->SetFont('courier', '', 9);
 
 foreach ($result as $row) {
-    $pdf->Cell($w[0], 0, $row[co_producto]);
-    $pdf->Cell($w[1], 0, $row[no_producto]);
+    $pdf->Cell($w[0], 0, $row['co_producto']);
+    $pdf->Cell($w[1], 0, $row['no_producto']);
     $pdf->Cell($w[2], 0, '');
     $pdf->Cell($w[3], 0, '');
     $pdf->Cell($w[4], 0, '');
     $pdf->Cell($w[5], 0, '');
     $pdf->SetFont('courier', 'B', 9);
-    $pdf->Cell($w[6], 0, $row[ca_stock], 0, 0, 'R');
+    $pdf->Cell($w[6], 0, $row['ca_stock'], 0, 0, 'R');
     $pdf->SetFont('courier', '', 9);
     $pdf->Ln();
 
     if($mostrarLotes=='true'){
-        $stmLotes->bindParam(1, $row[co_producto]);
+        $stmLotes->bindParam(1, $row['co_producto']);
         $stmLotes->execute();
         $resultLotes = $stmLotes->fetchAll();
         foreach ($resultLotes as $row2) {
-            if($row2[no_lote]<>''){
+            if($row2['no_lote']<>''){
                 $pdf->Cell($w[0], 0, '');
                 $pdf->Cell($w[1], 0, '');
-                $pdf->Cell($w[2], 0, $row2[no_lote]);
-                if($row2[fe_vencimiento] != '00/00/0000'){
-                    $pdf->Cell($w[3], 0, $row2[fe_vencimiento]);
+                $pdf->Cell($w[2], 0, $row2['no_lote']);
+                if($row2['fe_vencimiento'] != '00/00/0000'){
+                    $pdf->Cell($w[3], 0, $row2['fe_vencimiento']);
                 } else {
                     $pdf->Cell($w[3], 0, '');
                 }
-                $pdf->Cell($w[4], 0, $row2[no_almacen]);
-                if($row2[ca_stock] < 0){
+                $pdf->Cell($w[4], 0, $row2['no_almacen']);
+                if($row2['ca_stock'] < 0){
                     $pdf->SetTextColor(255, 0, 0);
-                    $pdf->Cell($w[5], 0, $row2[ca_stock], 0, 0, 'R');
+                    $pdf->Cell($w[5], 0, $row2['ca_stock'], 0, 0, 'R');
                 } else {
-                    $pdf->Cell($w[5], 0, $row2[ca_stock], 0, 0, 'R');
+                    $pdf->Cell($w[5], 0, $row2['ca_stock'], 0, 0, 'R');
                 }
                 $pdf->SetTextColor(0, 0, 0);
                 $pdf->Cell($w[6], 0, '');

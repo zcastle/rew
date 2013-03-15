@@ -239,7 +239,7 @@ Ext.define('rewsoft.view.ventas.PnlFacturacion', {
                 }],
                 bbar: [{
                     xtype: 'label',
-                    text: 'Neto:',
+                    text: 'V. Venta:',
                     baseCls: 'etiqueta-titulo'
                 },{
                     xtype: 'label',
@@ -269,14 +269,22 @@ Ext.define('rewsoft.view.ventas.PnlFacturacion', {
                     flex: 1
                 },{
                     xtype: 'label',
+                    name: 'lblTotalD1',
+                    hidden: true,
                     text: 'Total $:',
                     baseCls: 'etiqueta-titulo'
                 },{
                     xtype: 'label',
+                    hidden: true,
                     name: 'lblTotalD',
                     text: '0.00',
                     baseCls: 'etiqueta',
                     flex: 1
+                },{
+                    xtype: 'checkboxfield',
+                    name: 'chkMostrarMontoDolares',
+                    boxLabel: 'Monto en Dolares',
+                    fieldStyle: 'font-size: 17px;'
                 }],
                 dockedItems: [{
                     xtype: 'toolbar',

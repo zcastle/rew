@@ -69,11 +69,11 @@ Ext.define('rewsoft.controller.ventas.WinBuscarCliente', {
             this.getPnlVentasFacturacion().down('textfield[name=txtCliente]').setValue(record.get('cliente'));
             this.getPnlVentasFacturacion().down('textfield[name=txtDireccion]').setValue(record.get('direccion'));
             this.getPnlVentasFacturacion().down('combobox[name=cboFormaPago]').setValue(record.get('co_forma_pago')+'');
-        }catch(e){console.log(e)}
+        }catch(e){}
         try{
             this.getPnlVentasFacturacionConsultar().down('hiddenfield[name=txtRuc]').setValue(record.get('ruc'));
             this.getPnlVentasFacturacionConsultar().down('textfield[name=txtClientes]').setValue(record.get('cliente'));
-        }catch(e){console.log(e)}
+        }catch(e){}
         this.getMainView().close();
     }
 });

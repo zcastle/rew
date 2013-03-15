@@ -18,10 +18,10 @@ $conn = new dbapdo();
 
 $mes_ini = $_GET['mes_ini'];
 $anio_ini = $_GET['anio_ini'];
-$mes_fin = $_GET['mes_fin'];
-$anio_fin = $_GET['anio_fin'];
+//$mes_fin = $_GET['mes_fin'];
+//$anio_fin = $_GET['anio_fin'];
 
-if($mes_ini && $anio_ini && $mes_fin && $anio_fin){
+if($mes_ini && $anio_ini){
     $query = "SELECT CONCAT(v.opventa, RIGHT(CONCAT('0000', @ROW_NUMBER:=@ROW_NUMBER + 1), 4)) AS opventa, v.co_cliente, v.no_cliente, 
             v.fe_venta, v.fe_vencimiento,
             v.tipo_comprobante, v.nu_comprobante, v.docidentidad,
@@ -35,8 +35,7 @@ if($mes_ini && $anio_ini && $mes_fin && $anio_fin){
             cv.nu_comprobante, '6' AS docidentidad,
             cv.va_neto, cv.va_igv, cv.va_venta
             FROM c_ventas AS cv LEFT JOIN m_clientes AS mc ON cv.co_cliente = mc.co_cliente
-            WHERE (MONTH(cv.fe_venta) >= $mes_ini AND YEAR(cv.fe_venta) >= $anio_ini) AND 
-            (MONTH(cv.fe_venta) <= $mes_fin AND YEAR(cv.fe_venta) <= $anio_fin)
+            WHERE (MONTH(cv.fe_venta) = $mes_ini AND YEAR(cv.fe_venta) = $anio_ini)
             ORDER BY cv.fe_venta) AS v, (SELECT @ROW_NUMBER:=0) AS r";
 } else {
     $query = "SELECT CONCAT(DATE_FORMAT(cv.fe_venta, '%Y'), DATE_FORMAT(cv.fe_venta, '%m'), 'XXXX') AS opventa, 

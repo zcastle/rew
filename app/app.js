@@ -61,6 +61,7 @@ Ext.application({
 	    'almacen.kardex.PnlConsultarKardex',
 	    'almacen.abastecimiento.PnlOrdenAbastecimientoCrear',
 	    'almacen.transferencia.PnlTransferencia',
+        'almacen.WinBuscarProveedor',
 	    'contabilidad.WinLibroVentas',
 	    'reportes.WinRegistroVentas',
 	    'configuracion.WinTipoCambio',
@@ -130,7 +131,7 @@ Ext.apply('Ext.form.field.VTypes', {
 
 Ext.define('rewsoft.AppGlobals', {
     singleton: true,
-    DEBUG: true,
+    DEBUG: false,
     //ROLES
     //ROL_ID: 2,
     ROL_ACTIVO: 'ADMIN',

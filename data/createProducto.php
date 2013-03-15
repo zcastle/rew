@@ -40,6 +40,12 @@ if ($_POST) {
               cuenta_vta, cuenta_vt2, fl_igv, fl_serv, fe_creacion, co_empresa, nu_orden, co_destino)
               VALUES(?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, NOW(), ?, ?, ?)";
 
+/*
+    $va_compra = number_format($data->va_compra, 4, '.');
+    $precio0 = number_format($data->precio0, 4, '.');
+    $precio1 = number_format($data->precio1, 4, '.');
+*/
+
     $stmt = $conn->prepare($query);
     $stmt->bindParam(1, $co_producto);
     $stmt->bindParam(2, $data->co_grupo);

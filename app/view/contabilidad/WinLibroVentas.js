@@ -1,7 +1,7 @@
 Ext.define('rewsoft.view.contabilidad.WinLibroVentas', {
     extend: 'Ext.Window',
     alias: 'widget.winlibroventas',
-    title: 'Libro Ventas',
+    title: 'Libro Ventas -> Periodo',
     //width: 100,
     //height: 100,
     modal: true,
@@ -16,7 +16,7 @@ Ext.define('rewsoft.view.contabilidad.WinLibroVentas', {
                 labelWidth: 30
             },
             defaultType: 'combobox',
-            width: 400,
+            width: 300,
             items: [{
                 fieldLabel: 'Inicio',
                 name: 'fe_ini',
@@ -36,8 +36,8 @@ Ext.define('rewsoft.view.contabilidad.WinLibroVentas', {
                 allowBlank: false,
                 value: new Date().getFullYear(),
                 maxValue: new Date().getFullYear(),
-                width: 55
-            },{
+                width: 60
+            }/*,{
                 fieldLabel: 'Fin',
                 name: 'fe_fin',
                 store: 'Meses',
@@ -57,7 +57,7 @@ Ext.define('rewsoft.view.contabilidad.WinLibroVentas', {
                 value: new Date().getFullYear(),
                 maxValue: new Date().getFullYear(),
                 width: 55
-            }],
+            }*/],
             buttons: [{
                 name: 'btnVer',
                 text: 'Ver'

@@ -22,7 +22,8 @@ Ext.define('rewsoft.controller.almacen.IngresodeProductos', {
     'ConsultaRuc',
     'UnidadesVentaByProducto',
     'FormaPago',
-    'Monedas'
+    'Monedas',
+    'Proveedores'
     ],
     init: function() {
         this.control({
@@ -495,8 +496,8 @@ Ext.define('rewsoft.controller.almacen.IngresodeProductos', {
     onKeyPressTxtRuc: function(text, key){
         if(key.getKey() == key.ENTER){
             if(text.getValue().length == 0) {
-
-            } else if(text.getValue().length == 110) {
+                Ext.widget('winbuscarproveedor').show();
+            }/* else if(text.getValue().length == 110) {
                 this.getMainView().down('textfield[name=txtProveedor]').setValue('');
                 Ext.getBody().mask('Buscando Proveedor...');
                 this.getConsultaRucStore().proxy.extraParams.nu_ruc = text.getValue();
@@ -538,7 +539,7 @@ Ext.define('rewsoft.controller.almacen.IngresodeProductos', {
             } else {
                 Ext.Msg.alert('Error!!!', "El numero de RUC debe contener 11 caracteres");
                 text.focus();
-            }
+            }*/
         }
     },
     onKeyPressVaCompraSinIgv: function(text, key){

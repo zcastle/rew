@@ -13,7 +13,8 @@ Ext.define('rewsoft.controller.LoginUser', {
     }],
     stores: [
     'Cia',
-    'Usuarios'
+    'Usuarios',
+    'TipoCambio'
     ],
     init: function() {
         this.control({
@@ -103,6 +104,15 @@ Ext.define('rewsoft.controller.LoginUser', {
                     }
                     this.setMenus(rewsoft.AppGlobals.ROL_ACTIVO);
                     Ext.getBody().unmask();
+                    this.getTipoCambioStore().proxy.extraParams.today = 'S';
+                    this.getTipoCambioStore().load({
+                        callback: function(record, operation, success) {
+                            if(record.length < 1){
+                                Ext.widget('wintipocambio').show();
+                            }
+                        },
+                        scope: this
+                    });
                 },
                 failure: function(frm, action) {
                     if(action.failureType == 'server'){

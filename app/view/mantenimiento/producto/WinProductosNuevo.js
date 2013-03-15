@@ -162,6 +162,7 @@ Ext.define('rewsoft.view.mantenimiento.producto.WinProductosNuevo', {
                         width: 355,
                         defaults: {
                             xtype: 'numberfield',
+                            decimalSeparator: '.',
                             msgTarget: 'side',
                             allowBlank: false,
                             allowNegative: false,

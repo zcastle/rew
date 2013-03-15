@@ -12,6 +12,9 @@ Ext.define('rewsoft.controller.ventas.Facturaciones', {
     },{
         ref: 'WinNuevoCliente',
         selector: 'winnuevocliente'
+    },{
+        ref: 'WinVentasCantidad',
+        selector: 'winventascantidad'
     }],
     stores: [
     'Productos',
@@ -93,6 +96,9 @@ Ext.define('rewsoft.controller.ventas.Facturaciones', {
             'pnlventasfacturacion checkboxfield[name=chkMostrarMarca]' : {
                 change: this.onChangeChkMostrarMarca
             },
+            'pnlventasfacturacion checkboxfield[name=chkMostrarMontoDolares]' : {
+                change: this.onChangeChkMostrarMontoDolares
+            },
             'winventascantidad': {
                 render: this.onRenderedWinCantidad,
                 afterrender: this.onAfterRenderWinCantidad
@@ -103,11 +109,26 @@ Ext.define('rewsoft.controller.ventas.Facturaciones', {
             'winventascantidad grid[name=gridLotes]': {
                 itemclick: this.onItemClickGridLotes
             },
+            'winventascantidad grid[name=gridPrecios]': {
+                itemclick: this.onItemClickGridPrecios
+            },
             'winventascantidad combo[name=cboUnidadVenta]': {
                 beforerender: this.onBeforeRenderCboUnidadVenta
             },
             'winventascantidad grid[name=gridPrecioCaja]': {
-                itemdblclick: this.onItemDblClickGridPrecioCaja
+                itemclick: this.onItemClickGridPrecioCaja
+            },
+            'winventascantidad numberfield[name=txtCantidad]' : {
+                keypress: this.onKeypressTxtCantidad
+            },
+            'winventascantidad numberfield[name=txtPrecio]' : {
+                keypress: this.onKeypressTxtPrecio
+            },
+            'winventascantidad numberfield[name=txtTotal]' : {
+                keypress: this.onKeypressTxtTotal
+            },
+            'winventascantidad grid[name=txtTotal]' : {
+                keypress: this.onKeypressTxtTotal
             },
             'winseries grid[name=gridSeries]': {
                 cellclick: this.onCellClickGridSeries,
@@ -295,8 +316,10 @@ Ext.define('rewsoft.controller.ventas.Facturaciones', {
             var viewWinVentasCantidad = button.up('window');
             var gridPrecios = viewWinVentasCantidad.down('grid[name=gridPrecios]');
             var gridPrecioCaja = viewWinVentasCantidad.down('grid[name=gridPrecioCaja]');
-            var unitario = viewWinVentasCantidad.down('textfield[name=txtPrecio]');
-            if(!this.validarPrecio(gridPrecios, unitario)){
+            var unitario = viewWinVentasCantidad.down('numberfield[name=txtPrecio]');
+            var costo = viewWinVentasCantidad.down('textfield[name=txtCosto]');
+            //if(!this.validarPrecio(gridPrecios, unitario)){
+            if(unitario.getValue() <= costo.getValue()){
                 Ext.Msg.alert('Validacion', 'Precio ingresado es invalido');
                 return;
             }
@@ -1053,6 +1076,15 @@ Ext.define('rewsoft.controller.ventas.Facturaciones', {
             this.getMainView().down('grid[name=gridProductos]').columns[4].hide()
         }
     },
+    onChangeChkMostrarMontoDolares: function(check, newValue, oldValue){
+        if(newValue){
+            this.getMainView().down('label[name=lblTotalD1]').show()
+            this.getMainView().down('label[name=lblTotalD]').show()
+        } else {
+            this.getMainView().down('label[name=lblTotalD1]').hide()
+            this.getMainView().down('label[name=lblTotalD]').hide()
+        }
+    },
     onAfterRenderWinCantidad: function(win){
         this.getUnidadesVentaByProductoStore().proxy.extraParams.co_producto = win.down('hidden[name=txtCodigo]').getValue();
         this.getUnidadesVentaByProductoStore().load({
@@ -1062,8 +1094,13 @@ Ext.define('rewsoft.controller.ventas.Facturaciones', {
             scope: this
         });
     },
-    onItemDblClickGridPrecioCaja: function(grid, record){
-        grid.up('window').down('numberfield[name=txtPrecio]').setValue(record.get('va_precio'));
+    onItemClickGridPrecioCaja: function(grid, record){
+        var txtCantidad = this.getWinVentasCantidad().down('numberfield[name=txtCantidad]')
+        var txtPrecio = this.getWinVentasCantidad().down('numberfield[name=txtPrecio]')
+        var txtTotal = this.getWinVentasCantidad().down('numberfield[name=txtTotal]')
+        txtPrecio.setValue(record.get('va_precio'));
+        txtTotal.setValue(txtCantidad.getValue() * txtPrecio.getValue())
+        txtPrecio.focus();
     },
     onSelectCboFormaPago: function(combo, records){
         var fe_vencimiento = combo.up().down('displayfield[name=txtFechaVencimiento]');
@@ -1081,5 +1118,42 @@ Ext.define('rewsoft.controller.ventas.Facturaciones', {
         }
         var fecha = hoyd + '/' + mes + '/' + hoy.getFullYear(); 
         fe_vencimiento.setValue(fecha);
+    },
+    onKeypressTxtCantidad: function(text, key){
+        if(key.getKey() == key.ENTER){
+            var txtCantidad = this.getWinVentasCantidad().down('numberfield[name=txtCantidad]')
+            var txtPrecio = this.getWinVentasCantidad().down('numberfield[name=txtPrecio]')
+            var txtTotal = this.getWinVentasCantidad().down('numberfield[name=txtTotal]')
+            txtTotal.setValue(txtCantidad.getValue() * txtPrecio.getValue())
+            txtPrecio.focus();
+        }
+
+    },
+    onKeypressTxtPrecio: function(text, key){
+        if(key.getKey() == key.ENTER){
+            var txtCantidad = this.getWinVentasCantidad().down('numberfield[name=txtCantidad]')
+            var txtPrecio = this.getWinVentasCantidad().down('numberfield[name=txtPrecio]')
+            var txtTotal = this.getWinVentasCantidad().down('numberfield[name=txtTotal]')
+            txtTotal.setValue(txtCantidad.getValue() * txtPrecio.getValue())
+            txtTotal.focus();
+        }
+    },
+    onKeypressTxtTotal: function(text, key){
+        if(key.getKey() == key.ENTER){
+            var txtCantidad = this.getWinVentasCantidad().down('numberfield[name=txtCantidad]')
+            var txtPrecio = this.getWinVentasCantidad().down('numberfield[name=txtPrecio]')
+            var txtTotal = this.getWinVentasCantidad().down('numberfield[name=txtTotal]')
+            var btnAceptar = this.getWinVentasCantidad().down('button[name=btnAceptar]')
+            txtPrecio.setValue(txtTotal.getValue() / txtCantidad.getValue())
+            btnAceptar.focus()
+        }
+    },
+    onItemClickGridPrecios: function(grid, record){
+        var txtCantidad = this.getWinVentasCantidad().down('numberfield[name=txtCantidad]')
+        var txtPrecio = this.getWinVentasCantidad().down('numberfield[name=txtPrecio]')
+        var txtTotal = this.getWinVentasCantidad().down('numberfield[name=txtTotal]')
+        txtPrecio.setValue(record.get('va_precio'));
+        txtTotal.setValue(txtCantidad.getValue() * txtPrecio.getValue())
+        txtPrecio.focus();
     }
 });

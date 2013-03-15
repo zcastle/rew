@@ -10,5 +10,9 @@ Ext.define('rewsoft.model.TipoCambio', {
         name: 'tcCompraNuevo'
     },{
         name: 'tcVentaNuevo'
+    },{
+        name: 'co_usuario'
+    },{
+        name: 'fe_creacion'
     }]
 });

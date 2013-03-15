@@ -5,6 +5,7 @@ Ext.define('rewsoft.view.configuracion.WinTipoCambio', {
     border: false,
     modal: true,
     resizable: false,
+    closable: false,
     initComponent: function() {
         this.items = [{
             xtype: 'form',
@@ -29,11 +30,13 @@ Ext.define('rewsoft.view.configuracion.WinTipoCambio', {
                 xtype: 'fieldset',
                 defaults: {
                     xtype: 'numberfield',
+                    decimalSeparator: '.',
                     labelWidth: 120
                 },
                 items: [{
                     fieldLabel: 'TC Compra Nuevo',
                     name: 'tcCompraNuevo',
+                    enableKeyEvents: true,
                     allowBlank: false,
                     minValue: 0,
                     value: '0.00'
@@ -41,6 +44,7 @@ Ext.define('rewsoft.view.configuracion.WinTipoCambio', {
                     fieldLabel: 'TC Venta Nuevo',
                     name: 'tcVentaNuevo',
                     allowBlank: false,
+                    enableKeyEvents: true,
                     minValue: 0,
                     value: '0.00'
                 }]
@@ -51,13 +55,13 @@ Ext.define('rewsoft.view.configuracion.WinTipoCambio', {
             text : 'Aceptar',
             iconCls: 'ico-aceptar-medium',
             scale: 'medium'
-        },{
+        }/*,{
             text : 'Cancelar',
             scope : this,
             iconCls: 'ico-cancelar',
             scale: 'medium',
             handler: this.close
-        }];
+        }*/];
         this.callParent(arguments);
     }
 });

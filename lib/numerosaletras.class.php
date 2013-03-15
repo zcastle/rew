@@ -1,172 +1,243 @@
 <?php
-//------    CONVERTIR NUMEROS A LETRAS         ---------------
-//------    Máxima cifra soportada: 18 dígitos con 2 decimales
-//------    999,999,999,999,999,999.99 
-// NOVECIENTOS NOVENTA Y NUEVE MIL NOVECIENTOS NOVENTA Y NUEVE BILLONES 
-// NOVECIENTOS NOVENTA Y NUEVE MIL NOVECIENTOS NOVENTA Y NUEVE MILLONES 
-// NOVECIENTOS NOVENTA Y NUEVE MIL NOVECIENTOS NOVENTA Y NUEVE PESOS 99/100 M.N.
-//------    Creada por:                        ---------------
-//------             ULTIMINIO RAMOS GALÁN     ---------------
-//------            uramos@gmail.com           ---------------
-//------    10 de junio de 2009. México, D.F.  ---------------
-//------    PHP Version 4.3.1 o mayores (aunque podría funcionar en versiones anteriores, tendrías que probar)
-function numtoletras($xcifra) { 
-   $str_moneda = 'NUEVOS SOLES';
-   $xarray = array(0 => "Cero",
-      1 => "UN", "DOS", "TRES", "CUATRO", "CINCO", "SEIS", "SIETE", "OCHO", "NUEVE", 
-      "DIEZ", "ONCE", "DOCE", "TRECE", "CATORCE", "QUINCE", "DIECISEIS", "DIECISIETE", "DIECIOCHO", "DIECINUEVE", 
-      "VEINTI", 30 => "TREINTA", 40 => "CUARENTA", 50 => "CINCUENTA", 60 => "SESENTA", 70 => "SETENTA", 80 => "OCHENTA", 90 => "NOVENTA", 
-      100 => "CIENTO", 200 => "DOSCIENTOS", 300 => "TRESCIENTOS", 400 => "CUATROCIENTOS", 500 => "QUINIENTOS", 600 => "SEISCIENTOS", 700 => "SETECIENTOS", 800 => "OCHOCIENTOS", 900 => "NOVECIENTOS"
-      );
-   //
-   $xcifra = trim($xcifra);
-   $xlength = strlen($xcifra);
-   $xpos_punto = strpos($xcifra, ".");
-   $xaux_int = $xcifra;
-   $xdecimales = "00";
-   if (!($xpos_punto === false)) {
-      if ($xpos_punto == 0) {
-         $xcifra = "0".$xcifra;
-         $xpos_punto = strpos($xcifra, ".");
-      }
-      $xaux_int = substr($xcifra, 0, $xpos_punto); // obtengo el entero de la cifra a covertir
-      $xdecimales = substr($xcifra."00", $xpos_punto + 1, 2); // obtengo los valores decimales
-   }
+class numerosALetras{
+/*
+Script Name: *numerosAletras
+Script URI: http://www.mis-algoritmos.com/2007/09/07/numbers_to_words/
+Description: Permite convertir numeros a letras mediante el uso de una sencilla clase.
+Script Version: 0.1
+Author: Victor De la Rocha
+Author URI: http://www.mis-algoritmos.com
+*/
+		var $resultado;
+		var $antes_con_despues='con';
+		var $despues = 'decimales';
+		var $antes_sin_despues='';
+		/*
+			Constructor
+		*/
+		function numerosALetras($valor=''){
+				if(is_numeric($valor))
+					return $this->convertir($valor);
+				return false;
+			}
+		/*
+			Retorna el valor de la centena que se le envie como parametro.
+		*/
+		function centenas($centenas){
+				$valores = array('cero','uno','dos','tres','cuatro','cinco','seis',
+				'siete','ocho','nueve','diez','once','doce','trece','catorce',
+				'quince',20=>'veinte',30=>'treinta',40=>'cuarenta',50=>'cincuenta',
+				60=>'sesenta',70=>'setenta',80=>'ochenta',90=>'noventa',100=>'ciento',
+				101=>'quinientos',102=>'setecientos',103=>'novecientos');
+		
+				switch($centenas){
+						case '1': return $valores[100]; break;
+						case '5': return $valores[101]; break;
+						case '7': return $valores[102]; break;
+						case '9': return $valores[103]; break;
+						default: return $valores[$VCentena];
+					}
+			}
+		/*
+			Retorna el valor de la unidad que se le envie como parametro.
+		*/
+		function unidades($unidad){
+				$valores = array('cero','un','dos','tres','cuatro','cinco','seis',
+				'siete','ocho','nueve','diez','once','doce','trece','catorce',
+				'quince',20=>'veinte',30=>'treinta',40=>'cuarenta',50=>'cincuenta',
+				60=>'sesenta',70=>'setenta',80=>'ochenta',90=>'noventa',100=>'ciento',
+				101=>'quinientos',102=>'setecientos',103=>'novecientos'
+				);
+			
+				return $valores[$unidad];
+			}
+	
+		/*
+			Retorna el valor de la decena que se le envie como parametro
+		*/
+		function decenas($decena){
+				$valores = array('cero','uno','dos','tres','cuatro','cinco','seis','siete',
+				'ocho','nueve','diez','once','doce','trece','catorce','quince',20=>'veinte',30=>'treinta',
+				40=>'cuarenta',50=>'cincuenta',60=>'sesenta',70=>'setenta',80=>'ochenta',90=>'noventa',
+				100=>'ciento',101=>'quinientos',102=>'setecientos',103=>'novecientos');
+		
+				return $valores[$decena];
+			}
+	
+	
+		function evalua($valor){
+				if($valor==0)
+					return 'cero';
+					
+				$decimales = 0;
+				$letras = '';
+				while($valor!=0){
+						// Validamos si supera los 100 millones
+						if($valor>=1000000000)
+							return 'L&iacute;mite de aplicaci&oacute;n exedido.';
+						
+						//Centenas de Millón
+						if (($valor<1000000000) and ($valor>=100000000)){
+								if ((intval($valor/100000000)==1) and (($valor-(intval($valor/100000000)*100000000))<1000000))
+										$letras.=(string)'cien millones ';
+									else{
+										$letras.=$this->centenas(intval($valor/100000000));
+										If ((intval($valor/100000000)<>1) and (intval($valor/100000000)<>5) and (intval($valor/100000000)<>7) and (intval($valor/100000000)<> 9))
+												$letras.=(string)'ciento ';
+											else
+												$letras.=(string)' ';
+									}
+								$valor=$valor-(Intval($valor/100000000)*100000000);
+							}
+			
+						//Decenas de Millón
+						if(($valor<100000000) and ($valor>=10000000)){
+								if(intval($valor/1000000)<16){
+										$tempo=$this->decenas(intval($valor/1000000));
+										$letras.=(string)$tempo;
+										$letras.=(string)' millones ';
+										$valor=$valor-(intval($valor/1000000)*1000000);
+									}else{
+										$letras.=$this->decenas(intval($valor/10000000)*10);
+										$valor=$valor-(intval($valor/10000000)*10000000);
+										if ($valor>1000000)
+											$letras.=$letras.' y ';
+									}
+							}
+			
+						//Unidades de Millon
+						if(($valor<10000000) and ($valor>=1000000)){
+									$tempo=(intval($valor/1000000));
+									if($tempo==1)
+											$letras.=(string)' un mill&oacute;n ';
+										else{
+											$tempo= unidades(intval($valor/1000000));
+											$letras.=(string)$tempo;
+											$letras.=(string)" millones ";
+										}
+								$valor=$valor-(intval($valor/1000000)*1000000);
+							}
+			
+						//Centenas de Millar
+						if(($valor<1000000) and ($valor>=100000)){
+								$tempo=(intval($valor/100000));
+								$tempo2=($valor-($tempo*100000));
+								if(($tempo==1) and ($tempo2<1000))
+										$letras.=(string) 'cien mil ';
+									else{
+										$tempo=$this->centenas(intval($valor/100000));
+										$letras.=(string)$tempo;
+										$tempo=(intval($valor/100000));
+										if(($tempo <> 1) and ($tempo <> 5) and ($tempo <> 7) and ($tempo <> 9))
+												$letras.=(string)'ciento ';
+											else
+												$letras.=(string)' ';
+									}
+								$valor=$valor-(intval($valor/100000)*100000);
+							}
+			
+						//Decenas de Millar
+						if(($valor<100000) and ($valor>=10000)){
+								$tempo=(intval($valor/1000));
+								if($tempo<16){
+										$tempo=$this->decenas(intval($valor/1000));
+										$letras.=(string)$tempo;
+										$letras.=(string)' mil ';
+										$valor=$valor-(intval($valor/1000)*1000);
+									}else{
+										$tempo=$this->decenas(intval($valor/10000)*10);
+										$letras.=(string) $tempo;
+										$valor=$valor-(intval(($valor/10000))*10000);
+										if($valor>1000)
+												$letras.=(string)' y ';
+											else
+												$letras.=(string)' mil ';
+									}
+							}
+			
+			
+						//Unidades de Millar
+						if(($valor<10000) and ($valor>=1000)){
+								$tempo=intval($valor/1000);
+								if($tempo==1)
+									$letras.=(string)'';//'un';
+									else{
+										$tempo=$this->unidades(intval($valor/1000));
+										$letras.=(string) $tempo;
+									}
+								$letras.=(string)' mil ';
+								$valor=$valor-(intval($valor/1000)*1000);
+							}
+			
+						//Centenas
+						if(($valor<1000) and ($valor>99)){
+								if ((intval($valor/100)==1) and (($valor-(intval($valor/100)*100))<1))
+										$letras.='cien ';
+									else{
+										$temp=(intval($valor/100));
+										$l2=$this->centenas($temp);
+										$letras.=(string) $l2;
+										if((intval($valor/100)<>1) and (intval($valor/100)<>5) and (intval($valor/100)<>7) and (intval($valor/100)<>9))
+												$letras.='ciento ';
+											else
+												$letras.=(string)' ';
+									}
+								$valor=$valor-(intval($valor/100)*100);
+							}
+			
+						//Decenas
+						if(($valor<100) and ($valor>9)){
+								if($valor<16){
+										$tempo=$this->decenas(intval($valor));
+										$letras.=$tempo;
+										$Numer =$valor-Intval($valor);
+									}else{
+										$tempo=$this->decenas(Intval(($valor/10))*10);
+										$letras.=(string)$tempo;
+										$valor=$valor-(Intval(($valor/10))*10);
+										if($valor>0.99)
+											$letras.=(string)' y ';
+									}
+							}
+			
+						//Unidades
+						if(($valor<10) And ($valor>0.99)){
+								$tempo=$this->unidades(intval($valor));
+								$letras.=(string)$tempo;
+								$valor=$valor-intval($valor);
+							}
+			
+						//Decimales
+						if($decimales<=0)
+							if(($letras <> "Error en Conversi&oacute;n a Letras") and (strlen(trim($letras))>0))
+								$letras .= (string) ' ';
+					return $letras;
+				}
+			}
+		/*
+			Retorna el texto de el numero enviado como parametros
+		*/
+		function convertir($valor){
+				ob_start();
+				$tt = $valor;
+				$valor = intval($tt);
+				$decimales = $tt - intval($tt);
+				
+				$decimales = substr($decimales,strpos($decimales,'.'),3)*(100);
+				$decimales= round($decimales);
 
-$XAUX = str_pad($xaux_int, 18, " ", STR_PAD_LEFT); // ajusto la longitud de la cifra, para que sea divisible por centenas de miles (grupos de 6)
-$xcadena = "";
-for($xz = 0; $xz < 3; $xz++)
-{
-   $xaux = substr($XAUX, $xz * 6, 6);
-   $xi = 0; $xlimite = 6; // inicializo el contador de centenas xi y establezco el límite a 6 dígitos en la parte entera
-   $xexit = true; // bandera para controlar el ciclo del While 
-while ($xexit)
-{
-   if ($xi == $xlimite) { // si ya llegó al límite máximo de enteros
-      break; // termina el ciclo
-   }
-
-   $x3digitos = ($xlimite - $xi) * -1; // comienzo con los tres primeros digitos de la cifra, comenzando por la izquierda
-   $xaux = substr($xaux, $x3digitos, abs($x3digitos)); // obtengo la centena (los tres dígitos)
-   for ($xy = 1; $xy < 4; $xy++) // ciclo para revisar centenas, decenas y unidades, en ese orden
-{
-   switch ($xy) 
-   {
-case 1: // checa las centenas
-   if (substr($xaux, 0, 3) < 100) {// si el grupo de tres dígitos es menor a una centena ( < 99) no hace nada y pasa a revisar las decenas
-   }
-   else {
-      $xseek = $xarray[substr($xaux, 0, 3)]; // busco si la centena es número redondo (100, 200, 300, 400, etc..)
-      if ($xseek) {
-         $xsub = subfijo($xaux); // devuelve el subfijo correspondiente (Millón, Millones, Mil o nada)
-         if (substr($xaux, 0, 3) == 100) 
-            $xcadena = " ".$xcadena." CIEN ".$xsub;
-         else
-            $xcadena = " ".$xcadena." ".$xseek." ".$xsub;
-         $xy = 3; // la centena fue redonda, entonces termino el ciclo del for y ya no reviso decenas ni unidades
-      }
-      else {// entra aquí si la centena no fue numero redondo (101, 253, 120, 980, etc.)
-         $xseek = $xarray[substr($xaux, 0, 1) * 100]; // toma el primer caracter de la centena y lo multiplica por cien y lo busca en el arreglo (para que busque 100,200,300, etc)
-         $xcadena = " ".$xcadena." ".$xseek;
-      } // ENDIF ($xseek)
-   } // ENDIF (substr($xaux, 0, 3) < 100)
-   break;
-case 2: // checa las decenas (con la misma lógica que las centenas)
-if (substr($xaux, 1, 2) < 10)
-{
-}
-else
-{
-   $xseek = $xarray[substr($xaux, 1, 2)];
-   if ($xseek)
-   {
-      $xsub = subfijo($xaux);
-      if (substr($xaux, 1, 2) == 20)
-         $xcadena = " ".$xcadena." VEINTE ".$xsub;
-      else
-         $xcadena = " ".$xcadena." ".$xseek." ".$xsub;
-      $xy = 3;
-   }
-   else
-   {
-      $xseek = $xarray[substr($xaux, 1, 1) * 10];
-      if (substr($xaux, 1, 1) * 10 == 20)
-         $xcadena = " ".$xcadena." ".$xseek;
-      else 
-         $xcadena = " ".$xcadena." ".$xseek." Y ";
-} // ENDIF ($xseek)
-} // ENDIF (substr($xaux, 1, 2) < 10)
-break;
-case 3: // checa las unidades
-if (substr($xaux, 2, 1) < 1) {// si la unidad es cero, ya no hace nada
-}
-else {
-   $xseek = $xarray[substr($xaux, 2, 1)]; // obtengo directamente el valor de la unidad (del uno al nueve)
-   $xsub = subfijo($xaux);
-   $xcadena = " ".$xcadena." ".$xseek." ".$xsub;
-} // ENDIF (substr($xaux, 2, 1) < 1)
-break;
-} // END SWITCH
-} // END FOR
-$xi = $xi + 3;
-} // ENDDO
-
-if (substr(trim($xcadena), -5, 5) == "ILLON") // si la cadena obtenida termina en MILLON o BILLON, entonces le agrega al final la conjuncion DE
-$xcadena.= " DE";
-
-if (substr(trim($xcadena), -7, 7) == "ILLONES") // si la cadena obtenida en MILLONES o BILLONES, entoncea le agrega al final la conjuncion DE
-$xcadena.= " DE";
-
-// ----------- esta línea la puedes cambiar de acuerdo a tus necesidades o a tu país -------
-if (trim($xaux) != "") {
-   switch ($xz) {
-      case 0:
-      if (trim(substr($XAUX, $xz * 6, 6)) == "1")
-         $xcadena.= "UN BILLON ";
-      else
-         $xcadena.= " BILLONES ";
-      break;
-      case 1:
-      if (trim(substr($XAUX, $xz * 6, 6)) == "1")
-         $xcadena.= "UN MILLON ";
-      else
-         $xcadena.= " MILLONES ";
-      break;
-      case 2:
-      if ($xcifra < 1 ) {
-         $xcadena = "CERO CON $xdecimales/100 $str_moneda";
-      }
-      if ($xcifra >= 1 && $xcifra < 2) {
-         $xcadena = "UN CON $xdecimales/100 $str_moneda ";
-      }
-      if ($xcifra >= 2) {
-         $xcadena.= " CON $xdecimales/100 $str_moneda "; // 
-      }
-      break;
-   } // endswitch ($xz)
-} // ENDIF (trim($xaux) != "")
-// ------------------      en este caso, para México se usa esta leyenda     ----------------
-$xcadena = str_replace("VEINTI ", "VEINTI", $xcadena); // quito el espacio para el VEINTI, para que quede: VEINTICUATRO, VEINTIUN, VEINTIDOS, etc
-$xcadena = str_replace("  ", " ", $xcadena); // quito espacios dobles 
-$xcadena = str_replace("UN UN", "UN", $xcadena); // quito la duplicidad
-$xcadena = str_replace("  ", " ", $xcadena); // quito espacios dobles 
-$xcadena = str_replace("BILLON DE MILLONES", "BILLON DE", $xcadena); // corrigo la leyenda
-$xcadena = str_replace("BILLONES DE MILLONES", "BILLONES DE", $xcadena); // corrigo la leyenda
-$xcadena = str_replace("DE UN", "UN", $xcadena); // corrigo la leyenda
-} // ENDFOR ($xz)
-return trim($xcadena);
-} // END FUNCTION
-
-
-function subfijo($xx) { // esta función regresa un subfijo para la cifra
-   $xx = trim($xx);
-   $xstrlen = strlen($xx);
-   if ($xstrlen == 1 || $xstrlen == 2 || $xstrlen == 3)
-      $xsub = "";
-   // 
-   if ($xstrlen == 4 || $xstrlen == 5 || $xstrlen == 6)
-      $xsub = "MIL";
-   //
-   return $xsub;
-} // END FUNCTION
+				//Parte entera
+				print $this->evalua($valor);
+				
+				//Parte Decimal
+				if($decimales){
+						print " $this->antes_con_despues ";
+						print $this->evalua($decimales);
+						print " $this->despues";
+					}else{
+						print " $this->antes_sin_despues ";
+					}
+				return $this->resultado = $texto = ob_get_clean();
+			}
+	}
 ?>
