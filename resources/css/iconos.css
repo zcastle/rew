@@ -1,0 +1,131 @@
+.new-tab {
+    background-image: url('../images/new_tab.gif') !important;
+}
+
+.tabs {
+    background-image: url('../images/tabs.gif') !important;
+}
+
+.ico-large {
+    background-image: url('../images/app-large.png') !important;
+}
+
+.ico-medium {
+    background-image: url('../images/app-large.png') !important;
+}
+
+.ico-nuevo {
+    background-image: url('../images/nuevo-24x24.png') !important;
+}
+
+.ico-nuevo-large {
+    background-image: url('../images/nuevo-32x32.png') !important;
+}
+
+
+.ico-editar-small {
+    background-image: url('../images/editar-16x16.png') !important;
+}
+
+.ico-editar-medium {
+    background-image: url('../images/editar-24x24.png') !important;
+}
+
+.ico-eliminar {
+    background-image: url('../images/eliminar-24x24.png') !important;
+}
+
+.ico-aceptar-medium {
+    background-image: url('../images/aceptar-24x24.png') !important;
+}
+
+.ico-aceptar-large {
+    background-image: url('../images/aceptar-32x32.png') !important;
+}
+
+.ico-cancelar {
+    background-image: url('../images/cancelar-24x24.png') !important;
+}
+
+.ico-copiar {
+    background-image: url('../images/copiar-24x24.png') !important;
+}
+
+.ico-insertar-small {
+    background-image: url('../images/insertar-16x16.png') !important;
+}
+
+.ico-remover-small {
+    background-image: url('../images/remover-16x16.png') !important;
+}
+
+.ico-remover-todo-small {
+    background-image: url('../images/remover-16x16.png') !important;
+}
+
+.ico_imprimir {
+    background-image: url('../images/imprimir-24x24.png') !important;
+}
+
+.ico-mg-large {
+    background-image: url('../images/logomelygin-32x32.png') !important;
+}
+
+.mousepointer {
+    cursor: pointer;
+}
+
+.ico-facturacion-small {
+    background-image: url('../images/facturacion-small.png') !important;
+}
+
+.ico-consultar-small {
+    background-image: url('../images/consultar-small.png') !important;
+}
+
+.ico-compras-small {
+    background-image: url('../images/compras-small.png') !important;
+}
+
+.ico-facturacion-medium {
+    background-image: url('../images/facturacion-medium.png') !important;
+}
+
+.ico-compras-medium {
+    background-image: url('../images/compras-medium.png') !important;
+}
+
+.ico-exportar-medium {
+    background-image: url('../images/exportar-medium.png') !important;
+}
+
+.ico-cliente-small {
+    background-image: url('../images/cliente-16x16.png') !important;
+}
+
+.ico-buscar-small {
+    background-image: url('../images/buscar-16x16.png') !important;
+}
+
+.ico-limpiar-large {
+    background-image: url('../images/limpiar-32x32.png') !important;
+}
+
+.favicon {
+    background-image: url('../images/favicon-16x16.png') !important;
+}
+
+.ico-login {
+    background-image: url('../images/login-32x32.png') !important;
+}
+
+
+
+
+
+
+
+
+
+
+

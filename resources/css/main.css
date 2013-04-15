@@ -1,0 +1,84 @@
+#menutouch .x-box-inner{
+    overflow: auto;
+}
+
+.titulo{
+    margin: 0 0 0 5px;
+    color: #04408C;
+    font-size: 12px;
+    font-weight: bold;
+    font-family: tahoma, arial, verdana, sans-serif;
+}
+
+div.item-hover {
+    background-color: #eee;
+}
+
+div.thumb-wrap {
+    float: left;
+    padding: 5px 5px;
+    margin: 5px;
+    text-align: center;
+    line-height: 14px;
+    color: #333;
+    font-size: 11px;
+    font-family: "Helvetica Neue",sans-serif;
+    height: 110px;
+    width: 90px;
+    overflow: hidden;
+    border-top: 1px solid transparent;
+    cursor: pointer;
+}
+
+.etiqueta {
+    color: #ff0000;
+    font-size: 17px;
+    padding-left: 10px;
+}
+
+.etiqueta-titulo {
+    font-size: 17px;
+}
+
+.titulo-producto {
+    color: #ff0000;
+    font-size: 17px;
+    font-weight: bold;
+}
+
+.fondo-logo {
+    background-image: url('../images/melygin-logo.png');
+    width: 456px;
+    height: 419px;
+}
+
+#frmLogin {
+    background: transparent;
+    border-width: 0px;
+}
+
+#frmLogin .x-window-header {
+    display: none;
+}
+
+#frmLoginCampos-body {
+    background: transparent;
+    border-width: 0px;
+}
+
+.field label{
+    font-size: 17px;
+}
+
+.s {
+    border: none
+}
+
+.x-grid-row-over .x-grid-cell-inner {
+    font-weight: bold;
+}
+
+.x-grid-row-selected .x-grid-cell-inner {
+    font-weight: bold;
+    color: blue;
+}
