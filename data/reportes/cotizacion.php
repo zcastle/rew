@@ -102,8 +102,8 @@ $nu_documento = $_REQUEST["nu_documento"]; //'001-0000002'; //
 $query = "SELECT DATE_FORMAT(cc.fe_cotizacion, '%d/%m/%Y') AS fe_cotizacion, cc.nu_cotizacion, 
 			mc.no_cliente, mc.de_direccion, cc.va_venta, cc.co_vendedor, mfp.no_forma_pago
 			FROM (c_cotizacion AS cc
-			INNER JOIN m_clientes AS mc ON cc.co_cliente=mc.co_cliente)
-			INNER JOIN m_forma_pago AS mfp ON cc.co_forma_pago=mfp.co_forma_pago
+			LEFT JOIN m_clientes AS mc ON cc.co_cliente=mc.co_cliente)
+			LEFT JOIN m_forma_pago AS mfp ON cc.co_forma_pago=mfp.co_forma_pago
 			WHERE cc.nu_cotizacion = ?;";
 
 $queryD = "SELECT mp.no_producto, msc.no_sub_categoria, mum.no_unidad, dc.ca_producto, dc.va_producto,

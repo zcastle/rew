@@ -202,7 +202,7 @@ Ext.define('rewsoft.view.mantenimiento.producto.WinProductosNuevo', {
                             flex: 1
                         },*/{
                             name: 'va_peso',
-                            fieldLabel: 'Peso',
+                            fieldLabel: 'Peso(gr)',
                             labelWidth: 90,
                             flex: 1
                         },{

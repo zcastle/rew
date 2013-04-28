@@ -1,6 +1,6 @@
 <?php
 
-require('../../lib/fpdf17/fpdf.php');
+require_once('../../lib/fpdf17/fpdf.php');
 require_once('../../lib/dbapdo.class.php');
 
 function toTitulo($val){
@@ -138,7 +138,7 @@ $pdf = new PDF('P','mm','A4');
 $pdf->setNuCotizacion($result->nu_orden_compra);
 $pdf->setFormaPago($result->no_forma_pago);
 $pdf->setNoAtencion($result->co_usuario);
-$pdf->setVaTotal($result->va_venta);
+$pdf->setVaTotal($result->va_orden);
 
 $pdf->AliasNbPages();
 $pdf->AddPage();
@@ -149,7 +149,7 @@ $pdf->ln();
 $pdf->SetFont('Arial', 'B', 9);
 $pdf->Cell(18, 5, toTitulo('Señores:'), 0, 0);
 $pdf->SetFont('Arial', '', 9);
-$pdf->Cell(130, 5, $result->no_cliente, 0, 1);
+$pdf->Cell(130, 5, $result->no_razon_social, 0, 1);
 $pdf->SetFont('Arial', 'B', 9);
 $pdf->Cell(18, 5, 'Direccion:', 0, 0);
 $pdf->SetFont('Arial', '', 9);
@@ -158,7 +158,7 @@ $pdf->ln();
 $pdf->SetFont('Arial', 'B', 9);
 $pdf->Cell(18, 5, 'RUC:', 0, 0);
 $pdf->SetFont('Arial', '', 9);
-$pdf->Cell(110, 5, $result->co_cliente, 0, 0);
+$pdf->Cell(110, 5, $result->co_proveedor, 0, 0);
 $pdf->SetFont('Arial', 'B', 9);
 $pdf->Cell(35, 5, toTitulo('Moneda:'), 0, 0);
 $pdf->SetFont('Arial', '', 9);

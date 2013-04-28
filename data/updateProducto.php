@@ -14,7 +14,7 @@ if ($_POST) {
               co_pais_procedencia = ?, co_unidad = ?, v_presenta = ?, no_presentacion = ?,
               va_compra = ?, precio0 = ?, precio1 = ?, stk_min = ?, stk_max = ?,
               cuenta_vta = ?, cuenta_vt2 = ?, fl_igv= ?, fl_serv= ?, fe_modificacion = NOW(),
-              nu_orden = ?, co_destino = ?
+              nu_orden = ?, co_destino = ?, va_peso = ?
               WHERE co_producto = ?";
 
 /*
@@ -43,7 +43,9 @@ if ($_POST) {
     $stmt->bindParam(17, $data->fl_serv);
     $stmt->bindParam(18, $nu_orden);
     $stmt->bindParam(19, $data->co_destino);
-    $stmt->bindParam(20, $data->co_producto);
+    $stmt->bindParam(20, $data->va_peso);
+    $stmt->bindParam(21, $data->co_producto);
+    
     $stmt->execute();
 
     //echo "{success: true}";

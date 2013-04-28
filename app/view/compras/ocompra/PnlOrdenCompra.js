@@ -147,7 +147,7 @@ Ext.define('rewsoft.view.compras.ocompra.PnlOrdenCompra', {
                         scale: 'medium'
                     },{
                         xtype: 'button',
-                        text: 'Procesar Requerimiento',
+                        text: 'Procesar Orden',
                         name: 'btnProcesar',
                         iconCls: 'ico-medium',
                         scale: 'medium'

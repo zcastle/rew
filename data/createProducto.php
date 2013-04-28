@@ -37,8 +37,8 @@ if ($_POST) {
               co_producto, co_grupo, co_categoria, co_sub_categoria,
               no_producto, co_pais_procedencia, co_unidad, v_presenta,
               no_presentacion, va_compra, precio0, precio1, stk_min, stk_max,
-              cuenta_vta, cuenta_vt2, fl_igv, fl_serv, fe_creacion, co_empresa, nu_orden, co_destino)
-              VALUES(?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, NOW(), ?, ?, ?)";
+              cuenta_vta, cuenta_vt2, fl_igv, fl_serv, fe_creacion, co_empresa, nu_orden, co_destino, va_peso)
+              VALUES(?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, NOW(), ?, ?, ?, ?)";
 
 /*
     $va_compra = number_format($data->va_compra, 4, '.');
@@ -68,6 +68,7 @@ if ($_POST) {
     $stmt->bindParam(19, $co_empresa);
     $stmt->bindParam(20, $nu_orden);
     $stmt->bindParam(21, $data->co_destino);
+    $stmt->bindParam(22, $data->va_peso);
     $stmt->execute();
 
     $queryDelete = "DELETE FROM r_productos_precios WHERE co_producto = ?";
