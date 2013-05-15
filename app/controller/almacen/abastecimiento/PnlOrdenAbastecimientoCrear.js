@@ -181,10 +181,10 @@ Ext.define('rewsoft.controller.almacen.abastecimiento.PnlOrdenAbastecimientoCrea
         }, this);
     },
     formatNumber4: function(value){
-        return Ext.util.Format.number(value, "0,000.0000");
+        return Ext.util.Format.number(value, rewsoft.AppGlobals.FORMA_NUMBER);
     },
     formatNumber2: function(value){
-        return Ext.util.Format.number(value, "0,000.0000");
+        return Ext.util.Format.number(value, rewsoft.AppGlobals.FORMA_NUMBER);
     },
     getSecuencia: function(coTipoDocumento){
         Ext.Ajax.request({

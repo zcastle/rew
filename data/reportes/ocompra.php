@@ -11,6 +11,8 @@ class PDF extends FPDF{
 	private $nu_orden_compra;
 	private $forma_pago;
 	private $no_atencion;
+	private $va_neto;
+	private $va_igv;
 	private $va_total;
 
 	public function setNuCotizacion($nu_orden_compra){
@@ -27,6 +29,8 @@ class PDF extends FPDF{
 
 	public function setVaTotal($va_total){
 		$this->va_total = $va_total;
+		$this->va_neto = $this->va_total / 1.18;
+		$this->va_igv = $this->va_neto * 0.18;
 	}
 
 	function Header(){
@@ -59,7 +63,7 @@ class PDF extends FPDF{
 	    $this->Cell($w[1], 8, 'Logistica', 'TRB', 0, 'C');
 	    $this->Cell($w[2], 5, 'Bruto', 'T', 0, 'R');
 	    $this->SetFont('Arial', '', 9);
-	    $this->Cell($w[3], 5, '0.00', 'TR', 0, 'R');
+	    $this->Cell($w[3], 5, number_format($this->va_neto, 2), 'TR', 0, 'R');
 	    $this->ln();
 	    $this->Cell($w[0], 8, '', 'L');
 	    $this->Cell($w[1], 8, '', 'R');
@@ -73,21 +77,21 @@ class PDF extends FPDF{
 	    $this->SetFont('Arial', 'B', 9);
 	    $this->Cell($w[2], 5, 'Valor Venta', '', 0, 'R');
 	    $this->SetFont('Arial', '', 9);
-	    $this->Cell($w[3], 5, '0.00', 'R', 0, 'R');
+	    $this->Cell($w[3], 5, number_format($this->va_neto, 2), 'R', 0, 'R');
 	    $this->ln();
 	    $this->Cell($w[0], 8, '', 'L');
 	    $this->Cell($w[1], 8, '', 'R');
 	    $this->SetFont('Arial', 'B', 9);
 	    $this->Cell($w[2], 5, 'IGV 18%', '', 0, 'R');
 	    $this->SetFont('Arial', '', 9);
-	    $this->Cell($w[3], 5, '0.00', 'R', 0, 'R');
+	    $this->Cell($w[3], 5, number_format($this->va_igv, 2), 'R', 0, 'R');
 	    $this->ln();
 	    $this->Cell($w[0], 8, '', 'LB');
 	    $this->Cell($w[1], 8, '', 'RB');
 	    $this->SetFont('Arial', 'B', 9);
 	    $this->Cell($w[2], 8, 'Total Compra', 'B', 0, 'R');
 	    $this->SetFont('Arial', '', 9);
-	    $this->Cell($w[3], 8, '0.00', 'RB', 0, 'R');
+	    $this->Cell($w[3], 8, number_format($this->va_total, 2), 'RB', 0, 'R');
 		$this->ln();
 		$this->SetFont('Arial', '', 8);
 		$this->Cell($w[0], 5, 'Observaciones:');

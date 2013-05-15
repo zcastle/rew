@@ -132,7 +132,7 @@ Ext.define('rewsoft.view.ventas.WinCantidad', {
                     align: 'right',
                     flex: 1,
                     renderer: function(val){
-                        return Ext.util.Format.number(val, "0,000.0000");
+                        return Ext.util.Format.number(val, rewsoft.AppGlobals.FORMA_NUMBER);
                     }
                 }]
             },{
@@ -156,7 +156,7 @@ Ext.define('rewsoft.view.ventas.WinCantidad', {
                     align: 'right',
                     flex: 1,
                     renderer: function(val){
-                        return Ext.util.Format.number(val, "0,000.0000");
+                        return Ext.util.Format.number(val, rewsoft.AppGlobals.FORMA_NUMBER);
                     }
                 }]
             }]
@@ -274,7 +274,7 @@ Ext.define('rewsoft.view.ventas.WinCantidad', {
                 width: 100,
                 align: 'right',
                 renderer: function(val){
-                    return Ext.util.Format.number(val, "0,000.0000");
+                    return Ext.util.Format.number(val, rewsoft.AppGlobals.FORMA_NUMBER);
                 }
             }],
             bbar: Ext.create('Ext.PagingToolbar', {

@@ -103,7 +103,7 @@ Ext.define('rewsoft.view.compras.ocompra.WinCantidad', {
                 name: 'no_proveedor',
                 enableKeyEvents: true,
                 width: 380,
-                style: 'margin-top: 5px;',
+                style: 'margin-top: 5px;'
             },{
                 xtype: 'displayfield',
                 name: 'co_proveedor',

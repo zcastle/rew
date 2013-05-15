@@ -1,12 +1,9 @@
 Ext.define('rewsoft.store.IngresoProductos', {
     extend: 'Ext.data.Store',
     model: 'rewsoft.model.IngresoProductos',
-    /*proxy: {
+    roxy: {
         type: 'ajax',
         url: 'data/pedidos.json',
-        api:{
-            read: 'data/pedidos.json'
-        },
         reader: {
             type: 'json',
             root: 'pedido',
@@ -14,8 +11,7 @@ Ext.define('rewsoft.store.IngresoProductos', {
         },
         actionMethods: {
             read: 'POST'
-        },
-        simpleSortMode: true
-    }*/
-    data: []
+        }
+    }
+    //data: []
 });

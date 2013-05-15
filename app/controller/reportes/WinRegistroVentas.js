@@ -8,7 +8,8 @@ Ext.define('rewsoft.controller.reportes.WinRegistroVentas', {
         selector: 'winregistroventas'
     }],
     stores: [
-        'Meses'
+        'Meses',
+        'DiasTrabajo'
     ],
     init: function() {
         this.control({
@@ -20,10 +21,17 @@ Ext.define('rewsoft.controller.reportes.WinRegistroVentas', {
             },
             'winregistroventas button[name=btnVerRangoFechas]': {
                 click: this.onClickVerRangoFechas
+            },
+            'winregistroventas button[name=btnVerDiasTrabajo]': {
+                click: this.onClickVerDiasTrabajo
+            },
+            'winregistroventas grid': {
+                itemclick: this.onItemClickGridDias
             }
         });
     },
     onRenderedWinLibroVentas: function() {
+        this.getDiasTrabajoStore().load();
     },
     onClickVerMeses: function(button){
         var form = button.up('window').down('form[name=frmMeses]').getForm();
@@ -33,14 +41,14 @@ Ext.define('rewsoft.controller.reportes.WinRegistroVentas', {
             var fe_fin_month = this.getMainView().down('combobox[name=fe_fin_month]').getValue();
             var fe_fin_year = this.getMainView().down('numberfield[name=fe_fin_year]').getValue();
             if(fe_fin_year < fe_ini_year){
-                Ext.Msg.alert('Atencion','El año de Fin debe ser mayor o igual al año de Inicio');
+                Ext.Msg.alert('Atencion','El aÃ±o de Fin debe ser mayor al aÃ±o de Inicio');
                 return;
             }else if(fe_fin_month < fe_ini_month){
-                Ext.Msg.alert('Atencion','El mes de Fin debe ser mayor o igual al mes de Inicio');
+                Ext.Msg.alert('Atencion','El mes de Fin debe ser mayor al mes de Inicio');
                 return;
             }
             window.open('data/reportes/reporteRegistroVentas.php?cia='+rewsoft.AppGlobals.CIA+'&fe_ini_month='+fe_ini_month+'&fe_ini_year='+fe_ini_year+'&fe_fin_month='+fe_fin_month+'&fe_fin_year='+fe_fin_year, '_blank');
-            this.getMainView().close();
+            //this.getMainView().close();
         }
     },
     onClickVerRangoFechas: function(button){
@@ -49,11 +57,29 @@ Ext.define('rewsoft.controller.reportes.WinRegistroVentas', {
             var fe_ini = this.getMainView().down('datefield[name=fe_ini]').getRawValue();
             var fe_fin = this.getMainView().down('datefield[name=fe_fin]').getRawValue();
             if(fe_fin < fe_ini){
-                Ext.Msg.alert('Atencion','El año de Fin debe ser mayor o igual al año de Inicio');
+                Ext.Msg.alert('Atencion','El aÃ±o de Fin debe ser mayor al aÃ±o de Inicio');
                 return;
             }
             window.open('data/reportes/reporteRegistroVentas.php?cia='+rewsoft.AppGlobals.CIA+'&fe_ini='+fe_ini+'&fe_fin='+fe_fin, '_blank');
-            this.getMainView().close();
+            //this.getMainView().close();
         }
+    },
+    onClickVerDiasTrabajo: function(button){
+        var form = button.up('window').down('form[name=frmDiasTrabajo]').getForm();
+        if(form.isValid()){
+            var dia_ini = this.getMainView().down('numberfield[name=dia_ini]').getValue();
+            var dia_fin = this.getMainView().down('numberfield[name=dia_fin]').getValue();
+            if(dia_fin < dia_ini){
+                Ext.Msg.alert('Atencion','El dia Final no debe ser menor al dia de Inicio');
+                return;
+            }
+            window.open('data/reportes/reporteRegistroVentas.php?cia='+rewsoft.AppGlobals.CIA+'&dia_ini='+dia_ini+'&dia_fin='+dia_fin, '_blank');
+            //this.getMainView().close();
+        }
+    },
+    onItemClickGridDias: function(Grid, record){
+        var dia = record.get('nu_diadw');
+        this.getMainView().down('numberfield[name=dia_ini]').setValue(dia);
+        this.getMainView().down('numberfield[name=dia_fin]').setValue(dia);
     }
 });

@@ -15,8 +15,11 @@ Ext.define('rewsoft.view.almacen.WinCantidad', {
                 xtype: 'hiddenfield',
                 name: 'co_producto'
             },{
+                xtype: 'hiddenfield',
+                name: 'no_producto'
+            },{
                 xtype: 'label',
-                name: 'no_producto',
+                name: 'no_producto2',
                 baseCls: 'titulo-producto',
                 text: 'Nombre Producto'
             },{

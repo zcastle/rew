@@ -6,10 +6,10 @@ if ($_POST) {
     $conn = new dbapdo();
     $today = $_REQUEST['today'];
 
-    $query = "SELECT id, FORMAT(nu_tipo_cambio_compra, 2) AS nu_tipo_cambio_compra, 
-                FORMAT(nu_tipo_cambio_venta, 2) AS nu_tipo_cambio_venta,
-                FORMAT(nu_tipo_cambio_compra, 2) AS tcCompraNuevo, 
-                FORMAT(nu_tipo_cambio_venta, 2) AS tcVentaNuevo, DATE_FORMAT(fe_creacion, '%d/%m/%y %h:%i %p') AS fe_creacion, co_usuario
+    $query = "SELECT id, FORMAT(nu_tipo_cambio_compra, 3) AS nu_tipo_cambio_compra, 
+                FORMAT(nu_tipo_cambio_venta, 3) AS nu_tipo_cambio_venta,
+                FORMAT(nu_tipo_cambio_compra, 3) AS tcCompraNuevo, 
+                FORMAT(nu_tipo_cambio_venta, 3) AS tcVentaNuevo, DATE_FORMAT(fe_creacion, '%d/%m/%y %h:%i %p') AS fe_creacion, co_usuario
                 FROM m_tipo_cambio";
     if($today == 'N'){
         $query .= " ORDER BY id DESC LIMIT 1;";

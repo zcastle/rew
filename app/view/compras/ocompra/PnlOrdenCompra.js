@@ -99,7 +99,7 @@ Ext.define('rewsoft.view.compras.ocompra.PnlOrdenCompra', {
                     width: 70,
                     align: 'right',
                     renderer: function(val){
-                        return Ext.util.Format.number(val, "0,000.0000");
+                        return Ext.util.Format.number(val, rewsoft.AppGlobals.FORMA_NUMBER);
                     }
                 },{
                     header: 'Total',
@@ -109,7 +109,7 @@ Ext.define('rewsoft.view.compras.ocompra.PnlOrdenCompra', {
                     width: 70,
                     align: 'right',
                     renderer: function(val){
-                        return Ext.util.Format.number(val, "0,000.0000");
+                        return Ext.util.Format.number(val, rewsoft.AppGlobals.FORMA_NUMBER);
                     }
                 },{
                     header: 'Proveedor',

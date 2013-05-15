@@ -11,7 +11,10 @@ class PDF extends FPDF{
 	private $nu_cotizacion;
 	private $forma_pago;
 	private $no_atencion;
+	private $va_neto;
+	private $va_igv;
 	private $va_total;
+	private $fl_igv_incluido;
 
 	public function setNuCotizacion($nu_cotizacion){
 		$this->nu_cotizacion = $nu_cotizacion;
@@ -27,6 +30,12 @@ class PDF extends FPDF{
 
 	public function setVaTotal($va_total){
 		$this->va_total = $va_total;
+		$this->va_neto = $va_total / 1.18;
+		$this->igv = ($va_total / 1.18) * 0.18;
+	}
+
+	public function setFlIgvIncluido($fl_igv_incluido){
+		$this->fl_igv_incluido = $fl_igv_incluido;
 	}
 
 	function Header(){
@@ -55,24 +64,29 @@ class PDF extends FPDF{
 	    $this->SetY(-37);
 	    #$this->Cell(0, 10, toTitulo('Página '.$this->PageNo().'/{nb}'), 0, 0, 'R');
 	    $w = array(35, 98, 57);
+
 	    $this->Cell($w[0], 5, 'Forma de Pago: ', 'LTR', 0, 'R');
 	    $this->SetFont('Arial', '', 9);
 	    $this->Cell($w[1], 5, $this->forma_pago, 'RT');
 	    $this->SetFont('Arial', 'B', 9);
-	    $this->Cell(30, 5, 'Total          S/.', 'T');
-	    $this->Cell(27, 5, number_format($this->va_total, 2), 'TR', 0, 'R');
+	    $this->Cell(30, 5, 'Neto           S/.', 'T');
+	    $this->Cell(27, 5, number_format($this->va_neto, 2), 'TR', 0, 'R');
 	    $this->ln();
 	    $this->SetFont('Arial', 'B', 9);
 	    $this->Cell($w[0], 5, 'Validez de Oferta: ', 'LR', 0, 'R');
 	    $this->SetFont('Arial', '', 9);
 	    $this->Cell($w[1], 5, '15 DIAS', 'R');
-	    $this->Cell($w[2], 5, '', 'R');
+	    $this->SetFont('Arial', 'B', 9);
+	    $this->Cell(30, 5, 'IGV 18%    S/.');
+	    $this->Cell(27, 5, number_format($this->igv, 2), 'R', 0, 'R');
 	    $this->ln();
 	    $this->SetFont('Arial', 'B', 9);
 	    $this->Cell($w[0], 5, 'Garantia: ', 'LR', 0, 'R');
 	    $this->SetFont('Arial', '', 9);
 	    $this->Cell($w[1], 5, '', 'R');
-	    $this->Cell($w[2], 5, '', 'R');
+	    $this->SetFont('Arial', 'B', 9);
+	    $this->Cell(30, 5, 'Total          S/.');
+	    $this->Cell(27, 5, number_format($this->va_total, 2), 'R', 0, 'R');
 	    $this->ln();
 	    $this->SetFont('Arial', 'B', 9);
 	    $this->Cell($w[0], 5, 'Atencion: ', 'LR', 0, 'R');
@@ -88,7 +102,12 @@ class PDF extends FPDF{
 	    $this->ln();
 	    $this->Cell($w[0], 5, '', 'LRB');
 	    $this->SetFont('Arial', 'B', 9);
-	    $this->Cell($w[1], 5, 'PRECIOS INCLUYEN IGV', 'RB');
+	    if ($this->fl_igv_incluido){
+	    	$this->Cell($w[1], 5, 'PRECIOS INCLUYEN IGV', 'RB');
+	    } else {
+	    	$this->Cell($w[1], 5, 'PRECIOS NO INCLUYEN IGV', 'RB');
+	    }
+
 	    $this->Cell($w[2], 5, '', 'RB');
 
 	    $this->Image('sello.png', 113, 261, 29);
@@ -100,7 +119,7 @@ $conn = new dbapdo();
 $nu_documento = $_REQUEST["nu_documento"]; //'001-0000002'; //
 
 $query = "SELECT DATE_FORMAT(cc.fe_cotizacion, '%d/%m/%Y') AS fe_cotizacion, cc.nu_cotizacion, 
-			mc.no_cliente, mc.de_direccion, cc.va_venta, cc.co_vendedor, mfp.no_forma_pago
+			mc.no_cliente, mc.de_direccion, cc.va_venta, cc.co_vendedor, mfp.no_forma_pago, cc.fl_igv_incluido
 			FROM (c_cotizacion AS cc
 			LEFT JOIN m_clientes AS mc ON cc.co_cliente=mc.co_cliente)
 			LEFT JOIN m_forma_pago AS mfp ON cc.co_forma_pago=mfp.co_forma_pago
@@ -132,6 +151,13 @@ $pdf->setNuCotizacion($result->nu_cotizacion);
 $pdf->setFormaPago($result->no_forma_pago);
 $pdf->setNoAtencion($result->co_vendedor);
 $pdf->setVaTotal($result->va_venta);
+
+if($result->fl_igv_incluido == '1'){
+	$pdf->setFlIgvIncluido(true);
+} else {
+	$pdf->setFlIgvIncluido(false);
+}
+
 
 $pdf->AliasNbPages();
 $pdf->AddPage();

@@ -13,23 +13,14 @@ if ($_POST) {
 
     $detalle = json_decode(stripcslashes($_REQUEST['detalle']));
 
-    $sqlCabecera = "INSERT INTO c_orden_compra (co_empresa, fe_orden_compra, nu_orden_compra, co_usuario, nu_requerimiento, co_proveedor) 
-                VALUES (:co_empresa, NOW(), :nu_orden_compra, :co_usuario, :nu_requerimiento, :co_proveedor)";
+    $sqlCabecera = "INSERT INTO c_orden_compra (co_empresa, fe_orden_compra, nu_orden_compra, co_usuario, nu_requerimiento, co_proveedor, va_orden) 
+                VALUES (:co_empresa, NOW(), :nu_orden_compra, :co_usuario, :nu_requerimiento, :co_proveedor, :va_orden)";
 
     $sqlDetalle = "INSERT INTO d_orden_compra (nu_orden_compra, co_producto, ca_producto, va_producto, nu_linea) 
                    VALUES(?,?,?,?,?)";
 
     try {
         $conn->beginTransaction();
-
-        $stmtC = $conn->prepare($sqlCabecera);
-        $stmtC->execute(array(
-            ':co_empresa' => $cia,
-            ':nu_orden_compra' => $numeroDocumento,
-            ':co_usuario' => $coUsuario,
-            ':nu_requerimiento' => $numeroRequerimiento,
-            ':co_proveedor' => $co_proveedor
-        ));
 
         $coProducto = null; $caProducto = null; $noLote = null; $feVencimiento = null; $coAlmacen = null;
         $vaProducto = null;
@@ -42,6 +33,8 @@ if ($_POST) {
         $stmtD->bindParam(4, $vaProducto);
         $stmtD->bindParam(5, $ln);
 
+        $va_orden = 0;
+
         foreach ($detalle as $linea) {
             if($linea->co_proveedor){
                 $co_proveedor = $linea->co_proveedor;
@@ -49,9 +42,42 @@ if ($_POST) {
                 $caProducto = $linea->ca_producto;
                 $vaProducto = $linea->va_producto;
                 $stmtD->execute();
+                $va_orden += ($caProducto*$vaProducto);
                 $ln = $ln + 1;
+                $sqlUpdateDetalleRequerimiento = "UPDATE d_requerimiento SET fl_atendido = 'S' WHERE co_producto = :co_producto AND nu_requerimiento = :nu_requerimiento";
+                $stmtUD = $conn->prepare($sqlUpdateDetalleRequerimiento);
+                $stmtUD->execute(array(
+                    ':co_producto' => $linea->co_producto,
+                    ':nu_requerimiento' => $numeroRequerimiento
+                ));
             }
         }
+
+        $stmtC = $conn->prepare($sqlCabecera);
+        $stmtC->execute(array(
+            ':co_empresa' => $cia,
+            ':nu_orden_compra' => $numeroDocumento,
+            ':co_usuario' => $coUsuario,
+            ':nu_requerimiento' => $numeroRequerimiento,
+            ':co_proveedor' => $co_proveedor,
+            ':va_orden' => $va_orden
+        ));
+
+        $sqlDetalleCount = "SELECT * FROM d_requerimiento WHERE nu_requerimiento = :nu_requerimiento";
+        $stmtC = $conn->prepare($sqlDetalleCount);
+        $stmtC->execute(array(
+            ':nu_requerimiento' => $numeroRequerimiento
+        ));
+        $rowsC = $stmtC->rowCount();
+        $ln = $ln - 1;
+        if($rowsC == $ln){
+            $sqlUpdate = "UPDATE c_requerimiento SET fl_atendido = 'S' WHERE nu_requerimiento = :nu_requerimiento";
+            $stmtU = $conn->prepare($sqlUpdate);
+            $stmtU->execute(array(
+                ':nu_requerimiento' => $numeroRequerimiento
+            ));
+        }
+
         $conn->commit();
         echo "{success: true}";
     } catch (PDOException $e) {

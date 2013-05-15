@@ -10,12 +10,15 @@ Ext.define('rewsoft.view.reportes.WinRegistroVentas', {
     initComponent: function() {
         this.items = [{
             xtype: 'form',
+            collapsible: true,
+            collapsed: true,
+            width: 455,
             name: 'frmMeses',
+            title: 'Reporte por Meses',
             border: false,
             frame: true,
             items: [{
-                xtype: 'fieldset',
-                title: 'Reporte por Meses',
+                xtype: 'fieldcontainer',
                 layout: 'hbox',
                 defaults: {
                     labelWidth: 30
@@ -70,12 +73,15 @@ Ext.define('rewsoft.view.reportes.WinRegistroVentas', {
             }]
         },{
             xtype: 'form',
+            collapsible: true,
+            collapsed: true,
+            width: 455,
             name: 'frmRangoFechas',
+            title: 'Reporte por Rango de Fechas',
             border: false,
             frame: true,
             items: [{
-                xtype: 'fieldset',
-                title: 'Reporte por Rango de Fechas',
+                xtype: 'fieldcontainer',
                 layout: 'hbox',
                 defaults: {
                     labelWidth: 30
@@ -87,9 +93,9 @@ Ext.define('rewsoft.view.reportes.WinRegistroVentas', {
                     itemId: 'startdt',
                     emptyText: 'Inicio',
                     allowBlank: false,
-                    width: 190,
-                    vtype: 'daterange',
-                    endDateField: 'enddt'
+                    width: 190//,
+                    //vtype: 'daterange',
+                    //endDateField: 'enddt'
                 },{
                     fieldLabel: 'Fin',
                     name: 'fe_fin',
@@ -97,9 +103,9 @@ Ext.define('rewsoft.view.reportes.WinRegistroVentas', {
                     emptyText: 'Fin',
                     allowBlank: false,
                     margins: '0 0 0 5',
-                    width: 190,
-                    vtype: 'daterange',
-                    startDateField: 'startdt'
+                    width: 190//,
+                    //vtype: 'daterange',
+                    //startDateField: 'startdt'
                 },{
                     xtype: 'button',
                     name: 'btnVerRangoFechas',
@@ -110,26 +116,29 @@ Ext.define('rewsoft.view.reportes.WinRegistroVentas', {
             }]
         },{
             xtype: 'form',
+            collapsible: true,
+            //collapsed: true,
+            width: 455,
             name: 'frmDiasTrabajo',
+            title: 'Reporte por Dias de Trabajo',
             border: false,
             frame: true,
             items: [{
-                xtype: 'fieldset',
-                title: 'Reporte por Dias de Trabajo',
+                xtype: 'fieldcontainer',
                 layout: 'hbox',
                 defaults: {
                     labelWidth: 30
                 },
-                defaultType: 'textfield',
+                defaultType: 'numberfield',
                 items: [{
                     fieldLabel: 'Inicio',
-                    name: 'fe_ini',
+                    name: 'dia_ini',
                     emptyText: 'Inicio',
                     allowBlank: false,
                     width: 190
                 },{
                     fieldLabel: 'Fin',
-                    name: 'fe_fin',
+                    name: 'dia_fin',
                     emptyText: 'Fin',
                     allowBlank: false,
                     margins: '0 0 0 5',
@@ -141,6 +150,30 @@ Ext.define('rewsoft.view.reportes.WinRegistroVentas', {
                     margins: '0 0 0 5',
                     width: 55
                 }]
+            },{
+                xtype: 'grid',
+                height: 400,
+                width: 445,
+                store: 'DiasTrabajo',
+                columns: [{
+                    header: 'Dia',
+                    dataIndex: 'nu_diadw',
+                    width: 80
+                },{
+                    header: 'Fecha Inicio',
+                    dataIndex: 'fe_ini',
+                    flex: 1
+                },{
+                    header: 'Fecha Fin',
+                    dataIndex: 'fe_fin',
+                    flex: 1
+                }],
+                bbar: Ext.create('Ext.PagingToolbar', {
+                    store: 'DiasTrabajo',
+                    displayInfo: true,
+                    displayMsg: 'Mostrando registros {0} - {1} de {2}',
+                    emptyMsg: "No hay registros para mostrar"
+                })
             }]
         }];
         this.callParent(arguments);

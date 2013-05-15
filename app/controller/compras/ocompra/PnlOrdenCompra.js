@@ -248,9 +248,9 @@ Ext.define('rewsoft.controller.compras.ocompra.PnlOrdenCompra', {
         this.onClickBtnProcesarOcompra(grid, button);
     },
     onClickBtnProcesarOcompra: function(grid, button){
-        var btnLimpiarTodo = button.up().down('button[name=btnLimpiarTodo]');
-        var numeroDocumento = button.up('panel').up('panel').down('textfield[name=txtNuDocumento]').getValue();
-        var numeroRequerimiento = button.up('panel').up('panel').down('textfield[name=txtBuscarRequerimiento]').getValue();
+        var btnLimpiarTodo = this.getMainView().down('button[name=btnLimpiarTodo]');
+        var numeroDocumento = this.getMainView().down('textfield[name=txtNuDocumento]').getValue();
+        var numeroRequerimiento = this.getMainView().down('textfield[name=txtBuscarRequerimiento]').getValue();
 
         Ext.Msg.confirm('Confirmacion', 'Esta seguro de querer procesar la Orden de Compra No.: '+numeroDocumento+'?', function(btn){
             if(btn=='yes'){
@@ -307,6 +307,7 @@ Ext.define('rewsoft.controller.compras.ocompra.PnlOrdenCompra', {
         button.up('grid').getStore().removeAll();
         this.getProductosStore().loadPage(1);
         this.setTotalProductos(button.up('grid'));
+        this.getMainView().down('textfield[name=txtBuscarRequerimiento]').setValue('');
         this.getNumeroDocumento();
     },
     getNumeroDocumento: function(){
@@ -379,13 +380,15 @@ Ext.define('rewsoft.controller.compras.ocompra.PnlOrdenCompra', {
         }, this);
     },
     onItemDblClickGridRequerimientos: function(grid, record){
-        this.getRequerimientoStore().proxy.extraParams.nu_requerimiento = record.get('nu_requerimiento');
+        var nu_requerimiento = record.get('nu_requerimiento');
+        this.getRequerimientoStore().proxy.extraParams.nu_requerimiento = nu_requerimiento;
         this.getRequerimientoStore().load({
             callback: function(record, operation, success) {
                 this.getMainView().down('grid[name=gridPedido]').getStore().removeAll();
                 Ext.Array.forEach(record, function(item, index, allItems){
                     this.addProducto(item.get('co_producto'), item.get('no_producto'), item.get('ca_producto'), '', '', '1', 'UNI', '', '', '', '', 0, 0);
                 }, this);
+                this.getMainView().down('textfield[name=txtBuscarRequerimiento]').setValue(nu_requerimiento);
                 this.getWinRequerimientos().close();
             },
             scope: this

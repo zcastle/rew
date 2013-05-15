@@ -2,7 +2,8 @@ Ext.define('rewsoft.controller.almacen.IngresodeProductos', {
     extend: 'Ext.app.Controller',
     views: [
     'almacen.PnlIngresodeProducto',
-    'almacen.WinCantidad'
+    'almacen.WinCantidad',
+    'almacen.WinBuscarOrdenCompra'
     ],
     refs: [{
         ref: 'MainView',
@@ -10,6 +11,9 @@ Ext.define('rewsoft.controller.almacen.IngresodeProductos', {
     },{
         ref: 'WinAlmacenCantidad',
         selector: 'winalmacencantidad'
+    },{
+        ref: 'WinBuscarOrdenCompra',
+        selector: 'winbuscarordencompra'
     }],
     stores: [
     'Productos',
@@ -23,8 +27,11 @@ Ext.define('rewsoft.controller.almacen.IngresodeProductos', {
     'UnidadesVentaByProducto',
     'FormaPago',
     'Monedas',
-    'Proveedores'
+    'Proveedores',
+    'OrdenCompraC',
+    'OrdenCompra'
     ],
+    incluye_igv: true,
     init: function() {
         this.control({
             'pnlingresodeproducto': {
@@ -61,6 +68,12 @@ Ext.define('rewsoft.controller.almacen.IngresodeProductos', {
                 render: this.onRenderCboMoneda,
                 select: this.onSelectCboMoneda
             },
+            'pnlingresodeproducto button[name=btnIgvIncluido]': {
+                toggle: this.onToggleIgvIncluido
+            },
+            'pnlingresodeproducto button[name=btnBuscarOCompra]': {
+                click: this.onClickBtnBuscarOCompra
+            },
             'winalmacencantidad': {
                 render: this.onRenderedWinCantidad,
                 afterrender: this.onAfterRenderWinCantidad
@@ -82,10 +95,15 @@ Ext.define('rewsoft.controller.almacen.IngresodeProductos', {
             },
             'winalmacencantidad checkboxfield[name=chkSinLote]': {
                 change: this.onChangeChkSinLote
+            },
+            'winbuscarordencompra grid[name=gridOrdenCompra]': {
+                render: this.onRenderedGridOrdenCompra,
+                itemdblclick: this.onItemDblClickGridOrdenCompra
             }
         });
     },
     onRenderedPnlIngresodeProducto: function(panel) {
+        this.incluye_igv = true;
         this.getIngresoProductosStore().removeAll()
         this.getProductosStore().pageSize = 50;
         this.getProductosStore().proxy.extraParams.no_producto = '';
@@ -203,6 +221,7 @@ Ext.define('rewsoft.controller.almacen.IngresodeProductos', {
         this.getLotesStore().proxy.extraParams.co_empresa = rewsoft.AppGlobals.CIA;
         this.getLotesStore().proxy.extraParams.co_producto = record.get('co_producto');
         this.getLotesStore().load();
+        WinCantidad.down('label[name=no_producto2]').setText(record.get('co_producto')+'-'+record.get('no_producto'));
         WinCantidad.show();
     },
     onItemDblClickGridProductos: function(grid, record){
@@ -212,7 +231,9 @@ Ext.define('rewsoft.controller.almacen.IngresodeProductos', {
         this.getLotesStore().proxy.extraParams.co_empresa = rewsoft.AppGlobals.CIA;
         this.getLotesStore().proxy.extraParams.co_producto = record.get('co_producto');
         this.getLotesStore().load();
-        WinCantidad.down('label[name=no_producto]').setText(record.get('co_producto')+'-'+record.get('no_producto'));
+        console.log('otros');
+        WinCantidad.down('hiddenfield[name=no_producto]').setValue(record.get('no_producto'));
+        WinCantidad.down('label[name=no_producto2]').setText(record.get('co_producto')+'-'+record.get('no_producto'));
         var pos = this.getPosicion(gridPedido, record.get('co_producto'))
         if(pos > -1){
             WinCantidad.down('numberfield').setValue(gridPedido.getStore().data.items[pos].get('ca_producto'));
@@ -243,6 +264,7 @@ Ext.define('rewsoft.controller.almacen.IngresodeProductos', {
         var form = this.getWinAlmacenCantidad().down('form');
         if(form.getForm().isValid()){
             var co_producto = button.up('window').down('hiddenfield[name=co_producto]').getValue();
+            var no_producto = button.up('window').down('hiddenfield[name=no_producto]').getValue();
             var ca_producto = button.up('window').down('numberfield').getValue();
             var va_compra_sin_igv = button.up('window').down('textfield[name=va_compra_sin_igv]').getValue();
             var va_compra = button.up('window').down('textfield[name=va_compra]').getValue();
@@ -252,6 +274,7 @@ Ext.define('rewsoft.controller.almacen.IngresodeProductos', {
             var co_unidad = unidadventa.getValue();
             var no_unidad = unidadventa.getRawValue();;
             var gridPedido = this.getMainView().down('grid[name=gridPedido]');
+            var va_compra_total = ca_producto * va_compra;
             var pos = this.getPosicion(gridPedido, co_producto);
             if(pos > -1){
                 var va_total = va_compra * ca_producto;
@@ -265,7 +288,12 @@ Ext.define('rewsoft.controller.almacen.IngresodeProductos', {
                 this.editProducto(gridPedido, pos, 'no_unidad', no_unidad)
                 this.setMontoTotal(gridPedido);
             }else{
-                this.addProducto(ca_producto, va_compra_sin_igv, va_compra, no_lote, fe_vencimiento, co_unidad, no_unidad)
+                //this.addProducto(ca_producto, va_compra_sin_igv, va_compra, no_lote, fe_vencimiento, co_unidad, no_unidad)
+                var co_almacen = '';
+                var no_almacen = '';
+                var co_proveedor = '';
+                var no_proveedor = '';
+                this.addProducto(co_producto, no_producto, ca_producto, no_lote, fe_vencimiento, co_unidad, no_unidad, co_almacen, no_almacen, co_proveedor, no_proveedor, va_compra, va_compra_total)
             }
             button.up('window').close();
         }
@@ -277,7 +305,36 @@ Ext.define('rewsoft.controller.almacen.IngresodeProductos', {
         }
         return coTipoDocumento;
     },
-    addProducto: function(ca_producto, va_compra_sin_igv, va_compra, no_lote, fe_vencimiento, co_unidad, no_unidad){
+    addProducto: function(co_producto, no_producto, ca_producto, no_lote, fe_vencimiento, co_unidad, no_unidad, co_almacen, no_almacen, co_proveedor, no_proveedor, va_producto, va_compra_total){
+        var gridPedido = this.getMainView().down('grid[name=gridPedido]');
+        var gridProducto = this.getMainView().down('grid[name=gridProductos]');
+        var storePedido = gridPedido.getStore();
+        /*try{
+            var storeProductos = gridProducto.getSelectionModel().selected.items[0].data;
+        }catch(e){
+        }*/
+        
+        var pedido = Ext.create('rewsoft.store.IngresoProductos', {
+            co_producto: co_producto,
+            no_producto: no_producto,
+            no_lote: no_lote,
+            fe_vencimiento: fe_vencimiento,
+            ca_producto: ca_producto,
+            co_unidad: co_unidad,
+            no_unidad: no_unidad,
+            va_compra: va_producto,
+            va_total: va_compra_total,
+            co_almacen: co_almacen,
+            no_almacen: no_almacen,
+            co_proveedor: co_proveedor,
+            no_proveedor: no_proveedor,
+            fl_igv: 'S'
+        });
+        var count = storePedido.getCount();
+        storePedido.insert(count, pedido);
+        this.setMontoTotal(gridPedido);
+    },
+    /*addProducto: function(ca_producto, va_compra_sin_igv, va_compra, no_lote, fe_vencimiento, co_unidad, no_unidad){
         var gridPedido = this.getMainView().down('grid[name=gridPedido]');
         var gridProducto = this.getMainView().down('grid[name=gridProductos]');
         var storePedido = gridPedido.getStore();
@@ -300,7 +357,7 @@ Ext.define('rewsoft.controller.almacen.IngresodeProductos', {
         storePedido.insert(count, pedido);
         this.setMontoTotal(gridPedido);
         this.onChangeGridPedido(gridPedido);
-    },
+    },*/
     editProducto: function(gridPedido, pos, campo, valor){
         gridPedido.getStore().data.items[pos].set(campo, valor);
     },
@@ -323,11 +380,20 @@ Ext.define('rewsoft.controller.almacen.IngresodeProductos', {
             }
         });
         
-        neto = Ext.util.Format.number(neto, rewsoft.AppGlobals.FORMA_NUMBER);
-        igv = Ext.util.Format.number(neto * rewsoft.AppGlobals.VA_IGV_2, rewsoft.AppGlobals.FORMA_NUMBER);
-        totalS = Ext.util.Format.number(totalS, rewsoft.AppGlobals.FORMA_NUMBER);
-        totalD = Ext.util.Format.number(totalS / rewsoft.AppGlobals.TIPO_CAMBIO_VENTA, rewsoft.AppGlobals.FORMA_NUMBER);
-        
+        if (this.incluye_igv){
+            neto = Ext.util.Format.number(neto, rewsoft.AppGlobals.FORMA_NUMBER);
+            igv = Ext.util.Format.number(neto * rewsoft.AppGlobals.VA_IGV_2, rewsoft.AppGlobals.FORMA_NUMBER);
+            totalS = Ext.util.Format.number(totalS, rewsoft.AppGlobals.FORMA_NUMBER);
+            totalD = Ext.util.Format.number(totalS / rewsoft.AppGlobals.TIPO_CAMBIO_VENTA, rewsoft.AppGlobals.FORMA_NUMBER);
+        } else {
+            neto = totalS;
+            igv = neto * rewsoft.AppGlobals.VA_IGV_2
+            totalS = neto + igv;
+            totalD = this.formatNumber2(totalS / rewsoft.AppGlobals.TIPO_CAMBIO_VENTA);
+            neto = this.formatNumber2(neto);
+            igv = this.formatNumber2(igv);
+            totalS = this.formatNumber2(totalS);
+        }
         neto = neto + '';
         igv = igv + '';
         totalS = totalS + '';
@@ -459,7 +525,7 @@ Ext.define('rewsoft.controller.almacen.IngresodeProductos', {
         }, this);
     },
     formatNumber4: function(value){
-        return Ext.util.Format.number(value, "0,000.0000");
+        return Ext.util.Format.number(value, rewsoft.AppGlobals.FORMA_NUMBER);
     },
     onItemClickGridLotes: function(grid, record){
         //grid.up('window').down('textfield[name=txtLote]').setValue(record.get('no_lote'));
@@ -580,5 +646,58 @@ Ext.define('rewsoft.controller.almacen.IngresodeProductos', {
             txtLote.enable();
             txtVencimiento.enable();
         }
+    },
+    onToggleIgvIncluido: function(button, pressed){
+        Ext.getBody().mask('Procesando...');
+        this.incluye_igv = pressed;
+        if(pressed) {
+            button.setText('IGV Incluido');
+        } else {
+            button.setText('IGV NO Incluido');
+        }
+        var grid = this.getMainView().down('grid[name=gridPedido]');
+        this.setMontoTotal(grid);
+        Ext.getBody().unmask();
+    },
+    formatNumber2: function(value){
+        return Ext.util.Format.number(value, rewsoft.AppGlobals.FORMA_NUMBER);
+    },
+    onClickBtnBuscarOCompra: function(){
+        this.getOrdenCompraCStore().load();
+        Ext.widget('winbuscarordencompra').show();
+    },
+    onRenderedGridOrdenCompra: function(grid){
+        grid.getView().on('viewready', function(grd){
+            var maps = new Ext.KeyMap(grd.getEl(), [{
+                key: Ext.EventObject.ENTER,
+                fn: function(){
+                    var record = grd.getSelectionModel().selected.items[0];
+                    this.onItemDblClickGridOrdenCompra(grd, record)
+                },
+                scope: this
+            }]);
+            grd.keys = maps;
+        }, this);
+    },
+    onItemDblClickGridOrdenCompra: function(grid, record){
+        var nu_orden_compra = record.get('nu_orden_compra');
+        var co_proveedor = record.get('co_proveedor');
+        var no_proveedor = record.get('no_proveedor');
+        this.getOrdenCompraStore().proxy.extraParams.nu_orden_compra = nu_orden_compra;
+        this.getOrdenCompraStore().load({
+            callback: function(record, operation, success) {
+                this.getMainView().down('grid[name=gridPedido]').getStore().removeAll();
+                Ext.Array.forEach(record, function(item, index, allItems){
+                    this.addProducto(item.get('co_producto'), item.get('no_producto'), item.get('ca_producto'), '', '', '1', 'UNI', '', '', '', '', 0, 0);
+                }, this);
+                this.getMainView().down('textfield[name=txtBuscarOCompra]').setValue(nu_orden_compra);
+
+                this.getMainView().down('textfield[name=txtRuc]').setValue(co_proveedor);
+                this.getMainView().down('textfield[name=txtProveedor]').setValue(no_proveedor);
+
+                this.getWinBuscarOrdenCompra().close();
+            },
+            scope: this
+        })
     }
 });

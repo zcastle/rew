@@ -3,11 +3,11 @@ Ext.define('rewsoft.controller.MainView', {
     views: [
     'MainView',
     'LoginUser',
-    'Card'
+    'Viewport'
     ],
     refs: [{
-        ref: 'Card',
-        selector: 'card'
+        ref: 'Viewport',
+        selector: 'viewport'
     },{
         ref: 'LoginUser',
         selector: 'loginuser'
@@ -34,8 +34,8 @@ Ext.define('rewsoft.controller.MainView', {
                 console.log('Debug activado');
             }
             //this.getLoginUser().hide();
-            this.getCard().getLayout().setActiveItem(1);
-            //this.getController('TabMain').addTab('Facturacion', 'pnlventasfacturacion', 'ico-facturacion-small');
+            this.getViewport().getLayout().setActiveItem(1);
+            this.getController('TabMain').addTab('Facturacion', 'pnlventasfacturacion', 'ico-facturacion-small');
             //this.getController('TabMain').addTab('Ordenes de Despacho', 'pnlordenesdespacho');
             //this.getController('TabMain').addTab('Registro de Compras', 'pnlingresodeproducto');
             //this.getController('TabMain').addTab('Cuentas por Cobrar', 'pnlcuentascobrar');
@@ -56,7 +56,7 @@ Ext.define('rewsoft.controller.MainView', {
             //this.getController('TabMain').addTab('Comprobantes', 'pnlventasfacturacionconsultar', 'tabs');
             //Ext.widget('wintipocambio').show();
             //this.getController('TabMain').addTab('Tipo de Cambio', 'pnltipocambio', 'tabs');
-            this.getController('TabMain').addTab('Orden de Compra', 'pnlordencompra', 'tabs');
+            //this.getController('TabMain').addTab('Orden de Compra', 'pnlordencompra', 'tabs');
         } else {
             Ext.widget('loginuser');
         }

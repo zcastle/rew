@@ -40,7 +40,7 @@ if ($_POST) {
         IFNULL(mp.nu_orden, 0) AS nu_orden,
         mp.co_destino,
         (SELECT no_destino FROM m_destinos WHERE co_destino = mp.co_destino) AS no_destino,
-        va_peso
+        va_peso, va_medida, im_foto
         FROM m_productos AS mp
         WHERE mp.fl_eliminado = 'N' AND mp.co_empresa LIKE '%$co_empresa%'";
     if ($no_producto <> "") {

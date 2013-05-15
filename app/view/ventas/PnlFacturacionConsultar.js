@@ -29,7 +29,7 @@ Ext.define('rewsoft.view.ventas.PnlFacturacionConsultar' ,{
             width: 80,
             align: 'right',
             renderer: function(val){
-                return Ext.util.Format.number(val, "0,000.0000");
+                return Ext.util.Format.number(val, rewsoft.AppGlobals.FORMA_NUMBER);
             }
         },{
             header: 'IGV S/.',
@@ -37,7 +37,7 @@ Ext.define('rewsoft.view.ventas.PnlFacturacionConsultar' ,{
             width: 80,
             align: 'right',
             renderer: function(val){
-                return Ext.util.Format.number(val, "0,000.0000");
+                return Ext.util.Format.number(val, rewsoft.AppGlobals.FORMA_NUMBER);
             }
         },{
             header: 'Total S/.',
@@ -45,7 +45,7 @@ Ext.define('rewsoft.view.ventas.PnlFacturacionConsultar' ,{
             width: 80,
             align: 'right',
             renderer: function(val){
-                return Ext.util.Format.number(val, "0,000.0000");
+                return Ext.util.Format.number(val, rewsoft.AppGlobals.FORMA_NUMBER);
             }
         }];
         this.dockedItems = [{
@@ -66,7 +66,7 @@ Ext.define('rewsoft.view.ventas.PnlFacturacionConsultar' ,{
                 margins: '4 0 0 0'
             },{
                 xtype: "hiddenfield",
-                name: "txtRuc",
+                name: "txtRuc"
             },{
                 xtype: "textfield",
                 name: "txtClientes", 

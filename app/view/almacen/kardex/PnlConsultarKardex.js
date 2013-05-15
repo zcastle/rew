@@ -8,7 +8,7 @@ Ext.define('rewsoft.view.almacen.kardex.PnlConsultarKardex', {
             dataIndex: 'fe_creacion',
             menuDisabled: true,
             sortable: false,
-            width: 70
+            width: 85
         },{
             header: 'Operacion',
             dataIndex: 'no_movimiento',
@@ -53,7 +53,7 @@ Ext.define('rewsoft.view.almacen.kardex.PnlConsultarKardex', {
             width: 70,
             align: 'right',
             renderer: function(val){
-                return Ext.util.Format.number(val, "0,000.0000");
+                return Ext.util.Format.number(val, rewsoft.AppGlobals.FORMA_NUMBER);
             }
         },{
             header: 'Costo S/.',
@@ -63,7 +63,7 @@ Ext.define('rewsoft.view.almacen.kardex.PnlConsultarKardex', {
             width: 80,
             align: 'right',
             renderer: function(val){
-                return Ext.util.Format.number(val, "0,000.0000");
+                return Ext.util.Format.number(val, rewsoft.AppGlobals.FORMA_NUMBER);
             }
         }];
         this.tbar = [{

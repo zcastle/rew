@@ -85,8 +85,10 @@ Ext.define('rewsoft.controller.configuracion.WinTipoCambio', {
                     });
                     this.getTipoCambioStore().sync({
                         callback: function() {
-                            Ext.getBody().unmask();
                             this.getWinTipoCambio().close();
+                            rewsoft.AppGlobals.TIPO_CAMBIO_VENTA = values.tcVentaNuevo;
+                            Ext.getCmp('lblNoRazonSocial').setText(rewsoft.AppGlobals.RAZON_SOCIAL + ' - TCV: ' + rewsoft.AppGlobals.TIPO_CAMBIO_VENTA);
+                            Ext.getBody().unmask();
                         },
                         scope: this
                     });

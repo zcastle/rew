@@ -185,7 +185,7 @@ Ext.define('rewsoft.controller.almacen.requerimiento.PnlRequerimiento', {
                     var registro = {
                         co_producto: record.data['co_producto'],
                         ca_producto: record.data['ca_producto'],
-                        co_unidad: record.data['co_unidad'],
+                        co_unidad: record.data['co_unidad']
                     };
                     detalle.push(registro);
                 });

@@ -64,5 +64,9 @@ Ext.define('rewsoft.model.Producto', {
         name: 'co_destino'
     },{
         name: 'va_peso'
+    },{
+        name: 'va_medida'
+    },{
+        name: 'im_foto'
     }]
 });

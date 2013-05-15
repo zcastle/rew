@@ -125,6 +125,19 @@ Ext.define('rewsoft.view.almacen.PnlIngresodeProducto', {
                         queryMode: 'local',
                         editable: false,
                         labelWidth: 90
+                    },{
+                        xtype: "textfield",
+                        name: "txtBuscarOCompra",
+                        fieldLabel: "O. Compra",
+                        labelWidth: 100,
+                        style: 'color: red; font-size: 15px;',
+                        readOnly: true,
+                        width: 200
+                    },{
+                        xtype: 'button',
+                        name: 'btnBuscarOCompra',
+                        text: 'Buscar',
+                        iconCls: 'ico-buscar-small'
                     }]
                 }]
             },{
@@ -161,8 +174,8 @@ Ext.define('rewsoft.view.almacen.PnlIngresodeProducto', {
                     dataIndex: 'fe_vencimiento',
                     menuDisabled: true,
                     sortable: false,
-                    width: 70
-                },{
+                    width: 85
+                }/*,{
                     header: 'Valor Compra',
                     dataIndex: 'va_compra_sin_igv',
                     align: 'right',
@@ -170,9 +183,9 @@ Ext.define('rewsoft.view.almacen.PnlIngresodeProducto', {
                     sortable: false,
                     width: 80,
                     renderer: function(val){
-                        return Ext.util.Format.number(val, "0,000.0000");
+                        return Ext.util.Format.number(val, rewsoft.AppGlobals.FORMA_NUMBER);
                     }
-                },{
+                }*/,{
                     header: 'Precio Compra',
                     dataIndex: 'va_compra',
                     align: 'right',
@@ -180,7 +193,7 @@ Ext.define('rewsoft.view.almacen.PnlIngresodeProducto', {
                     sortable: false,
                     width: 80,
                     renderer: function(val){
-                        return Ext.util.Format.number(val, "0,000.0000");
+                        return Ext.util.Format.number(val, rewsoft.AppGlobals.FORMA_NUMBER);
                     }
                 },{
                     header: 'Cantidad',
@@ -202,7 +215,7 @@ Ext.define('rewsoft.view.almacen.PnlIngresodeProducto', {
                     menuDisabled: true,
                     sortable: false,
                     renderer: function(val){
-                        return Ext.util.Format.number(val, "0,000.0000");
+                        return Ext.util.Format.number(val, rewsoft.AppGlobals.FORMA_NUMBER);
                     }
                 },{
                     header: 'Afecto',
@@ -250,6 +263,12 @@ Ext.define('rewsoft.view.almacen.PnlIngresodeProducto', {
                                 name: 'btnProcesar',
                                 iconCls: 'ico-aceptar-large',
                                 scale: 'large'
+                            },{
+                                text: 'IGV Incluido',
+                                name: 'btnIgvIncluido',
+                                enableToggle: true,
+                                pressed: true,
+                                scale: 'large'
                             }]
                         },{
                             xtype: 'label',
@@ -265,7 +284,7 @@ Ext.define('rewsoft.view.almacen.PnlIngresodeProducto', {
                         defaults: {
                             xtype: 'displayfield',
                             labelWidth: 70,
-                            width: 160,
+                            width: 250,
                             fieldStyle: 'border: 1px solid #B5B8C8; color: red; text-align: right',
                             value: '0.00'
                         },
@@ -345,7 +364,7 @@ Ext.define('rewsoft.view.almacen.PnlIngresodeProducto', {
                     width: 70,
                     sortable: false,
                     renderer: function(val){
-                        return Ext.util.Format.number(val, "0,000.0000");
+                        return Ext.util.Format.number(val, rewsoft.AppGlobals.FORMA_NUMBER);
                     }
                 }],
                 dockedItems: [{

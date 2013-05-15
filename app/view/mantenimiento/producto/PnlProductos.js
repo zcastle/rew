@@ -29,7 +29,7 @@ Ext.define('rewsoft.view.mantenimiento.producto.PnlProductos' ,{
             align: 'right',
             width: 90,
             renderer: function(val){
-                return Ext.util.Format.number(val, "0,000.0000");
+                return Ext.util.Format.number(val, rewsoft.AppGlobals.FORMA_NUMBER);
             }
         },{
             header: 'Precio Venta',
@@ -37,7 +37,7 @@ Ext.define('rewsoft.view.mantenimiento.producto.PnlProductos' ,{
             align: 'right',
             width: 90,
             renderer: function(val){
-                return Ext.util.Format.number(val, "0,000.0000");
+                return Ext.util.Format.number(val, rewsoft.AppGlobals.FORMA_NUMBER);
             }
         },{
             header: 'Procedencia',

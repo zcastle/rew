@@ -1,12 +1,11 @@
 Ext.define('rewsoft.controller.LoginUser', {
     extend: 'Ext.app.Controller',
     views: [
-    'LoginUser',
-    'Card'
+    'LoginUser'
     ],
     refs: [{
-        ref: 'Card',
-        selector: 'card'
+        ref: 'Viewport',
+        selector: 'viewport'
     },{
         ref: 'MainView',
         selector: 'loginuser'
@@ -74,8 +73,8 @@ Ext.define('rewsoft.controller.LoginUser', {
                 success: function(frm, action) {
                     rewsoft.AppGlobals.CO_USUARIO = this.getMainView().down('combobox[name=txtUsuario]').getValue();
                     rewsoft.AppGlobals.RAZON_SOCIAL = this.getMainView().down('combobox[name=cboCia]').getStore().findRecord('co_empresa', rewsoft.AppGlobals.CIA).data.no_razon_social
-                    Ext.getCmp('lblNoRazonSocial').setText(rewsoft.AppGlobals.RAZON_SOCIAL + ' - TC: ' + rewsoft.AppGlobals.TIPO_CAMBIO_VENTA);
-                    this.getCard().getLayout().setActiveItem(1);
+                    Ext.getCmp('lblNoRazonSocial').setText(rewsoft.AppGlobals.RAZON_SOCIAL + ' - TCV: ' + rewsoft.AppGlobals.TIPO_CAMBIO_VENTA);
+                    this.getViewport().getLayout().setActiveItem(1);
                     this.getMainView().hide();
                     var obj = Ext.decode(action.response.responseText);
                     rewsoft.AppGlobals.SERIE_FV = obj.data.serie_fv;
@@ -109,6 +108,10 @@ Ext.define('rewsoft.controller.LoginUser', {
                         callback: function(record, operation, success) {
                             if(record.length < 1){
                                 Ext.widget('wintipocambio').show();
+                            } else {
+                                //console.log(record[0].get('nu_tipo_cambio_venta'));
+                                rewsoft.AppGlobals.TIPO_CAMBIO_VENTA = record[0].get('nu_tipo_cambio_venta');
+                                Ext.getCmp('lblNoRazonSocial').setText(rewsoft.AppGlobals.RAZON_SOCIAL + ' - TCV: ' + rewsoft.AppGlobals.TIPO_CAMBIO_VENTA);
                             }
                         },
                         scope: this

@@ -143,7 +143,7 @@ Ext.define('rewsoft.view.compras.PnlFacturacion', {
                     sortable: false,
                     width: 70,
                     renderer: function(val){
-                        return Ext.util.Format.number(val, "0,000.0000");
+                        return Ext.util.Format.number(val, rewsoft.AppGlobals.FORMA_NUMBER);
                     }
                 },{
                     header: 'Cantidad',
@@ -159,7 +159,7 @@ Ext.define('rewsoft.view.compras.PnlFacturacion', {
                     menuDisabled: true,
                     sortable: false,
                     renderer: function(val){
-                        return Ext.util.Format.number(val, "0,000.0000");
+                        return Ext.util.Format.number(val, rewsoft.AppGlobals.FORMA_NUMBER);
                     }
                 },{
                     xtype: 'actioncolumn',
@@ -274,7 +274,7 @@ Ext.define('rewsoft.view.compras.PnlFacturacion', {
                     width: 70,
                     sortable: false,
                     renderer: function(val){
-                        return Ext.util.Format.number(val, "0,000.0000");
+                        return Ext.util.Format.number(val, rewsoft.AppGlobals.FORMA_NUMBER);
                     }
                 }],
                 dockedItems: [{

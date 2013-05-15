@@ -26,5 +26,5 @@ Ext.define('rewsoft.store.Requerimiento', {
         extraParams: {
             nu_requerimiento: ''
         }
-    },
+    }
 });

@@ -21,115 +21,143 @@ Ext.define('rewsoft.view.mantenimiento.producto.WinProductosNuevo', {
                         xtype: 'hidden',
                         name: 'co_producto'
                     },{
-                        xtype: 'combobox',
-                        name: 'co_grupo',
-                        fieldLabel: 'Grupo',
-                        labelWidth: 90,
-                        store: 'Grupo',
-                        valueField: 'co_grupo',
-                        displayField: 'no_grupo',
-                        queryMode: 'local',
-                        editable: false,
-                        width: 355,
-                        msgTarget: 'side',
-                        allowBlank: false
-                    },{
                         xtype: 'fieldcontainer',
                         layout: 'hbox',
-                        width: 355,
+                        width: 535,
                         items: [{
-                            xtype: 'textfield',
-                            name: 'co_categoria',
-                            fieldLabel: 'Categoria',
-                            labelWidth: 90,
-                            width: 150,
-                            msgTarget: 'side',
-                            enableKeyEvents: true,
-                            allowBlank: false
+                            xtype: 'fieldcontainer',
+                            layout: 'vbox',
+                            flex: 1,
+                            items: [{
+                                xtype: 'combobox',
+                                name: 'co_grupo',
+                                fieldLabel: 'Grupo',
+                                labelWidth: 90,
+                                store: 'Grupo',
+                                valueField: 'co_grupo',
+                                displayField: 'no_grupo',
+                                queryMode: 'local',
+                                editable: false,
+                                width: 355,
+                                msgTarget: 'side',
+                                allowBlank: false
+                            },{
+                                xtype: 'fieldcontainer',
+                                layout: 'hbox',
+                                width: 355,
+                                items: [{
+                                    xtype: 'textfield',
+                                    name: 'co_categoria',
+                                    fieldLabel: 'Categoria',
+                                    labelWidth: 90,
+                                    width: 150,
+                                    msgTarget: 'side',
+                                    enableKeyEvents: true,
+                                    allowBlank: false
+                                },{
+                                    xtype: 'displayfield',
+                                    name: 'no_categoria',
+                                    padding: '0 0 0 2',
+                                    fieldStyle: 'border: 1px solid #B5B8C8; height: 22px',
+                                    flex: 1
+                                }]
+                            },{
+                                xtype: 'fieldcontainer',
+                                layout: 'hbox',
+                                width: 355,
+                                name: 'zonaMarca',
+                                items: [{
+                                    xtype: 'textfield',
+                                    name: 'co_sub_categoria',
+                                    fieldLabel: 'Marca',
+                                    labelWidth: 90,
+                                    width: 150,
+                                    msgTarget: 'side',
+                                    enableKeyEvents: true,
+                                    allowBlank: false
+                                },{
+                                    xtype: 'displayfield',
+                                    name: 'no_sub_categoria',
+                                    padding: '0 0 0 2',
+                                    fieldStyle: 'border: 1px solid #B5B8C8; height: 22px',
+                                    flex: 1
+                                }]
+                            },{
+                                xtype: 'fieldcontainer',
+                                layout: 'hbox',
+                                width: 355,
+                                name: 'zonaPaisProcedencia',
+                                items: [{
+                                    xtype: 'textfield',
+                                    name: 'co_pais_procedencia',
+                                    fieldLabel: 'Procedencia',
+                                    labelWidth: 90,
+                                    width: 150,
+                                    msgTarget: 'side',
+                                    enableKeyEvents: true,
+                                    allowBlank: false
+                                },{
+                                    xtype: 'displayfield',
+                                    name: 'no_pais_procedencia',
+                                    padding: '0 0 0 2',
+                                    fieldStyle: 'border: 1px solid #B5B8C8; height: 22px',
+                                    flex: 1
+                                }]
+                            },{
+                                xtype: 'filefield',
+                                name: 'im_foto',
+                                fieldLabel: 'Imagen',
+                                buttonText: 'Examinar',
+                                emptyText: 'Seleccione una imagen',
+                                labelWidth: 90,
+                                width: 355,
+                                msgTarget: 'side',
+                                allowBlank: true/*,
+                                buttonConfig: {
+                                    iconCls: 'upload-icon'
+                                }*/
+                            },{
+                                xtype: 'textfield',
+                                name: 'no_producto',
+                                fieldLabel: 'Descripcion',
+                                msgTarget: 'side',
+                                allowBlank: false,
+                                labelWidth: 90,
+                                width: 355,
+                                fieldStyle : 'text-transform: uppercase'
+                            },{
+                                xtype: 'fieldcontainer',
+                                layout: 'hbox',
+                                width: 355,
+                                name: 'zonaUnidadMedida',
+                                defaults: {
+                                    xtype: 'textfield',
+                                    msgTarget: 'side',
+                                    allowBlank: false,
+                                    labelWidth: 90
+                                },
+                                items: [{
+                                    xtype: 'combobox',
+                                    name: 'co_unidad',
+                                    store: 'UnidadesVenta',
+                                    valueField: 'id',
+                                    displayField: 'nombre',
+                                    queryMode: 'local',
+                                    editable: false,
+                                    fieldLabel: 'Unidad Medida',
+                                    flex: 1
+                                }/*,{
+                                    xtype: 'button',
+                                    name: 'btnCrearUnidadMedida',
+                                    text: 'crear',
+                                    margins: '0 0 0 5'
+                                }*/]
+                            }]
                         },{
-                            xtype: 'displayfield',
-                            name: 'no_categoria',
-                            padding: '0 0 0 2',
-                            fieldStyle: 'border: 1px solid #B5B8C8; height: 22px',
-                            flex: 1
-                        }]
-                    },{
-                        xtype: 'fieldcontainer',
-                        layout: 'hbox',
-                        width: 355,
-                        name: 'zonaMarca',
-                        items: [{
-                            xtype: 'textfield',
-                            name: 'co_sub_categoria',
-                            fieldLabel: 'Marca',
-                            labelWidth: 90,
-                            width: 150,
-                            msgTarget: 'side',
-                            enableKeyEvents: true,
-                            allowBlank: false
-                        },{
-                            xtype: 'displayfield',
-                            name: 'no_sub_categoria',
-                            padding: '0 0 0 2',
-                            fieldStyle: 'border: 1px solid #B5B8C8; height: 22px',
-                            flex: 1
-                        }]
-                    },{
-                        xtype: 'fieldcontainer',
-                        layout: 'hbox',
-                        width: 355,
-                        name: 'zonaPaisProcedencia',
-                        items: [{
-                            xtype: 'textfield',
-                            name: 'co_pais_procedencia',
-                            fieldLabel: 'Procedencia',
-                            labelWidth: 90,
-                            width: 150,
-                            msgTarget: 'side',
-                            enableKeyEvents: true,
-                            allowBlank: false
-                        },{
-                            xtype: 'displayfield',
-                            name: 'no_pais_procedencia',
-                            padding: '0 0 0 2',
-                            fieldStyle: 'border: 1px solid #B5B8C8; height: 22px',
-                            flex: 1
-                        }]
-                    },{
-                        xtype: 'textfield',
-                        name: 'no_producto',
-                        fieldLabel: 'Descripcion',
-                        msgTarget: 'side',
-                        allowBlank: false,
-                        labelWidth: 90,
-                        width: 355,
-                        fieldStyle : 'text-transform: uppercase'
-                    },{
-                        xtype: 'fieldcontainer',
-                        layout: 'hbox',
-                        width: 355,
-                        name: 'zonaUnidadMedida',
-                        defaults: {
-                            xtype: 'textfield',
-                            msgTarget: 'side',
-                            allowBlank: false,
-                            labelWidth: 90
-                        },
-                        items: [{
-                            xtype: 'combobox',
-                            name: 'co_unidad',
-                            store: 'UnidadesVenta',
-                            valueField: 'id',
-                            displayField: 'nombre',
-                            queryMode: 'local',
-                            editable: false,
-                            fieldLabel: 'Unidad Medida',
-                            flex: 1
-                        },{
-                            xtype: 'button',
-                            name: 'btnCrearUnidadMedida',
-                            text: 'crear',
-                            margins: '0 0 0 5'
+                            xtype: 'image',
+                            id: 'img_foto_producto',
+                            width: 175,
+                            src: 'resources/images/no-imagen.jpg'
                         }]
                     }/*,{
                         xtype: 'fieldcontainer',
@@ -159,7 +187,7 @@ Ext.define('rewsoft.view.mantenimiento.producto.WinProductosNuevo', {
                     }*/,{
                         xtype: 'fieldcontainer',
                         layout: 'hbox',
-                        width: 355,
+                        width: 535,
                         defaults: {
                             xtype: 'numberfield',
                             decimalSeparator: '.',
@@ -176,8 +204,14 @@ Ext.define('rewsoft.view.mantenimiento.producto.WinProductosNuevo', {
                             labelWidth: 90,
                             flex: 1
                         },{
-                            name: 'precio0',
-                            fieldLabel: 'Precio Publico',
+                            name: 'va_peso',
+                            fieldLabel: 'Peso (gr)',
+                            labelWidth: 90,
+                            flex: 1,
+                            margin: '0 0 0 5'
+                        },{
+                            name: 'va_medida',
+                            fieldLabel: 'Medida (cm)',
                             labelWidth: 90,
                             flex: 1,
                             margin: '0 0 0 5'
@@ -197,12 +231,9 @@ Ext.define('rewsoft.view.mantenimiento.producto.WinProductosNuevo', {
                             minValue: 0,
                             value: 0
                         },
-                        items: [/*{
-                            xtype: 'hiddenfield',
-                            flex: 1
-                        },*/{
-                            name: 'va_peso',
-                            fieldLabel: 'Peso(gr)',
+                        items: [{
+                            name: 'precio0',
+                            fieldLabel: 'Precio Publico',
                             labelWidth: 90,
                             flex: 1
                         },{
@@ -351,7 +382,7 @@ Ext.define('rewsoft.view.mantenimiento.producto.WinProductosNuevo', {
                                 dataIndex: 'va_precio',
                                 flex: 1,
                                 renderer: function(val){
-                                    return Ext.util.Format.number(val, "0,000.0000");
+                                    return Ext.util.Format.number(val, rewsoft.AppGlobals.FORMA_NUMBER);
                                 }
                             },{
                                 xtype: 'actioncolumn',
@@ -391,7 +422,7 @@ Ext.define('rewsoft.view.mantenimiento.producto.WinProductosNuevo', {
                             width: 60,
                             align: 'right',
                             renderer: function(val){
-                                return Ext.util.Format.number(val, "0,000.0000");
+                                return Ext.util.Format.number(val, rewsoft.AppGlobals.FORMA_NUMBER);
                             }
                         },{
                             header: 'Unidad',
@@ -403,7 +434,7 @@ Ext.define('rewsoft.view.mantenimiento.producto.WinProductosNuevo', {
                             width: 60,
                             align: 'right',
                             renderer: function(val){
-                                return Ext.util.Format.number(val, "0,000.0000");
+                                return Ext.util.Format.number(val, rewsoft.AppGlobals.FORMA_NUMBER);
                             }
                         },{
                             header: 'Total',
@@ -411,7 +442,7 @@ Ext.define('rewsoft.view.mantenimiento.producto.WinProductosNuevo', {
                             width: 60,
                             align: 'right',
                             renderer: function(val){
-                                return Ext.util.Format.number(val, "0,000.0000");
+                                return Ext.util.Format.number(val, rewsoft.AppGlobals.FORMA_NUMBER);
                             }
                         },{
                             header: 'Almacen',

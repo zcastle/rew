@@ -30,8 +30,12 @@ Ext.define('rewsoft.view.configuracion.WinTipoCambio', {
                 xtype: 'fieldset',
                 defaults: {
                     xtype: 'numberfield',
-                    decimalSeparator: '.',
-                    labelWidth: 120
+                    //decimalSeparator: '.',
+                    labelWidth: 120,
+                    hideTrigger: true,
+                    keyNavEnabled: false,
+                    mouseWheelEnabled: false,
+                    decimalPrecision: 3
                 },
                 items: [{
                     fieldLabel: 'TC Compra Nuevo',

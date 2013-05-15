@@ -54,16 +54,10 @@ Ext.define('rewsoft.view.ventas.PnlFacturacion', {
                         text: 'Cambiar',
                         iconCls: 'ico-editar-small'
                     },{
-                        xtype: "combobox",
-                        name: "cboMoneda", 
-                        fieldLabel: "Moneda",
-                        labelWidth: 60,
-                        store: 'Monedas',
-                        valueField: 'codigo',
-                        displayField: 'moneda',
-                        queryMode: 'local',
-                        editable: false,
-                        width: 150
+                        xtype: 'button',
+                        name: 'btnBuscarPasado',
+                        text: 'Buscar',
+                        iconCls: 'ico-buscar-small'
                     }]
                 },{
                     layout: {
@@ -112,7 +106,7 @@ Ext.define('rewsoft.view.ventas.PnlFacturacion', {
                         fieldLabel: "GR-OD-CC",
                         labelWidth: 70,
                         readOnly: true,
-                        width: 200
+                        width: 180
                     },{
                         xtype: 'button',
                         name: 'btnBuscarGuiaRemision',
@@ -133,20 +127,20 @@ Ext.define('rewsoft.view.ventas.PnlFacturacion', {
                     },{
                         xtype: "combobox",
                         name: "cboFormaPago", 
-                        fieldLabel: "Forma de Pago",
+                        fieldLabel: "F. Pago",
                         store: 'FormaPago',
                         valueField: 'co_forma_pago',
                         displayField: 'no_forma_pago',
                         queryMode: 'local',
                         //typeAhead: true,
                         editable: false,
-                        labelWidth: 90,
-                        width: 300
+                        labelWidth: 70,
+                        width: 220
                     },{
                         xtype: "displayfield",
                         name: "txtFechaVencimiento", 
-                        labelWidth: 90,
-                        fieldLabel: "F. Vencimiento",
+                        labelWidth: 50,
+                        fieldLabel: "Vence",
                         fieldStyle: 'border: 1px solid #B5B8C8;',
                         value: Ext.Date.format(new Date(), 'n/j/Y'),
                         flex: 1
@@ -167,7 +161,29 @@ Ext.define('rewsoft.view.ventas.PnlFacturacion', {
                         //typeAhead: true,
                         editable: false,
                         labelWidth: 70,
-                        width: 250
+                        width: 180
+                    },{
+                        xtype: "combobox",
+                        name: "cboMoneda", 
+                        fieldLabel: "Moneda",
+                        labelWidth: 50,
+                        store: 'Monedas',
+                        valueField: 'codigo',
+                        displayField: 'moneda',
+                        queryMode: 'local',
+                        editable: false,
+                        width: 135
+                    },{
+                        xtype: "datefield",
+                        name: "txtFeDocumento",
+                        fieldLabel: "F. Documento",
+                        labelWidth: 90,
+                        width: 200,
+                        value: new Date()
+                    },{
+                        xtype: 'button',
+                        name: 'btnActualizarFecha',
+                        text: 'Actualizar'
                     }]
                 }]
             },{
@@ -204,7 +220,7 @@ Ext.define('rewsoft.view.ventas.PnlFacturacion', {
                     dataIndex: 'vencimiento',
                     menuDisabled: true,
                     sortable: false,
-                    width: 70
+                    width: 80
                 },{
                     header: 'P. Unitario',
                     dataIndex: 'precio0',
@@ -213,7 +229,7 @@ Ext.define('rewsoft.view.ventas.PnlFacturacion', {
                     sortable: false,
                     width: 70,
                     renderer: function(val){
-                        return Ext.util.Format.number(val, "0,000.0000");
+                        return Ext.util.Format.number(val, rewsoft.AppGlobals.FORMA_NUMBER);
                     }
                 },{
                     header: 'Cantidad',
@@ -235,7 +251,7 @@ Ext.define('rewsoft.view.ventas.PnlFacturacion', {
                     menuDisabled: true,
                     sortable: false,
                     renderer: function(val){
-                        return Ext.util.Format.number(val, "0,000.0000");
+                        return Ext.util.Format.number(val, rewsoft.AppGlobals.FORMA_NUMBER);
                     }
                 },{
                     xtype: 'actioncolumn',
@@ -310,6 +326,12 @@ Ext.define('rewsoft.view.ventas.PnlFacturacion', {
                     },{
                         xtype: 'tbfill'
                     },{
+                        text: 'IGV Incluido',
+                        name: 'btnIgvIncluido',
+                        enableToggle: true,
+                        pressed: true,
+                        scale: 'large'
+                    },{
                         text: 'Limpiar todo',
                         name: 'btnLimpiarTodo',
                         iconCls: 'ico-limpiar-large',
@@ -358,7 +380,7 @@ Ext.define('rewsoft.view.ventas.PnlFacturacion', {
                     width: 70,
                     sortable: false,
                     renderer: function(val){
-                        return Ext.util.Format.number(val, "0,000.0000");
+                        return Ext.util.Format.number(val, rewsoft.AppGlobals.FORMA_NUMBER);
                     }
                 },{
                     header: 'Costo',
@@ -369,7 +391,7 @@ Ext.define('rewsoft.view.ventas.PnlFacturacion', {
                     width: 70,
                     sortable: false,
                     renderer: function(val){
-                        return Ext.util.Format.number(val, "0,000.0000");
+                        return Ext.util.Format.number(val, rewsoft.AppGlobals.FORMA_NUMBER);
                     }
                 },{
                     header: 'Stock',

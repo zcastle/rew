@@ -75,6 +75,9 @@ Ext.define('rewsoft.controller.mantenimiento.productos.WinProductosNuevo', {
             },
             'winproductosnuevo numberfield[name=precio0]': {
                 keypress: this.onKeypressPrecio0
+            },
+            'winproductosnuevo filefield': {
+                change: this.onChangeImProducto
             }
         });
     },
@@ -165,7 +168,7 @@ Ext.define('rewsoft.controller.mantenimiento.productos.WinProductosNuevo', {
                     }else{
                         this.getProductosStore().proxy.extraParams.co_empresa = rewsoft.AppGlobals.CIA;
                     }
-                    this.getProductosStore().insert(0, values);
+                    this.getProductosStore().add(values);
                     this.getProductosStore().sync({
                         callback: function() {
                             this.getProductosStore().load();
@@ -402,8 +405,8 @@ Ext.define('rewsoft.controller.mantenimiento.productos.WinProductosNuevo', {
             costo = costo + record.data['va_total'];
         });
         ventaSugerido = (costo * 100) / 23;
-        this.getMainView().down('displayfield[name=totalCosto]').setValue(Ext.util.Format.number(costo, "0,000.0000"));
-        this.getMainView().down('displayfield[name=ventaSugerido]').setValue(Ext.util.Format.number(ventaSugerido, "0,000.0000"));
+        this.getMainView().down('displayfield[name=totalCosto]').setValue(Ext.util.Format.number(costo, rewsoft.AppGlobals.FORMA_NUMBER));
+        this.getMainView().down('displayfield[name=ventaSugerido]').setValue(Ext.util.Format.number(ventaSugerido, rewsoft.AppGlobals.FORMA_NUMBER));
         this.getMainView().down('displayfield[name=formula]').setValue('('+costo+' * 100) / 23');
     },
     onClickBtnAplicarCosto: function(){
@@ -458,5 +461,41 @@ Ext.define('rewsoft.controller.mantenimiento.productos.WinProductosNuevo', {
                 this.getMainView().down('numberfield[name=va_peso]').focus();
             }
         }
-    }
+    },
+    onChangeImProducto: function(file, value, o){
+        /*console.log(file);
+        console.log(value);
+        console.log(o);*/
+        //var finalPath = value.substr(12);
+        var finalPath = value;
+        //console.log(finalPath);
+        //alert(finalPath);
+        Ext.Ajax.request({
+            url: 'data/uploadTmpImage.php',
+            params: {
+                im_foto: finalPath
+            },
+            scope: this,
+            success: function(response){
+                var obj = Ext.decode(response.responseText);
+                if(obj.success) {
+                    this.getMainView().down('image').setSrc("tmp/".finalPath);
+                } else {
+                    this.getMainView().down('image').setSrc("");
+                }
+            }
+        });
+        //this.getMainView().down('image').setSrc(value);
+        //Ext.getCmp('img_foto_producto').getEl().dom.src = value;
+    }/*,
+    final FileUploadField fileUpload = new FileUploadField(){
+        // this is to resolve the "fakepath" issue
+        @Override
+        protected void onChange(ComponentEvent ce) {
+            final String fullPath = getFileInput().getValue();
+            final int lastIndex = fullPath.lastIndexOf('\\');
+            final String fileName = fullPath.substring(lastIndex + 1);
+            setValue(fileName);
+        }
+    };*/
 });
