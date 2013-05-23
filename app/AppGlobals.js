@@ -1,3 +1,4 @@
+/*220513*/
 Ext.define('rewsoft.AppGlobals', {
     singleton: true,
     DEBUG: false,
@@ -23,6 +24,7 @@ Ext.define('rewsoft.AppGlobals', {
     MODELO_NEGOCIO: null,
     MODELO_NEGOCIO_MELY_GIN: 'MG',
     MODELO_NEGOCIO_DSILVANA: 'POS',
+    MODELO_NEGOCIO_ELI: true,
     DECIMALES: 4,
     FORMA_NUMBER: '0,000.0000',
     FORMA_PAGO_DEFAULT: '1010',

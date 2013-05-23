@@ -32,12 +32,29 @@ Ext.define('rewsoft.view.mantenimiento.producto.PnlProductos' ,{
                 return Ext.util.Format.number(val, rewsoft.AppGlobals.FORMA_NUMBER);
             }
         },{
+            header: 'Peso (GR)',
+            dataIndex: 'va_peso',
+            align: 'right',
+            width: 90,
+            renderer: function(val){
+                return Ext.util.Format.number(val, '0.00');
+            }
+        },{
             header: 'Precio Venta',
             dataIndex: 'precio0',
             align: 'right',
             width: 90,
             renderer: function(val){
                 return Ext.util.Format.number(val, rewsoft.AppGlobals.FORMA_NUMBER);
+            }
+        },{
+            header: 'Valor Venta',
+            align: 'right',
+            width: 90,
+            renderer: function(val, meta, record){
+                var precio0 = record.get('precio0');
+                var va_peso = record.get('va_peso');
+                return Ext.util.Format.number(precio0 * va_peso, rewsoft.AppGlobals.FORMA_NUMBER);
             }
         },{
             header: 'Procedencia',

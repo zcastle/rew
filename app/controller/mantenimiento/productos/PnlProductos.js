@@ -28,6 +28,15 @@ Ext.define('rewsoft.controller.mantenimiento.productos.PnlProductos', {
         });
     },
     onRenderedPnlProductos: function(grid) {
+        if(rewsoft.AppGlobals.MODELO_NEGOCIO_ELI){
+            this.getMainView().columns[4].hide();
+            this.getMainView().columns[8].show();
+            this.getMainView().columns[9].hide();
+        }else{
+            this.getMainView().columns[4].show();
+            this.getMainView().columns[8].hide();
+            this.getMainView().columns[9].show();
+        }
         this.getProductosStore().proxy.extraParams.no_producto = '';
         this.getProductosStore().proxy.extraParams.co_grupo = '';
         this.getProductosStore().proxy.extraParams.co_empresa = rewsoft.AppGlobals.CIA;

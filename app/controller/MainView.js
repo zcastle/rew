@@ -35,11 +35,11 @@ Ext.define('rewsoft.controller.MainView', {
             }
             //this.getLoginUser().hide();
             this.getViewport().getLayout().setActiveItem(1);
-            this.getController('TabMain').addTab('Facturacion', 'pnlventasfacturacion', 'ico-facturacion-small');
+            //this.getController('TabMain').addTab('Facturacion', 'pnlventasfacturacion', 'ico-facturacion-small');
             //this.getController('TabMain').addTab('Ordenes de Despacho', 'pnlordenesdespacho');
             //this.getController('TabMain').addTab('Registro de Compras', 'pnlingresodeproducto');
             //this.getController('TabMain').addTab('Cuentas por Cobrar', 'pnlcuentascobrar');
-            //this.getController('TabMain').addTab('Productos', 'pnlproductos');
+            this.getController('TabMain').addTab('Productos', 'pnlproductos');
             //this.getController('TabMain').addTab('Ordenes de Despacho', 'pnlordenesdespacho');
             //Ext.widget('winlibroventas').show();
             //Ext.widget('winregistroventas').show();
