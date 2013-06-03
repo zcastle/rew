@@ -10,7 +10,6 @@ if ($_POST) {
     $numeroRequerimiento = $_REQUEST['numeroRequerimiento'];
     $coUsuario = $_REQUEST['coUsuario'];
     $co_proveedor = null;
-
     $detalle = json_decode(stripcslashes($_REQUEST['detalle']));
 
     $sqlCabecera = "INSERT INTO c_orden_compra (co_empresa, fe_orden_compra, nu_orden_compra, co_usuario, nu_requerimiento, co_proveedor, va_orden) 
@@ -19,21 +18,45 @@ if ($_POST) {
     $sqlDetalle = "INSERT INTO d_orden_compra (nu_orden_compra, co_producto, ca_producto, va_producto, nu_linea) 
                    VALUES(?,?,?,?,?)";
 
+    $queryTmp = "CREATE TABLE tmp_oc SELECT * FROM d_orden_compra WHERE 1=2;";
+    $sqlDetalleTmp = "INSERT INTO d_orden_compra (nu_orden_compra, co_producto, ca_producto, va_producto, nu_linea) 
+                   VALUES(?,?,?,?,?)";
+
     try {
         $conn->beginTransaction();
 
         $coProducto = null; $caProducto = null; $noLote = null; $feVencimiento = null; $coAlmacen = null;
         $vaProducto = null;
         $ln = 1;
+        $va_orden = 0;
         
+        $stmtTmp = $conn->prepare($queryTmp);
+        $stmtTmp->execute();
+
+        $stmtDTmp = $conn->prepare($sqlDetalleTmp);
+        $stmtDTmp->bindParam(1, $numeroDocumento);
+        $stmtDTmp->bindParam(2, $coProducto);
+        $stmtDTmp->bindParam(3, $caProducto);
+        $stmtDTmp->bindParam(4, $vaProducto);
+        $stmtDTmp->bindParam(5, $ln);
+
+        foreach ($detalle as $linea) {
+            if($linea->co_proveedor){
+                $co_proveedor = $linea->co_proveedor;
+                $coProducto = $linea->co_producto;
+                $caProducto = $linea->ca_producto;
+                $vaProducto = $linea->va_producto;
+                $stmtDTmp->execute();
+                $ln = $ln + 1;
+            }
+        }
+
         $stmtD = $conn->prepare($sqlDetalle);
         $stmtD->bindParam(1, $numeroDocumento);
         $stmtD->bindParam(2, $coProducto);
         $stmtD->bindParam(3, $caProducto);
         $stmtD->bindParam(4, $vaProducto);
         $stmtD->bindParam(5, $ln);
-
-        $va_orden = 0;
 
         foreach ($detalle as $linea) {
             if($linea->co_proveedor){
