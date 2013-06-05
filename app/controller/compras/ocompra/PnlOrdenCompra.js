@@ -280,14 +280,16 @@ Ext.define('rewsoft.controller.compras.ocompra.PnlOrdenCompra', {
                     success: function(response){
                         var obj = Ext.decode(response.responseText);
                         if(obj.success) {
-                            this.setSecuencial();
-                            this.onClickBtnLimpiarTodoYes(btnLimpiarTodo);
-                            Ext.Msg.confirm('Impresion de Orden de Compra', 'Desea imprimir la <span style=color:red; font-weidth: bold>Orden de Compra No.: '+numeroDocumento+'</span>?', function(btn){
-                                if(btn=='yes'){
-                                    window.open("data/reportes/ocompra.php?nu_documento="+numeroDocumento, '_blank');
-                                }
-                            });
                             Ext.getBody().unmask();
+                            //this.setSecuencial();
+                            this.onClickBtnLimpiarTodoYes(btnLimpiarTodo);
+                            Ext.Array.forEach(obj.series, function(item, index, allItems){
+                                Ext.Msg.confirm('Impresion de Orden de Compra', 'Desea imprimir la <span style=color:red; font-weidth: bold>Orden de Compra No.: '+item+'</span>?', function(btn){
+                                    if(btn=='yes'){
+                                        window.open("data/reportes/ocompra.php?nu_documento="+item, '_blank');
+                                    }
+                                });
+                            }, this);
                         } else {
                             Ext.Msg.alert('Error!!!', 'Error en el proceso: ' + obj.msg);
                         }

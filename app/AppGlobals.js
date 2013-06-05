@@ -1,7 +1,7 @@
 /*220513*/
 Ext.define('rewsoft.AppGlobals', {
     singleton: true,
-    DEBUG: false,
+    DEBUG: true,
     //ROLES
     //ROL_ID: 2,
     ROL_ACTIVO: 'ADMIN',

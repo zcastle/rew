@@ -56,7 +56,7 @@ Ext.define('rewsoft.controller.MainView', {
             //this.getController('TabMain').addTab('Comprobantes', 'pnlventasfacturacionconsultar', 'tabs');
             //Ext.widget('wintipocambio').show();
             //this.getController('TabMain').addTab('Tipo de Cambio', 'pnltipocambio', 'tabs');
-            //this.getController('TabMain').addTab('Orden de Compra', 'pnlordencompra', 'tabs');
+            this.getController('TabMain').addTab('Orden de Compra', 'pnlordencompra', 'tabs');
         } else {
             Ext.widget('loginuser');
         }
