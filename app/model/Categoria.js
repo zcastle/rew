@@ -14,5 +14,7 @@ Ext.define('rewsoft.model.Categoria', {
         name: 'co_destino'
     },{
         name: 'no_destino'
+    },{
+        name: 'nu_orden'
     }]
 });
