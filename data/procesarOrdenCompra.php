@@ -18,7 +18,7 @@ if ($_POST) {
     $sqlDetalle = "INSERT INTO d_orden_compra (nu_orden_compra, co_producto, ca_producto, va_producto, nu_linea) 
                    VALUES(?,?,?,?,?)";
 
-    $queryTmpDrop = "DROP TABLE tmp_oc";
+    $queryTmpDrop = "DROP TABLE IF EXISTS tmp_oc";
     $queryTmp = "CREATE TABLE tmp_oc SELECT * FROM d_orden_compra WHERE 1=2;";
     $sqlDetalleTmp = "INSERT INTO tmp_oc (nu_orden_compra, co_producto, ca_producto, va_producto, nu_linea, co_proveedor) 
                    VALUES(?,?,?,?,?,?)";
