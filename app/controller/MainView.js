@@ -39,7 +39,7 @@ Ext.define('rewsoft.controller.MainView', {
             //this.getController('TabMain').addTab('Ordenes de Despacho', 'pnlordenesdespacho');
             //this.getController('TabMain').addTab('Registro de Compras', 'pnlingresodeproducto');
             //this.getController('TabMain').addTab('Cuentas por Cobrar', 'pnlcuentascobrar');
-            this.getController('TabMain').addTab('Productos', 'pnlproductos');
+            //this.getController('TabMain').addTab('Productos', 'pnlproductos');
             //this.getController('TabMain').addTab('Ordenes de Despacho', 'pnlordenesdespacho');
             //Ext.widget('winlibroventas').show();
             //Ext.widget('winregistroventas').show();
