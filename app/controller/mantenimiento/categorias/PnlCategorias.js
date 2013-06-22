@@ -20,6 +20,10 @@ Ext.define('rewsoft.controller.mantenimiento.categorias.PnlCategorias', {
             },
             'pnlcategorias button[name=btnNuevo]': {
                 click: this.onClickBtnNuevo
+            },
+            'pnlcategorias textfield[name=txtBuscar]': {
+                keypress: this.onKeyPressTxtBuscar,
+                keyup: this.onKeyUpTxtBuscar
             }
         });
     },
@@ -58,5 +62,17 @@ Ext.define('rewsoft.controller.mantenimiento.categorias.PnlCategorias', {
         var view = Ext.widget('wincategoriasnuevo');
         view.down('button[name=btnEditar]').hide();
         view.show();
-    }
+    },
+    onKeyPressTxtBuscar: function(text, key){
+        if(key.getKey() == key.ENTER){
+            this.getCategoriasStore().proxy.extraParams.no_categoria = text.getValue();
+            this.getCategoriasStore().loadPage(1);
+        }
+    },
+    onKeyUpTxtBuscar: function(text, key) {
+        if((key.getKey() == key.BACKSPACE || key.getKey() == key.DELETE) && text.getValue().length == 0){
+            this.getCategoriasStore().proxy.extraParams.no_categoria = '';
+            this.getCategoriasStore().loadPage(1);
+        }
+    },
 });

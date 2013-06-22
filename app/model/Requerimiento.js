@@ -12,5 +12,7 @@ Ext.define('rewsoft.model.Requerimiento', {
         name: 'co_unidad_medida'
     },{
         name: 'no_unidad_medida'
+    },{
+        name: 'va_compra'
     }]
 });

@@ -4,7 +4,8 @@ Ext.define('rewsoft.controller.compras.ocompra.PnlOrdenCompra', {
     'compras.ocompra.PnlOrdenCompra',
     'compras.ocompra.WinCantidad',
     'compras.ocompra.WinRequerimientos',
-    'compras.ocompra.WinBuscarProveedor'
+    'compras.ocompra.WinBuscarProveedor',
+    'compras.ocompra.WinMostrarDocumentosImprimir'
     ],
     refs: [{
         ref: 'MainView',
@@ -18,6 +19,9 @@ Ext.define('rewsoft.controller.compras.ocompra.PnlOrdenCompra', {
     },{
         ref: 'WinBuscarProveedorOcompra',
         selector: 'winbuscarproveedorocompra'
+    },{
+        ref: 'WinMostrarDocumentosImprimir',
+        selector: 'winmostrardocumentosimprimir'
     }],
     stores: [
     'Productos',
@@ -26,7 +30,8 @@ Ext.define('rewsoft.controller.compras.ocompra.PnlOrdenCompra', {
     'IngresoProductos',
     'RequerimientoC',
     'Requerimiento',
-    'Proveedores'
+    'Proveedores',
+    'MostrarDocumentosImprimir'
     ],
     init: function() {
         this.control({
@@ -86,6 +91,10 @@ Ext.define('rewsoft.controller.compras.ocompra.PnlOrdenCompra', {
             'winrequerimientos grid[name=gridRequerimientos]': {
                 render: this.onRenderedGridRequerimientos,
                 itemdblclick: this.onItemDblClickGridRequerimientos
+            },
+            'winmostrardocumentosimprimir grid': {
+                render: this.onRenderedGridDocumentosImprimir,
+                itemdblclick: this.onItemDblClickGridDocumentosImprimir
             }
         });
     },
@@ -283,13 +292,25 @@ Ext.define('rewsoft.controller.compras.ocompra.PnlOrdenCompra', {
                             Ext.getBody().unmask();
                             //this.setSecuencial();
                             this.onClickBtnLimpiarTodoYes(btnLimpiarTodo);
+                            var nu_documento = null;
+                            this.getMostrarDocumentosImprimirStore().removeAll()
                             Ext.Array.forEach(obj.series, function(item, index, allItems){
-                                Ext.Msg.confirm('Impresion de Orden de Compra', 'Desea imprimir la <span style=color:red; font-weidth: bold>Orden de Compra No.: '+item+'</span>?', function(btn){
-                                    if(btn=='yes'){
-                                        window.open("data/reportes/ocompra.php?nu_documento="+item, '_blank');
-                                    }
-                                });
+                                //Ext.Msg.confirm('Impresion de Orden de Compra', 'Desea imprimir la <span style=color:red; font-weidth: bold>Orden de Compra No.: '+item+'</span>?', function(btn){
+                                //    if(btn=='yes'){
+                                //        window.open("data/reportes/ocompra.php?nu_documento="+item, '_blank');
+                                //    }
+                                //});
+                                nu_documento = item;
+                                this.getMostrarDocumentosImprimirStore().add({
+                                    'nu_documento': item
+                                })
                             }, this);
+                            //console.log(this.getMostrarDocumentosImprimirStore());
+                            if(this.getMostrarDocumentosImprimirStore().count()>1){
+                                Ext.widget('winmostrardocumentosimprimir').show();
+                            }else{
+                                window.open("data/reportes/ocompra.php?nu_documento="+nu_documento, '_blank');
+                            }
                         } else {
                             Ext.Msg.alert('Error!!!', 'Error en el proceso: ' + obj.msg);
                         }
@@ -388,7 +409,7 @@ Ext.define('rewsoft.controller.compras.ocompra.PnlOrdenCompra', {
             callback: function(record, operation, success) {
                 this.getMainView().down('grid[name=gridPedido]').getStore().removeAll();
                 Ext.Array.forEach(record, function(item, index, allItems){
-                    this.addProducto(item.get('co_producto'), item.get('no_producto'), item.get('ca_producto'), '', '', '1', 'UNI', '', '', '', '', 0, 0);
+                    this.addProducto(item.get('co_producto'), item.get('no_producto'), item.get('ca_producto'), '', '', '1', 'UNI', '', '', '', '', item.get('va_compra'), 0);
                 }, this);
                 this.getMainView().down('textfield[name=txtBuscarRequerimiento]').setValue(nu_requerimiento);
                 this.getWinRequerimientos().close();
@@ -461,5 +482,21 @@ Ext.define('rewsoft.controller.compras.ocompra.PnlOrdenCompra', {
             txtPrecio.setValue(txtTotal.getValue() / txtCantidad.getValue())
             btnAceptar.focus()
         }
+    },
+    onRenderedGridDocumentosImprimir: function(grid){
+        grid.getView().on('viewready', function(grd){
+            var maps = new Ext.KeyMap(grd.getEl(), [{
+                key: Ext.EventObject.ENTER,
+                fn: function(){
+                    var record = grd.getSelectionModel().selected.items[0];
+                    this.onItemDblClickGridDocumentosImprimir(grd, record)
+                },
+                scope: this
+            }]);
+            grd.keys = maps;
+        }, this);
+    },
+    onItemDblClickGridDocumentosImprimir: function(grid, record){
+        window.open("data/reportes/ocompra.php?nu_documento="+record.get('nu_documento'), '_blank');
     }
 });
