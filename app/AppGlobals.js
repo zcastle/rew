@@ -1,4 +1,5 @@
 /*220513*/
+/*220613*/
 Ext.define('rewsoft.AppGlobals', {
     singleton: true,
     DEBUG: true,
