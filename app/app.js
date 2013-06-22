@@ -82,6 +82,7 @@ Ext.application({
         'compras.ocompra.PnlOrdenCompra',
         'contabilidad.WinLibroVentas',
         'reportes.WinRegistroVentas',
+        'reportes.WinRegistroVentasXFamilias',
         'configuracion.WinTipoCambio',
         'configuracion.PnlUsuarios',
         'configuracion.WinUsuariosNuevo',

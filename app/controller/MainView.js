@@ -26,8 +26,8 @@ Ext.define('rewsoft.controller.MainView', {
         });
     },
     onMainViewRendered: function() {
-        rewsoft.AppGlobals.MODELO_NEGOCIO = rewsoft.AppGlobals.MODELO_NEGOCIO_MELY_GIN;
-        //rewsoft.AppGlobals.MODELO_NEGOCIO = rewsoft.AppGlobals.MODELO_NEGOCIO_DSILVANA;
+        //rewsoft.AppGlobals.MODELO_NEGOCIO = rewsoft.AppGlobals.MODELO_NEGOCIO_MELY_GIN;
+        rewsoft.AppGlobals.MODELO_NEGOCIO = rewsoft.AppGlobals.MODELO_NEGOCIO_DSILVANA;
         this.loadMenu();
         if(rewsoft.AppGlobals.DEBUG){
             if(console){
@@ -56,7 +56,7 @@ Ext.define('rewsoft.controller.MainView', {
             //this.getController('TabMain').addTab('Comprobantes', 'pnlventasfacturacionconsultar', 'tabs');
             //Ext.widget('wintipocambio').show();
             //this.getController('TabMain').addTab('Tipo de Cambio', 'pnltipocambio', 'tabs');
-            this.getController('TabMain').addTab('Orden de Compra', 'pnlordencompra', 'tabs');
+            //this.getController('TabMain').addTab('Orden de Compra', 'pnlordencompra', 'tabs');
         } else {
             Ext.widget('loginuser');
         }
@@ -205,8 +205,8 @@ Ext.define('rewsoft.controller.MainView', {
                     text: 'Registro de Ventas',
                     action: 'mnuReportesRegistroVentas'
                 },{
-                    text: 'Registro de Ventas x Productos',
-                    action: 'mnuReportesRegistroVentasxProductos'
+                    text: 'Registro de Ventas x Familias',
+                    action: 'mnuReportesRegistroVentasxFamilias'
                 }]
             });
         }
@@ -338,6 +338,9 @@ Ext.define('rewsoft.controller.MainView', {
                 break;
             case 'mnuReportesRegistroVentas':
                 Ext.widget('winregistroventas').show();
+                break;
+            case 'mnuReportesRegistroVentasxFamilias':
+                Ext.widget('winregistroventasxfamilias').show();
                 break;
             case 'mnuInventarioConsultarStock':
                 Ext.widget('winconsultarstock').show();

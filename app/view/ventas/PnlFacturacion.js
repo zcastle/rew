@@ -326,6 +326,11 @@ Ext.define('rewsoft.view.ventas.PnlFacturacion', {
                     },{
                         xtype: 'tbfill'
                     },{
+                        text: 'Imprimir',
+                        name: 'btnImprimirCotizacion',
+                        iconCls: 'ico-large',
+                        scale: 'large'
+                    },{
                         text: 'IGV Incluido',
                         name: 'btnIgvIncluido',
                         enableToggle: true,
@@ -336,12 +341,7 @@ Ext.define('rewsoft.view.ventas.PnlFacturacion', {
                         name: 'btnLimpiarTodo',
                         iconCls: 'ico-limpiar-large',
                         scale: 'large'
-                    },/*{
-                        text: 'Imprimir',
-                        name: 'btnImprimir',
-                        iconCls: 'ico-large',
-                        scale: 'large'
-                    },*/{
+                    },{
                         text: 'Procesar Venta',
                         name: 'btnProcesar',
                         iconCls: 'ico-aceptar-large',

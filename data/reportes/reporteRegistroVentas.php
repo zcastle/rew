@@ -59,7 +59,7 @@ class MYPDF extends TCPDF {
         $paginas = 'Pagina '.$this->getAliasNumPage().'/'.$this->getAliasNbPages();
         $this->SetY(-15);
         $this->SetFont('courier', 'I', 8);
-        $this->Cell(0, 0, $paginas, T, true);
+        $this->Cell(0, 0, $paginas, 'T', true);
         $this->Cell(0, 0, "Fecha Impresion: $this->fechaSistema", 0, true);
         $this->Cell(0, 0, "Hora Impresion: $this->horaSistema", 0, false);
     }
@@ -78,13 +78,16 @@ $query = "SELECT DATE_FORMAT(cv.fe_venta, '%d/%m/%Y') AS fe_venta, cv.nu_comprob
                 FROM c_ventas AS cv LIMIT 20";
 
 $cia = $_GET['cia'];
-$fe_ini_month = $_GET['fe_ini_month'];
-$fe_ini_year = $_GET['fe_ini_year'];
-$fe_fin_month = $_GET['fe_fin_month'];
-$fe_fin_year = $_GET['fe_fin_year'];
+$fe_ini_month =  isset($_GET['fe_ini_month'])?$_GET['fe_ini_month']:null;
+$fe_ini_year = isset($_GET['fe_ini_year'])?$_GET['fe_ini_year']:null;
+$fe_fin_month = isset($_GET['fe_fin_month'])?$_GET['fe_fin_month']:null;
+$fe_fin_year = isset($_GET['fe_fin_year'])?$_GET['fe_fin_year']:null;
 
-$fe_ini = $_GET['fe_ini'];
-$fe_fin = $_GET['fe_fin'];
+$fe_ini = isset($_GET['fe_ini'])?$_GET['fe_ini']:null;
+$fe_fin = isset($_GET['fe_fin'])?$_GET['fe_fin']:null;
+
+$dia_ini = isset($_GET['dia_ini'])?$_GET['dia_ini']:null;
+$dia_fin = isset($_GET['dia_fin'])?$_GET['dia_fin']:null;
 
 $del = "";
 $al = "";
@@ -110,6 +113,17 @@ if($fe_ini && $fe_fin){
                 cv.va_neto, cv.va_igv, cv.va_venta, cv.fl_anulada 
                 FROM c_ventas AS cv WHERE 
                 DATE(cv.fe_venta) BETWEEN DATE('$fe_ini') AND DATE('$fe_fin')";
+}
+
+if($dia_ini && $dia_fin){
+    $del = $dia_ini;
+    $al = $dia_fin;
+    $fe_ini = substr($fe_ini, 6, 4) . '-' . substr($fe_ini, 3, 2) . '-' . substr($fe_ini, 0, 2);
+    $fe_fin = substr($fe_fin, 6, 4) . '-' . substr($fe_fin, 3, 2) . '-' . substr($fe_fin, 0, 2);
+    $query = "SELECT DATE_FORMAT(cv.fe_venta, '%d/%m/%Y') AS fe_venta, cv.nu_comprobante, cv.co_cliente,
+                (SELECT no_cliente FROM m_clientes WHERE co_cliente = cv.co_cliente) AS no_cliente, 
+                cv.va_neto, cv.va_igv, cv.va_venta, cv.fl_anulada 
+                FROM c_ventas AS cv WHERE cv.nu_diadw >= $dia_ini AND cv.nu_diadw <= $dia_fin";
 }
 
 $stm = $conn->prepare($query);
@@ -151,14 +165,14 @@ $pdf->Ln();
 $pdf->SetFont('courier', '', 9);
 
 foreach ($result as $row) {
-    $pdf->Cell($w[0], 0, $row[fe_venta]);
-    $pdf->Cell($w[1], 0, $row[nu_comprobante]);
-    $pdf->Cell($w[2], 0, $row[co_cliente]);
-    $pdf->Cell($w[3], 0, $row[no_cliente]);
-    $pdf->Cell($w[4], 0, number_format($row[va_neto], 2), 0, 0, 'R');
-    $pdf->Cell($w[5], 0, number_format($row[va_igv], 2), 0, 0, 'R');
-    $pdf->Cell($w[6], 0, number_format($row[va_venta], 2), 0, 0, 'R');
-    if($row[fl_anulada]=='S'){
+    $pdf->Cell($w[0], 0, $row['fe_venta']);
+    $pdf->Cell($w[1], 0, $row['nu_comprobante']);
+    $pdf->Cell($w[2], 0, $row['co_cliente']);
+    $pdf->Cell($w[3], 0, $row['no_cliente']);
+    $pdf->Cell($w[4], 0, number_format($row['va_neto'], 2), 0, 0, 'R');
+    $pdf->Cell($w[5], 0, number_format($row['va_igv'], 2), 0, 0, 'R');
+    $pdf->Cell($w[6], 0, number_format($row['va_venta'], 2), 0, 0, 'R');
+    if($row['fl_anulada']=='S'){
         $pdf->Cell($w[7], 0, ' S');
     }else{
         $pdf->Cell($w[7], 0, ' ');

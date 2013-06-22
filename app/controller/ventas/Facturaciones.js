@@ -114,6 +114,9 @@ Ext.define('rewsoft.controller.ventas.Facturaciones', {
             'pnlventasfacturacion button[name=btnIgvIncluido]': {
                 toggle: this.onToggleIgvIncluido
             },
+            'pnlventasfacturacion button[name=btnImprimirCotizacion]': {
+                click: this.onClickBtnImprimirCotizacion
+            },
             'pnlventasfacturacion button[name=btnBuscarPasado]': {
                 click: this.onClickBtnBuscarPasado
             },
@@ -490,10 +493,17 @@ Ext.define('rewsoft.controller.ventas.Facturaciones', {
         }, this);
     },
     onClickBtnLimpiarTodoYes: function(){
+        var cboTipoDocumento = this.getMainView().down('combobox[name=cboTipoDocumento]');
+        var coTipoDocumento = cboTipoDocumento.getValue();
+        this.setSecuencial(coTipoDocumento, cboTipoDocumento);
         this.getMainView().down('textfield[name=txtRuc]').setValue('');
         this.getMainView().down('textfield[name=txtCliente]').setValue('');
         this.getMainView().down('textfield[name=txtDireccion]').setValue('');
         this.getMainView().down('textfield[name=txtBuscarGuiaRemision]').setValue('');
+        this.getMainView().down('button[name=btnImprimirCotizacion]').hide();
+        this.getMainView().down('button[name=btnIgvIncluido]').show();
+        //this.getMainView().down('button[name=btnLimpiarTodo]').show();
+        this.getMainView().down('button[name=btnProcesar]').show();
         this.getPedidosStore().removeAll();
         this.setMontoTotal(this.getMainView().down('grid[name=gridPedido]'));
     },
@@ -893,6 +903,7 @@ Ext.define('rewsoft.controller.ventas.Facturaciones', {
             this.getMainView().down('button[name=btnBuscarComprobante]').hide();
             this.getMainView().down('datefield[name=txtFeDocumento]').hide();
             this.getMainView().down('button[name=btnIgvIncluido]').hide();
+            this.getMainView().down('button[name=btnImprimirCotizacion]').hide();
             this.getMainView().down('button[name=btnBuscarPasado]').hide();
 
             if(coTipoDocumento == 'BV' || coTipoDocumento == 'FV'){
@@ -917,6 +928,7 @@ Ext.define('rewsoft.controller.ventas.Facturaciones', {
                 this.getMainView().down('button[name=btnProcesar]').setText('Cotizar');
                 this.getMainView().down('datefield[name=txtFeDocumento]').show();
                 this.getMainView().down('button[name=btnIgvIncluido]').show();
+                //this.getMainView().down('button[name=btnImprimirCotizacion]').show();
                 this.getMainView().down('button[name=btnBuscarPasado]').show();
                 //this.getMainView().down('combobox[name=cboVendedor]').hide();
             } else {
@@ -1293,6 +1305,13 @@ Ext.define('rewsoft.controller.ventas.Facturaciones', {
         this.getMainView().down('datefield[name=txtFeDocumento]').setValue(record.get('fe_documento'));
         this.getDetalleGuiaRemision(record.get('nu_documento'), record.get('tipo_documento'));
         grid.up('window').hide();
+        //
+        this.getMainView().down('button[name=btnImprimirCotizacion]').show();
+        this.getMainView().down('button[name=btnIgvIncluido]').hide();
+        //this.getMainView().down('button[name=btnLimpiarTodo]').hide();
+        this.getMainView().down('button[name=btnProcesar]').hide();
+
+
     },
     actualizarFechaCotizacion: function(){
         var nu_documento = this.getMainView().down('textfield[name=txtNuDocumento]').getValue();
@@ -1315,5 +1334,9 @@ Ext.define('rewsoft.controller.ventas.Facturaciones', {
             });
             }
         }, this);
+    },
+    onClickBtnImprimirCotizacion: function(btn){
+        var numeroDocumento = this.getMainView().down('textfield[name=txtNuDocumento]').value;
+        window.open("data/reportes/cotizacion.php?nu_documento="+numeroDocumento, '_blank');
     }
 });
