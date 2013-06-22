@@ -19,7 +19,8 @@ Ext.define('rewsoft.controller.configuracion.WinUsuariosNuevo', {
             },
             'winusuariosnuevo button[name=btnCrear]':{
                 click: this.onClickBtnCrear
-            },'winusuariosnuevo button[name=btnEditar]':{
+            },
+            'winusuariosnuevo button[name=btnEditar]':{
                 click: this.onClickBtnEditar
             }
         });
