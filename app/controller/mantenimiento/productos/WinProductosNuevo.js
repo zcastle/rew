@@ -95,10 +95,13 @@ Ext.define('rewsoft.controller.mantenimiento.productos.WinProductosNuevo', {
             win.down('checkbox[name=fl_serv]').show();
             win.down('combobox[name=co_grupo]').show();
             win.down('fieldcontainer[name=zonaOrdenDestino]').show();
+            win.down('fieldcontainer[name=zonaPrecioCaja]').show();
+            win.down('numberfield[name=precio1]').hide();
         } else if(rewsoft.AppGlobals.MODELO_NEGOCIO == rewsoft.AppGlobals.MODELO_NEGOCIO_MELY_GIN){
             win.down('fieldcontainer[name=zonaMarca]').show();
             win.down('fieldcontainer[name=zonaPaisProcedencia]').show();
             win.down('fieldcontainer[name=zonaPrecioCaja]').show();
+            win.down('numberfield[name=precio1]').show();
             //win.down('fieldcontainer[name=zonaPresentacion]').show();
             win.down('fieldset[name=zonaPrecios]').show();
         }

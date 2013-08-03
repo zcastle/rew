@@ -281,11 +281,13 @@ Ext.define('rewsoft.view.mantenimiento.producto.WinProductosNuevo', {
                         items: [{
                             name: 'cuenta_vta',
                             fieldLabel: 'Cta. Nacional',
-                            labelWidth: 90
+                            labelWidth: 90,
+                            value: 1
                         },{
                             name: 'cuenta_vt2',
                             fieldLabel: 'Cta. Extranjera',
                             labelWidth: 90,
+                            value: 1,
                             margin: '0 0 0 5'
                         }]
                     },{
@@ -316,6 +318,7 @@ Ext.define('rewsoft.view.mantenimiento.producto.WinProductosNuevo', {
                             displayField: 'no_destino',
                             queryMode: 'local',
                             editable: false,
+                            allowBlank: false,
                             width: 355
                         }]
                     },{
