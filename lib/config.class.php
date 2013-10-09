@@ -1,7 +1,7 @@
 <?php
 
 class config {
-    private $server = '192.168.1.108'; //mb12012.dyndns.org
+    private $server = 'localhost'; //mb12012.dyndns.org
     private $username = 'root';
     private $password = '123456';
     private $database_name = 'dbrewsoft';

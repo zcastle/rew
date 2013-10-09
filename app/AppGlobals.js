@@ -2,7 +2,7 @@
 /*220613*/
 Ext.define('rewsoft.AppGlobals', {
     singleton: true,
-    DEBUG: true,
+    DEBUG: false,
     //ROLES
     //ROL_ID: 2,
     ROL_ACTIVO: 'ADMIN',
@@ -18,7 +18,7 @@ Ext.define('rewsoft.AppGlobals', {
     VA_IGV_2: 0.18,
     TIPO_CAMBIO_COMPRA: 2.65,
     TIPO_CAMBIO_VENTA: 2.60,
-    CIA: '06', //CODIGO DE LA EMPRESA SEGUN LA TB m_empresas
+    CIA: '01', //CODIGO DE LA EMPRESA SEGUN LA TB m_empresas
     NOMBRE_COMERCIAL: 'EMPRESA',
     RAZON_SOCIAL: 'EMPRESA SA',
     CO_USUARIO: 'ADMIN',

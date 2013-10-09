@@ -1,14 +1,45 @@
 <?php
 //header('Content-type: application/pdf');
 require_once('../../lib/fpdf17/fpdf.php');
+require_once('bootstrap.php');
+
+$tipo_comprobante = $_REQUEST['tipo_comprobante'];
+
+$obj = VentasC::find('all', array('conditions'=>"tipo_comprobante = '$tipo_comprobante' AND nu_comprobante = '001-0062624'"));
+
+/*foreach ($obj as $o) {
+    echo $o->tipo_comprobante.'<br/>';
+    echo $o->nu_comprobante.'<br/>';
+}*/
+
+
+//die();
 
 class MYFPDF extends FPDF {
+
+    private $monto = 0;
+    private $igv = 0;
+    private $total = 0;
+
+    public function setMonto($monto) {
+        $this->monto = $monto;
+    }
+
+    public function setIgv($igv) {
+        $this->igv = $igv;
+    }
+
+    public function setTotal($total) {
+        $this->total = $total;
+    }
+
     public function Header() { }
     public function Footer() {
         $this->SetY(-77);
-        $this->_print(170,190,number_format('100',2,'.',','),15,'R');
-        $this->_print(170,195,number_format('18',2,'.',','),15,'R');
-        $this->_print(170,200,number_format('118',2,'.',','),15,'R');
+        $this->SetFont('courier','b',15);
+        $this->_print(170,190,number_format($this->monto,2,'.',','),15,'R');
+        $this->_print(170,195,number_format($this->igv,2,'.',','),15,'R');
+        $this->_print(170,200,number_format($this->total,2,'.',','),15,'R');
     }
     public function _print($posx,$posy,$text,$ancho=5,$align='L',$ln=0){
         $this->setXY($posx,$posy);
@@ -21,11 +52,16 @@ $pdf = new MYFPDF('P','mm',array(190,210)); //'A4'
 
 $pdf->AddPage();
 $pdf->SetMargins(0,0,0);
-$pdf->SetFont('Arial','',9);
+$pdf->SetFont('courier','',9);
 
-$nu_documento = '001-0001254';
+/*
+echo $obj[0]->tipo_comprobante.'<br/>';
+echo $obj[0]->nu_comprobante.'<br/>';
+*/
+
+$nu_documento = $obj[0]->nu_comprobante;
 $fe_documento = '15/05/2013';
-$nu_ruc = '00000000000';
+$nu_ruc = $obj[0]->co_cliente;
 $no_razon_socual = 'Razon Social';
 $de_direccion = 'Direccion';
 $nu_cotizacion = null;
@@ -48,10 +84,12 @@ $va_producto = 100;
 $to_producto = $ca_producto * $va_producto;
 
 $ini = 40;
+$total = 0;
 for ($i=1;$i<=10;$i++) { 
     $ca_producto += $i;
     $va_producto += $i;
     $to_producto = $ca_producto * $va_producto;
+    $total += $to_producto;
     $pdf->_print(2,$ini,$co_producto);
     $pdf->_print(17,$ini,$no_producto);
     $pdf->_print(125,$ini,$ca_producto,10,'R');
@@ -60,6 +98,13 @@ for ($i=1;$i<=10;$i++) {
     $pdf->_print(173,$ini,number_format($to_producto, 2,'.',','),15,'R');
     $ini += 5;
 }
+
+$monto = $total / 1.18;
+$igv = $monto * 0.18;
+
+$pdf->setMonto($monto);
+$pdf->setIgv($igv);
+$pdf->setTotal($total);
 
 $pdf->Output();
 ?>

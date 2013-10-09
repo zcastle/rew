@@ -14,7 +14,7 @@ if ($_POST) {
                     WHERE co_forma_pago = mp.co_forma_pago) AS no_forma_pago 
                     FROM m_proveedores mp";
     if($nu_ruc <> '') {
-        $query .= " WHERE mp.nu_ruc = :nu_ruc";
+        $query .= " WHERE mp.nu_ruc LIKE %:nu_ruc%";
     }
     if($no_proveedor <> ''){
         $query .= " WHERE ((";
@@ -24,7 +24,7 @@ if ($_POST) {
         }
         $query .= implode(" AND ", $condicion);
         $query .= ")";
-        $query .= " OR CONVERT(mp.nu_ruc, UNSIGNED INTEGER) = '$no_proveedor')";
+        $query .= " OR CONVERT(mp.nu_ruc, UNSIGNED INTEGER) LIKE '%$no_proveedor%')";
     }
     $query .= " ORDER BY 3 LIMIT $start, $limit;";
 
@@ -37,7 +37,7 @@ if ($_POST) {
 
     $queryCount = "SELECT * FROM m_proveedores AS mp";
     if($nu_ruc <> '') {
-        $queryCount .= " WHERE mp.nu_ruc = :nu_ruc";
+        $queryCount .= " WHERE mp.nu_ruc LIKE %:nu_ruc%";
     }
     if($no_proveedor <> ''){
         $queryCount .= " WHERE ((";
@@ -47,7 +47,7 @@ if ($_POST) {
         }
         $queryCount .= implode(" AND ", $condicion);
         $queryCount .= ")";
-        $queryCount .= " OR CONVERT(mp.nu_ruc, UNSIGNED INTEGER) = '$no_proveedor')";
+        $queryCount .= " OR CONVERT(mp.nu_ruc, UNSIGNED INTEGER) LIKE '%$no_proveedor%')";
     }
     $stmtCount = $conn->prepare($queryCount);
     $stmtCount->execute();

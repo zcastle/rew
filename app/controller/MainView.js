@@ -26,8 +26,8 @@ Ext.define('rewsoft.controller.MainView', {
         });
     },
     onMainViewRendered: function() {
-        //rewsoft.AppGlobals.MODELO_NEGOCIO = rewsoft.AppGlobals.MODELO_NEGOCIO_MELY_GIN;
-        rewsoft.AppGlobals.MODELO_NEGOCIO = rewsoft.AppGlobals.MODELO_NEGOCIO_DSILVANA;
+        rewsoft.AppGlobals.MODELO_NEGOCIO = rewsoft.AppGlobals.MODELO_NEGOCIO_MELY_GIN;
+        //rewsoft.AppGlobals.MODELO_NEGOCIO = rewsoft.AppGlobals.MODELO_NEGOCIO_DSILVANA;
         this.loadMenu();
         if(rewsoft.AppGlobals.DEBUG){
             if(console){

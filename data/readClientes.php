@@ -13,7 +13,7 @@ if ($_POST) {
             (SELECT no_forma_pago FROM m_forma_pago WHERE co_forma_pago = mc.co_forma_pago) AS no_forma_pago
             FROM m_clientes AS mc";
     if($co_cliente <> ''){
-        $query .= " WHERE mc.co_cliente = $co_cliente";
+        $query .= " WHERE mc.co_cliente LIK% %$co_cliente%";
     }
     if($no_cliente <> ''){
         $query .= " WHERE ((";
@@ -23,7 +23,7 @@ if ($_POST) {
         }
         $query .= implode(" AND ", $condicion);
         $query .= ")";
-        $query .= " OR CONVERT(mc.co_cliente, UNSIGNED INTEGER) = '$no_cliente')";
+        $query .= " OR CONVERT(mc.co_cliente, UNSIGNED INTEGER) LIKE '%$no_cliente%')";
     }
     $query .= " ORDER BY 2 LIMIT $start, $limit;";
 
@@ -33,7 +33,7 @@ if ($_POST) {
     
     $queryCount = "SELECT COUNT(*) AS count FROM m_clientes";
     if($co_cliente <> ''){
-        $queryCount .= " WHERE co_cliente = $co_cliente";
+        $queryCount .= " WHERE co_cliente LIKE %$co_cliente%";
     }
     if($no_cliente <> ''){
         $queryCount .= " WHERE ((";
@@ -43,7 +43,7 @@ if ($_POST) {
         }
         $queryCount .= implode(" AND ", $condicion2);
         $queryCount .= ")";
-        $queryCount .= " OR CONVERT(co_cliente, UNSIGNED INTEGER) = '$no_cliente')";
+        $queryCount .= " OR CONVERT(co_cliente, UNSIGNED INTEGER) LIKE '%$no_cliente%')";
     }
     $stmtCount = $conn->prepare($queryCount);
     $stmtCount->execute();
