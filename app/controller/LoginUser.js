@@ -155,6 +155,9 @@ Ext.define('rewsoft.controller.LoginUser', {
                 }
                 Ext.getCmp('mnuCompras').show();
                 Ext.getCmp('mnuAlmacen').show();
+                if(rewsoft.AppGlobals.MODELO_NEGOCIO == rewsoft.AppGlobals.MODELO_NEGOCIO_DSILVANA){
+                    Ext.getCmp('mnuReportes').show();
+                }
                 if(rewsoft.AppGlobals.MODELO_NEGOCIO == rewsoft.AppGlobals.MODELO_NEGOCIO_MELY_GIN){
                     Ext.getCmp('mnuContabilidad').show();
                 }

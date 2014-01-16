@@ -103,7 +103,7 @@ Ext.define('rewsoft.view.mantenimiento.producto.WinProductosNuevo', {
                                     fieldStyle: 'border: 1px solid #B5B8C8; height: 22px',
                                     flex: 1
                                 }]
-                            },{
+                            }/*,{
                                 xtype: 'filefield',
                                 name: 'im_foto',
                                 fieldLabel: 'Imagen',
@@ -112,11 +112,11 @@ Ext.define('rewsoft.view.mantenimiento.producto.WinProductosNuevo', {
                                 labelWidth: 90,
                                 width: 355,
                                 msgTarget: 'side',
-                                allowBlank: true/*,
+                                allowBlank: true,
                                 buttonConfig: {
                                     iconCls: 'upload-icon'
-                                }*/
-                            },{
+                                }
+                            }*/,{
                                 xtype: 'textfield',
                                 name: 'no_producto',
                                 fieldLabel: 'Descripcion',
@@ -133,7 +133,7 @@ Ext.define('rewsoft.view.mantenimiento.producto.WinProductosNuevo', {
                                 defaults: {
                                     xtype: 'textfield',
                                     msgTarget: 'side',
-                                    allowBlank: false,
+                                    allowBlank: true,
                                     labelWidth: 90
                                 },
                                 items: [{
@@ -153,12 +153,12 @@ Ext.define('rewsoft.view.mantenimiento.producto.WinProductosNuevo', {
                                     margins: '0 0 0 5'
                                 }*/]
                             }]
-                        },{
+                        }/*,{
                             xtype: 'image',
                             id: 'img_foto_producto',
                             width: 175,
                             src: 'resources/images/no-imagen.jpg'
-                        }]
+                        }*/]
                     }/*,{
                         xtype: 'fieldcontainer',
                         layout: 'hbox',

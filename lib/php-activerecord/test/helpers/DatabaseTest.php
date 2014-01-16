@@ -1,5 +1,5 @@
 <?php
-require_once 'DatabaseLoader.php';
+require_once __DIR__ . '/DatabaseLoader.php';
 
 class DatabaseTest extends SnakeCase_PHPUnit_Framework_TestCase
 {
@@ -23,7 +23,12 @@ class DatabaseTest extends SnakeCase_PHPUnit_Framework_TestCase
 			new SQLite3($this->db);
 		}
 
-		$this->conn = ActiveRecord\ConnectionManager::get_connection($connection_name);
+		$this->connection_name = $connection_name;
+		try {
+			$this->conn = ActiveRecord\ConnectionManager::get_connection($connection_name);
+		} catch (ActiveRecord\DatabaseException $e) {
+			$this->mark_test_skipped($connection_name . ' failed to connect. '.$e->getMessage());
+		}
 
 		$GLOBALS['ACTIVERECORD_LOG'] = false;
 
@@ -50,7 +55,7 @@ class DatabaseTest extends SnakeCase_PHPUnit_Framework_TestCase
 			$message = $e->getMessage();
 		}
 
-		$this->assert_true(strpos($message,$contains) !== false);
+		$this->assertContains($contains, $message);
 	}
 
 	/**
@@ -63,14 +68,14 @@ class DatabaseTest extends SnakeCase_PHPUnit_Framework_TestCase
 	{
 		$needle = str_replace(array('"','`'),'',$needle);
 		$haystack = str_replace(array('"','`'),'',$haystack);
-		return $this->assert_true(strpos($haystack,$needle) !== false);
+		return $this->assertContains($needle, $haystack);
 	}
 
 	public function assert_sql_doesnt_has($needle, $haystack)
 	{
 		$needle = str_replace(array('"','`'),'',$needle);
 		$haystack = str_replace(array('"','`'),'',$haystack);
-		return $this->assert_false(strpos($haystack,$needle) !== false);
+		return $this->assertNotContains($needle, $haystack);
 	}
 }
 ?>

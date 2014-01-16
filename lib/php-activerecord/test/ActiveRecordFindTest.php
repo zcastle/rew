@@ -1,5 +1,4 @@
 <?php
-include 'helpers/config.php';
 
 class ActiveRecordFindTest extends DatabaseTest
 {
@@ -61,7 +60,7 @@ class ActiveRecordFindTest extends DatabaseTest
 	}
 
 	/**
-	 * @expectedException Exception
+	 * @expectedException ActiveRecord\RecordNotFound
 	 */
 	public function test_find_nothing_with_sql_in_string()
 	{
@@ -226,6 +225,13 @@ class ActiveRecordFindTest extends DatabaseTest
 		$this->assert_equals(1,Author::count(array('name' => 'Tito', 'author_id' => 1)));
 	}
 
+	public function test_gh149_empty_count()
+	{
+		$total = Author::count();
+		$this->assert_equals($total, Author::count(null));
+		$this->assert_equals($total, Author::count(array()));
+	}
+
 	public function test_exists()
 	{
 		$this->assert_true(Author::exists(1));
@@ -346,7 +352,7 @@ class ActiveRecordFindTest extends DatabaseTest
 	{
 		$venues = Venue::all(array('select' => 'state', 'group' => 'state', 'having' => 'length(state) = 2', 'order' => 'state', 'limit' => 2));
 		$this->assert_true(count($venues) > 0);
-		$this->assert_sql_has($this->conn->limit('SELECT state FROM venues GROUP BY state HAVING length(state) = 2 ORDER BY state',0,2),Venue::table()->last_sql);
+		$this->assert_sql_has($this->conn->limit('SELECT state FROM venues GROUP BY state HAVING length(state) = 2 ORDER BY state',null,2),Venue::table()->last_sql);
 	}
 
 	public function test_escape_quotes()
@@ -445,6 +451,11 @@ class ActiveRecordFindTest extends DatabaseTest
 
 	public function test_find_by_datetime()
 	{
+		if ( getenv('TRAVIS') ) $this->markTestSkipped(
+			'The Travis CI environment seems to screw this up for unknonwn reasons; ' .
+			'see Github #298 (https://github.com/kla/php-activerecord/issues/298)'
+		);
+
 		$now = new DateTime();
 		$arnow = new ActiveRecord\DateTime();
 		$arnow->setTimestamp($now->getTimestamp());

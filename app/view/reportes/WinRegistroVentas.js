@@ -34,15 +34,15 @@ Ext.define('rewsoft.view.reportes.WinRegistroVentas', {
                     emptyText: 'Month',
                     allowBlank: false,
                     forceSelection: true,
-                    width: 130
+                    width: 111
                 },{
                     xtype: 'numberfield',
                     name: 'fe_ini_year',
                     allowBlank: false,
                     value: new Date().getFullYear(),
                     maxValue: new Date().getFullYear(),
-                    margins: '0 0 0 5',
-                    width: 55
+                    margins: '0 0 0 3',
+                    width: 52
                 },{
                     fieldLabel: 'Fin',
                     name: 'fe_fin_month',
@@ -53,20 +53,28 @@ Ext.define('rewsoft.view.reportes.WinRegistroVentas', {
                     emptyText: 'Month',
                     allowBlank: false,
                     forceSelection: true,
-                    margins: '0 0 0 5',
-                    width: 130
+                    margins: '0 0 0 3',
+                    labelWidth: 20,
+                    width: 101
                 },{
                     xtype: 'numberfield',
                     name: 'fe_fin_year',
                     allowBlank: false,
                     value: new Date().getFullYear(),
                     maxValue: new Date().getFullYear(),
+                    margins: '0 0 0 3',
+                    width: 52
+                },{
+                    xtype: 'button',
+                    name: 'btnVerMeses',
+                    text: 'Ver',
                     margins: '0 0 0 5',
                     width: 55
                 },{
                     xtype: 'button',
                     name: 'btnVerMeses',
-                    text: 'Ver',
+                    text: 'Excel',
+                    tag: 'excel',
                     margins: '0 0 0 5',
                     width: 55
                 }]
@@ -93,7 +101,7 @@ Ext.define('rewsoft.view.reportes.WinRegistroVentas', {
                     itemId: 'startdt',
                     emptyText: 'Inicio',
                     allowBlank: false,
-                    width: 190//,
+                    flex: 1//,
                     //vtype: 'daterange',
                     //endDateField: 'enddt'
                 },{
@@ -103,13 +111,20 @@ Ext.define('rewsoft.view.reportes.WinRegistroVentas', {
                     emptyText: 'Fin',
                     allowBlank: false,
                     margins: '0 0 0 5',
-                    width: 190//,
+                    flex: 1//,
                     //vtype: 'daterange',
                     //startDateField: 'startdt'
                 },{
                     xtype: 'button',
                     name: 'btnVerRangoFechas',
                     text: 'Ver',
+                    margins: '0 0 0 5',
+                    width: 55
+                },{
+                    xtype: 'button',
+                    name: 'btnVerRangoFechas',
+                    text: 'Excel',
+                    tag: 'excel',
                     margins: '0 0 0 5',
                     width: 55
                 }]
@@ -135,18 +150,25 @@ Ext.define('rewsoft.view.reportes.WinRegistroVentas', {
                     name: 'dia_ini',
                     emptyText: 'Inicio',
                     allowBlank: false,
-                    width: 190
+                    flex: 1
                 },{
                     fieldLabel: 'Fin',
                     name: 'dia_fin',
                     emptyText: 'Fin',
                     allowBlank: false,
                     margins: '0 0 0 5',
-                    width: 190
+                    flex: 1
                 },{
                     xtype: 'button',
                     name: 'btnVerDiasTrabajo',
                     text: 'Ver',
+                    margins: '0 0 0 5',
+                    width: 55
+                },{
+                    xtype: 'button',
+                    name: 'btnVerDiasTrabajo',
+                    text: 'Excel',
+                    tag: 'excel',
                     margins: '0 0 0 5',
                     width: 55
                 }]

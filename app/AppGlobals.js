@@ -18,7 +18,7 @@ Ext.define('rewsoft.AppGlobals', {
     VA_IGV_2: 0.18,
     TIPO_CAMBIO_COMPRA: 2.65,
     TIPO_CAMBIO_VENTA: 2.60,
-    CIA: '01', //CODIGO DE LA EMPRESA SEGUN LA TB m_empresas
+    CIA: '06', //CODIGO DE LA EMPRESA SEGUN LA TB m_empresas
     NOMBRE_COMERCIAL: 'EMPRESA',
     RAZON_SOCIAL: 'EMPRESA SA',
     CO_USUARIO: 'ADMIN',
@@ -31,5 +31,6 @@ Ext.define('rewsoft.AppGlobals', {
     FORMA_PAGO_DEFAULT: '1010',
     SERIE_FV: '1',
     SERIE_BV: '1',
-    NOTA_PIE: 'REWSoft -> Gestion Comercial y Almacenes -> Desarrollado por openbusiness.pe [v2.5.1-JC]'
+    NOTA_PIE: 'REWSoft -> Gestion Comercial y Almacenes -> Desarrollado por openbusiness.pe [v2.5.1-JC]',
+    CO_GRUPO: 40
 });

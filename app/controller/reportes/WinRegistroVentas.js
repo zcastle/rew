@@ -47,7 +47,11 @@ Ext.define('rewsoft.controller.reportes.WinRegistroVentas', {
                 Ext.Msg.alert('Atencion','El mes de Fin debe ser mayor al mes de Inicio');
                 return;
             }
-            window.open('data/reportes/reporteRegistroVentas.php?cia='+rewsoft.AppGlobals.CIA+'&fe_ini_month='+fe_ini_month+'&fe_ini_year='+fe_ini_year+'&fe_fin_month='+fe_fin_month+'&fe_fin_year='+fe_fin_year, '_blank');
+            if(button.tag){
+                window.open('data/reporteRegistroVentas.php?out=excel&cia='+rewsoft.AppGlobals.CIA+'&fe_ini_month='+fe_ini_month+'&fe_ini_year='+fe_ini_year+'&fe_fin_month='+fe_fin_month+'&fe_fin_year='+fe_fin_year, '_blank');
+            }else{
+                window.open('data/reporteRegistroVentas.php?cia='+rewsoft.AppGlobals.CIA+'&fe_ini_month='+fe_ini_month+'&fe_ini_year='+fe_ini_year+'&fe_fin_month='+fe_fin_month+'&fe_fin_year='+fe_fin_year, '_blank');
+            }
             //this.getMainView().close();
         }
     },
@@ -60,7 +64,11 @@ Ext.define('rewsoft.controller.reportes.WinRegistroVentas', {
                 Ext.Msg.alert('Atencion','El aÃ±o de Fin debe ser mayor al aÃ±o de Inicio');
                 return;
             }
-            window.open('data/reportes/reporteRegistroVentas.php?cia='+rewsoft.AppGlobals.CIA+'&fe_ini='+fe_ini+'&fe_fin='+fe_fin, '_blank');
+            if(button.tag){
+                window.open('data/reporteRegistroVentas.php?out=excel&cia='+rewsoft.AppGlobals.CIA+'&fe_ini='+fe_ini+'&fe_fin='+fe_fin, '_blank');
+            }else{
+                window.open('data/reporteRegistroVentas.php?cia='+rewsoft.AppGlobals.CIA+'&fe_ini='+fe_ini+'&fe_fin='+fe_fin, '_blank');
+            }
             //this.getMainView().close();
         }
     },
@@ -73,7 +81,11 @@ Ext.define('rewsoft.controller.reportes.WinRegistroVentas', {
                 Ext.Msg.alert('Atencion','El dia Final no debe ser menor al dia de Inicio');
                 return;
             }
-            window.open('data/reportes/reporteRegistroVentas.php?cia='+rewsoft.AppGlobals.CIA+'&dia_ini='+dia_ini+'&dia_fin='+dia_fin, '_blank');
+            if(button.tag){
+                window.open('data/reporteRegistroVentas.php?out=excel&cia='+rewsoft.AppGlobals.CIA+'&dia_ini='+dia_ini+'&dia_fin='+dia_fin, '_blank');
+            }else{
+                window.open('data/reporteRegistroVentas.php?cia='+rewsoft.AppGlobals.CIA+'&dia_ini='+dia_ini+'&dia_fin='+dia_fin, '_blank');
+            }
             //this.getMainView().close();
         }
     },
